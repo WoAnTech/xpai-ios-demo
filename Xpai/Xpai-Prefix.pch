@@ -1,0 +1,32 @@
+//
+// Prefix header for all source files of the 'Xpai' target in the 'Xpai' project
+//
+
+#define kScreenW [UIScreen mainScreen].bounds.size.width
+#define kScreenH [UIScreen mainScreen].bounds.size.height
+#define newRecordTag 100
+#define ZBYTag 200
+#define uploadTag 300
+#define KtitleColor [UIColor colorWithRed:0 green:0.6 blue:1 alpha:1]
+
+#define kNSNotificationCenter [[NSNotificationCenter defaultCenter] postNotificationName:@"resolution" object:nil]
+
+#define KaudioSamlingNotication [[NSNotificationCenter defaultCenter] postNotificationName:@"audioSampling" object:nil]
+
+
+#import "UIView+Extension.h"
+
+#import <Availability.h>
+
+
+#ifndef __IPHONE_3_0
+#warning "This project uses features only available in iPhone SDK 3.0 and later."
+#endif
+
+#ifdef __OBJC__
+    #import <UIKit/UIKit.h>
+    #import <Foundation/Foundation.h>
+    #import "SuperViewController.h"
+#endif
+
+

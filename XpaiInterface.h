@@ -62,7 +62,7 @@ typedef enum ResolutionValue {
     RESOLUTION_1920x1080
 } ResolutionValue;
 
-//int resArray[8][7];//当客户端集成了cocopads时再集成我们的SDK会报重复定义的错误，客户端在使用时将该定义注释掉即可通过编译
+int resArray[8][7];//当客户端集成了cocopads时再集成我们的SDK会报重复定义的错误，客户端在使用时将该定义注释掉即可通过编译
 
 /**
  * 当摄像头工作在不同模式下时，takePhoto函数取得的视频质量完全不同，如果摄像头工作在视频录制模式，即使把分辨
@@ -188,6 +188,8 @@ typedef enum VideoMirroredMode {
 + (void)resumeRecord;
 + (void)interruptLive;
 + (void)stopRecord;
++ (void)toggleMute:(BOOL)muteOn;
++ (BOOL)isMute;
 
 + (SInt64)uploadVideoFile:(NSString *)url mode:(UploadMode)mode sId:(NSString *)sId sPath:(NSString *)sPath isRecordDone:(BOOL)isRecordDone;
 + (void)notifyRecordDone:(SInt64)ID;    // 如果uploadVideoFile的isRecordDone是NO，当视频录制完成后，需要通过本函数通知Lib

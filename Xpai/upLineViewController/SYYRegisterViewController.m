@@ -12,7 +12,7 @@
 #import "VRCViewController.h"
 #import "CLSettingConfig.h"
 
-@interface SYYRegisterViewController ()<UITextFieldDelegate>
+@interface SYYRegisterViewController ()<UITextFieldDelegate,UITextViewDelegate>
 {
     UILabel * _explainLabel;
     
@@ -93,6 +93,7 @@
     _ServiceCode = [ZBYTextField initTextFieldWith:@"" frame:CGRectMake(kScreenW * 0.47, _explainLabel.maxY + 5, textFieldW, textFieldH)];
     _ServiceCode.delegate = self;
     _UserName = [ZBYTextField initTextFieldWith:@"" frame:CGRectMake(kScreenW * 0.47, _ServiceCode.maxY + crack, textFieldW, textFieldH)];
+    _UserName.delegate = self;
     _UserName.keyboardType = UIKeyboardTypePhonePad;
     _ServiceCode.delegate = self;
      _PassWord = [ZBYTextField initTextFieldWith:@"" frame:CGRectMake(kScreenW * 0.47, _UserName.maxY + crack, textFieldW, textFieldH)];
@@ -103,6 +104,7 @@
     _segment.frame = CGRectMake(_PassWord.x, _PassWord.maxY + crack, textFieldW, 30);
     _segment.selectedSegmentIndex = 0;
      _GetVCUrl = [[UITextView alloc]initWithFrame:CGRectMake(kScreenW * 0.13, _segment.maxY + crack+ 30, kScreenW - kScreenW * 0.13 *2 + 20, textFieldH)];
+    _GetVCUrl.delegate = self;
     _GetVCUrl.keyboardType = UIKeyboardTypeURL;
 //    _GetVCUrl.text = @"http://180.153.55.2:10010/api/20140928/get_vs";//测试网址
     
@@ -169,24 +171,46 @@
 //登录
 -(void)login {
     [XpaiInterface connectCloud:_GetVCUrl.text u:_UserName.text pd:_PassWord.text svcd:_ServiceCode.text];
+    [CLSettingConfig sharedInstance].SYYUserName = _UserName.text;
+    [CLSettingConfig sharedInstance].SYYPassWord = _PassWord.text;
+    [CLSettingConfig sharedInstance].SYYServiceCode = _ServiceCode.text;
+    [CLSettingConfig sharedInstance].GetVCUrl = _GetVCUrl.text;
     [[CLSettingConfig sharedInstance] WriteData];
 }
 
-#pragma mark -- textField代理方法
+#pragma mark -- 代理方法
 -(void)textFieldDidBeginEditing:(UITextField *)textField {
     if ([textField isEqual:_PassWord]) {
         [UIView animateWithDuration:0.3 animations:^{
-            self.view.y = -30;
+            self.view.y = -50;
         }];
     }else if ([textField isEqual:_ServiceCode]) {
         [UIView animateWithDuration:0.3 animations:^{
-            self.view.y = -30;
+            self.view.y = -50;
         }];
     }else if ([textField isEqual:_UserName]) {
         [UIView animateWithDuration:0.3 animations:^{
-            self.view.y = -30;
+            self.view.y = -50;
         }];
     }
+}
+
+-(void)textFieldDidEndEditing:(UITextField *)textField {
+    [UIView animateWithDuration:0.3 animations:^{
+        self.view.y = 0;
+    }];
+}
+
+-(void)textViewDidBeginEditing:(UITextView *)textView {
+    [UIView animateWithDuration:0.3 animations:^{
+        self.view.y = -50;
+    }];
+}
+
+-(void)textViewDidEndEditing:(UITextView *)textView {
+    [UIView animateWithDuration:0.3 animations:^{
+        self.view.y = 0;
+    }];
 }
 
 #pragma mark --XpainterFaceDelegate回调

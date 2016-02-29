@@ -86,7 +86,6 @@
     BOOL isMKViedo;//开启录像模式
     BOOL isBackCamera; //是否为后摄像头
     BOOL isSuspend; //是否暂停
-    BOOL isMute;//是否静音
     BOOL isback;//返回
     BOOL isReconnect;//是否重连
     
@@ -207,7 +206,6 @@
     }
     isBackCamera = YES;
     isSuspend = NO;
-    isMute = NO;
     [[CLSettingConfig sharedInstance] loadData];
     
     
@@ -406,7 +404,7 @@
     _soundButton = [UIButton ButtonWithFrame:CGRectMake(_makeVideoButton.x, _suspendButton.maxY + 10, buttonW, buttonH) image:@"mic"];
     _soundButton.hidden = YES;
     [_soundButton addTarget:self action:@selector(mute) forControlEvents:UIControlEventTouchUpInside];
-//    [self.view addSubview:_soundButton];
+    [self.view addSubview:_soundButton];
     
     //拍照
     _photographButton = [UIButton ButtonWithFrame:CGRectMake(_makeVideoButton.x, kScreenW - buttonH - 10, buttonW, buttonH) image:@"take_picture"];
@@ -596,7 +594,7 @@
 //连接 断开连接
 -(void)login {
     if (_isLogin == NO) {
-        
+        _loginButton.enabled = NO;
         if ([[[UIDevice currentDevice] systemVersion] floatValue]>=8.0) {
             self.modalPresentationStyle=UIModalPresentationOverCurrentContext;
         }
@@ -825,13 +823,13 @@
 
 //静音
 -(void)mute {
-    if (isMute == YES) {
+    NSLog(@"静音%d",[XpaiInterface isMute]);
+    if ([XpaiInterface isMute]) {
         [_soundButton setBackgroundImage:[UIImage imageNamed:@"mic"] forState:UIControlStateNormal];
-        isMute = NO;
+        [XpaiInterface toggleMute:false];
     }else {
         [_soundButton setBackgroundImage:[UIImage imageNamed:@"mic_mute"] forState:UIControlStateNormal];
-        isMute = YES;
-                
+        [XpaiInterface toggleMute:true];
     }
 }
 
@@ -888,7 +886,7 @@
 //直播
 -(void)live {
     [self informationWithSte:@"开始直播"];
-    
+    NSLog(@"静音%d",[XpaiInterface isMute]);
     [XpaiInterface setVideoBitRate:(int)[CLSettingConfig sharedInstance].BitStream];//设置码流
     NSLog(@"码流%d",(int)[CLSettingConfig sharedInstance].BitStream);
     [XpaiInterface setNetWorkingAdaptive:[CLSettingConfig sharedInstance].NetDeption];//网络自适应
@@ -918,8 +916,6 @@
 //    }
 
     VideoID = [XpaiInterface startRecord:HARDWARE_ENCODER_LOCAL_STORAGE_ONLY TransferMode:VIDEO_AND_AUDIO forceReallyFile:TRUE volume:0 parameters:nil];
-    
-    
 }
 
 
@@ -980,6 +976,7 @@
     _isLogin = YES;
     [_loginButton setBackgroundImage:[UIImage imageNamed:@"link"] forState:UIControlStateNormal];
     [_loginButton.layer removeAnimationForKey:@"disconnect"];
+    _loginButton.enabled = YES;
 }
 
 //尝试重新连接回调

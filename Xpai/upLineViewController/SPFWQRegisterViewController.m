@@ -126,7 +126,7 @@
     _segment = [[UISegmentedControl alloc]initWithItems:kindOfOrientation];
     _segment.frame = CGRectMake(kScreenW * 0.47, _mainPort.maxY + crack, textFieldW, 30);
     _segment.selectedSegmentIndex = 0;
-    [self.view addSubview:_segment];
+    [_backgroundView addSubview:_segment];
     
     [_backgroundView addSubview:_UserName];
     [_backgroundView addSubview:_PassWord];
@@ -208,6 +208,12 @@
 //登录
 -(void)login {
     [XpaiInterface connectToServer:_mainUrl.text p:[_mainPort.text intValue] u:_UserName.text pd:_PassWord.text svcd:_serviceCode.text OnUDP:_TCPWwitch.on];
+    [CLSettingConfig sharedInstance].SPFWQPassWord = _PassWord.text;
+    [CLSettingConfig sharedInstance].SPFWQServiceCode = _serviceCode.text;
+    [CLSettingConfig sharedInstance].SPFWQUserName = _UserName.text;
+    [CLSettingConfig sharedInstance].mainUrl = _mainUrl.text;
+    [CLSettingConfig sharedInstance].mainPort = [_mainPort.text integerValue];
+    [CLSettingConfig sharedInstance].isTcp = _TCPWwitch.selected;
     [[CLSettingConfig sharedInstance] WriteData];
 }
 

@@ -416,14 +416,14 @@
     //暂停录制、直播
     _suspendButton = [UIButton ButtonWithFrame:CGRectMake(_makeVideoButton.x, _makeVideoButton.maxY + 10, buttonW, buttonH) image:@"record_pause"];
     _suspendButton.hidden = YES;
-    [_suspendButton addTarget:self action:@selector(suspend) forControlEvents:UIControlEventTouchUpInside];
+    [_suspendButton addTarget:self action:@selector(suspendVideo) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_suspendButton];
     
     //静音模式
     _soundButton = [UIButton ButtonWithFrame:CGRectMake(_makeVideoButton.x, _suspendButton.maxY + 10, buttonW, buttonH) image:@"mic"];
     _soundButton.hidden = YES;
     [_soundButton addTarget:self action:@selector(mute) forControlEvents:UIControlEventTouchUpInside];
-//    [self.view addSubview:_soundButton];
+    [self.view addSubview:_soundButton];
     
     //拍照
     _photographButton = [UIButton ButtonWithFrame:CGRectMake(_makeVideoButton.x, kScreenW - buttonH - 10, buttonW, buttonH) image:@"take_picture"];
@@ -760,8 +760,8 @@
 //录制视频
 -(void)makeVideo {
     if (isMKPhoto ==NO) {
-//        UIAlertView * al = [[UIAlertView alloc]initWithTitle:@"提示" message:@"请开启预览" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
-//        [al show];
+        UIAlertView * al = [[UIAlertView alloc]initWithTitle:@"提示" message:@"请开启预览" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+        [al show];
         return;
     }
     int camera;//判定前后摄像头
@@ -813,7 +813,7 @@
 }
 
 //暂停视频录制
--(void)suspend {
+-(void)suspendVideo {
     
     if (_isLogin == YES) {
         if (isSuspend == NO) {
@@ -867,9 +867,11 @@
 -(void)mute {
     if (isMute == YES) {
         [_soundButton setBackgroundImage:[UIImage imageNamed:@"mic"] forState:UIControlStateNormal];
+        [XpaiInterface toggleMute:NO];
         isMute = NO;
     }else {
         [_soundButton setBackgroundImage:[UIImage imageNamed:@"mic_mute"] forState:UIControlStateNormal];
+        [XpaiInterface toggleMute:YES];
         isMute = YES;
                 
     }

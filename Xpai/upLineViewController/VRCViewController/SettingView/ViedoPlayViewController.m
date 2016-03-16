@@ -113,9 +113,8 @@
 #pragma mark --搭建界面
 //创建播放页面
 -(void)CreatePlayView {
-    NSArray *parameters = [NSArray arrayWithObjects:@"-probesize", @"200000", @"-realtime", nil];
-    _player = [[WoanPlayerInterface alloc]initWithContentString:_PlayFileURL parameters:parameters];//初始化播放管理者
-    NSLog(@"playView%@",_PlayFileURL);
+
+    _player = [[WoanPlayerInterface alloc]initWithContentString:_PlayFileURL parameters:nil];//初始化播放管理者
     
     _playView = [_player getPlayViewWithFrame:self.view.bounds];
     _playView.contentMode = UIViewContentModeScaleAspectFit;

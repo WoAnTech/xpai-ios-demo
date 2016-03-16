@@ -3,13 +3,13 @@
 //  Xpai
 //
 //  Created by  cLong on 16/2/3.
-//  Copyright © 2016年 北京沃安科技有限公司. All rights reserved.
+//  Copyright © 2016年 B-Star. All rights reserved.
 //
 
 #import "reconnectTimeView.h"
 #import "CLSettingConfig.h"
 
-@interface ReconnectTimeView ()
+@interface reconnectTimeView ()
 {
     UILabel * _titLB;
     UISlider * _slider;
@@ -17,7 +17,7 @@
 
 @end
 
-@implementation ReconnectTimeView
+@implementation reconnectTimeView
 
 -(void)dealloc {
     [_titLB release];

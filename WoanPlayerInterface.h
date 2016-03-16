@@ -38,8 +38,6 @@ typedef enum {
 - (void)pause;
 - (void)stop;
 - (void)seekTo:(NSTimeInterval)newPos;
-- (void)toggleMute:(BOOL)muteOn;
-- (BOOL)isMute;
 
 - (NSTimeInterval)getDuration;
 - (NSTimeInterval)getCurrentPlaybackTime;

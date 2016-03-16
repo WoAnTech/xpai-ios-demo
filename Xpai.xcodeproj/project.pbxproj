@@ -34,13 +34,13 @@
 		BD09EAFF1C3CE793008399E0 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = BD09EAFE1C3CE793008399E0 /* libz.tbd */; };
 		BD09EB011C3CE79C008399E0 /* libbz2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = BD09EB001C3CE79C008399E0 /* libbz2.tbd */; };
 		BD09EB031C3CE7A5008399E0 /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = BD09EB021C3CE7A5008399E0 /* libiconv.tbd */; };
-		BD0A78F91C4F355E002EE8EC /* VideoPlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD0A78F81C4F355E002EE8EC /* VideoPlayViewController.m */; };
+		BD0A78F91C4F355E002EE8EC /* ViedoPlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD0A78F81C4F355E002EE8EC /* ViedoPlayViewController.m */; };
 		BD0AFEBB1C435360003F42B4 /* ZBYTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = BD0AFEBA1C435360003F42B4 /* ZBYTextField.m */; };
 		BD1740B41C4DC792002E9EB9 /* PlayViedoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD1740B31C4DC792002E9EB9 /* PlayViedoViewController.m */; };
 		BD1740B71C4DDC08002E9EB9 /* PlayMoreView.m in Sources */ = {isa = PBXBuildFile; fileRef = BD1740B61C4DDC08002E9EB9 /* PlayMoreView.m */; };
 		BD1740B91C4DDD54002E9EB9 /* More.png in Resources */ = {isa = PBXBuildFile; fileRef = BD1740B81C4DDD54002E9EB9 /* More.png */; };
 		BD1740BF1C4E30F7002E9EB9 /* MovNameCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BD1740BE1C4E30F7002E9EB9 /* MovNameCell.m */; };
-		BD1F10A91C5B4A4F00095E25 /* OutPutLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = BD1F10A81C5B4A4F00095E25 /* OutPutLabel.m */; };
+		BD1F10A91C5B4A4F00095E25 /* outPutLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = BD1F10A81C5B4A4F00095E25 /* outPutLabel.m */; };
 		BD1F10AB1C5B66BD00095E25 /* get.png in Resources */ = {isa = PBXBuildFile; fileRef = BD1F10AA1C5B66BD00095E25 /* get.png */; };
 		BD1F10AE1C5B6F5300095E25 /* CLNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD1F10AD1C5B6F5300095E25 /* CLNavigationController.m */; };
 		BD2489701C59EA220099DF13 /* 2.png in Resources */ = {isa = PBXBuildFile; fileRef = BD2489691C59EA220099DF13 /* 2.png */; };
@@ -64,14 +64,14 @@
 		BD978CB41C4CE9D10086F9A6 /* SaveRedioView.m in Sources */ = {isa = PBXBuildFile; fileRef = BD978CB31C4CE9D10086F9A6 /* SaveRedioView.m */; };
 		BD9DE6371C48D63600EE4130 /* BitStreamView.m in Sources */ = {isa = PBXBuildFile; fileRef = BD9DE6361C48D63600EE4130 /* BitStreamView.m */; };
 		BD9DE63B1C48FAA400EE4130 /* NetOverTimeView.m in Sources */ = {isa = PBXBuildFile; fileRef = BD9DE63A1C48FAA400EE4130 /* NetOverTimeView.m */; };
-		BD9DE63E1C49018900EE4130 /* TranscribeView.m in Sources */ = {isa = PBXBuildFile; fileRef = BD9DE63D1C49018900EE4130 /* TranscribeView.m */; };
+		BD9DE63E1C49018900EE4130 /* transcribeView.m in Sources */ = {isa = PBXBuildFile; fileRef = BD9DE63D1C49018900EE4130 /* transcribeView.m */; };
 		BDA2AD221C4498CB00482E3E /* VRCViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDA2AD211C4498CB00482E3E /* VRCViewController.m */; };
 		BDAB49CA1C475D31006273E6 /* IconsLand_017.png in Resources */ = {isa = PBXBuildFile; fileRef = BDAB49C91C475D31006273E6 /* IconsLand_017.png */; };
-		BDAB49D01C477107006273E6 /* SettingView.m in Sources */ = {isa = PBXBuildFile; fileRef = BDAB49CF1C477107006273E6 /* SettingView.m */; };
+		BDAB49D01C477107006273E6 /* SwttingView.m in Sources */ = {isa = PBXBuildFile; fileRef = BDAB49CF1C477107006273E6 /* SwttingView.m */; };
 		BDAB49D41C4774D7006273E6 /* SettingViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BDAB49D31C4774D7006273E6 /* SettingViewCell.m */; };
 		BDAB49D71C479961006273E6 /* CLSettingConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = BDAB49D61C479961006273E6 /* CLSettingConfig.m */; };
-		BDAB49DA1C479B25006273E6 /* ResolutionRatioView.m in Sources */ = {isa = PBXBuildFile; fileRef = BDAB49D91C479B25006273E6 /* ResolutionRatioView.m */; };
-		BDAB49DD1C47A32E006273E6 /* ResolutionRatioCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BDAB49DC1C47A32E006273E6 /* ResolutionRatioCell.m */; };
+		BDAB49DA1C479B25006273E6 /* resolutionRatioView.m in Sources */ = {isa = PBXBuildFile; fileRef = BDAB49D91C479B25006273E6 /* resolutionRatioView.m */; };
+		BDAB49DD1C47A32E006273E6 /* resolutionRatioCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BDAB49DC1C47A32E006273E6 /* resolutionRatioCell.m */; };
 		BDBBEEE01C44AA61009B4A7B /* MainNaVi.m in Sources */ = {isa = PBXBuildFile; fileRef = BDBBEEDF1C44AA61009B4A7B /* MainNaVi.m */; };
 		BDBBEEF41C44B767009B4A7B /* change_camera_id.png in Resources */ = {isa = PBXBuildFile; fileRef = BDBBEEE21C44B767009B4A7B /* change_camera_id.png */; };
 		BDBBEEF51C44B767009B4A7B /* flash_off.png in Resources */ = {isa = PBXBuildFile; fileRef = BDBBEEE31C44B767009B4A7B /* flash_off.png */; };
@@ -247,7 +247,7 @@
 		BDE3CC041C72FA6A00161539 /* UIView+MJExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = BDE3CB6D1C72FA6A00161539 /* UIView+MJExtension.m */; };
 		BDE3CC061C730B3D00161539 /* logo-640-480.png in Resources */ = {isa = PBXBuildFile; fileRef = BDE3CC051C730B3D00161539 /* logo-640-480.png */; };
 		BDE3CC081C730DFB00161539 /* logo-505-200.png in Resources */ = {isa = PBXBuildFile; fileRef = BDE3CC071C730DFB00161539 /* logo-505-200.png */; };
-		BDE6200C1C6196250079587B /* ReconnectTimeView.m in Sources */ = {isa = PBXBuildFile; fileRef = BDE6200B1C6196250079587B /* ReconnectTimeView.m */; };
+		BDE6200C1C6196250079587B /* reconnectTimeView.m in Sources */ = {isa = PBXBuildFile; fileRef = BDE6200B1C6196250079587B /* reconnectTimeView.m */; };
 		BDE6200F1C61A8ED0079587B /* CLUploadConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = BDE6200E1C61A8ED0079587B /* CLUploadConfig.m */; };
 		DC77B4D6165F678C0095EEEB /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DC77B4D5165F678C0095EEEB /* Default-568h@2x.png */; };
 		DC81AF951453056700109399 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC81AF941453056700109399 /* AssetsLibrary.framework */; };
@@ -290,8 +290,8 @@
 		BD09EAFE1C3CE793008399E0 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		BD09EB001C3CE79C008399E0 /* libbz2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libbz2.tbd; path = usr/lib/libbz2.tbd; sourceTree = SDKROOT; };
 		BD09EB021C3CE7A5008399E0 /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
-		BD0A78F71C4F355E002EE8EC /* VideoPlayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoPlayViewController.h; sourceTree = "<group>"; };
-		BD0A78F81C4F355E002EE8EC /* VideoPlayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoPlayViewController.m; sourceTree = "<group>"; };
+		BD0A78F71C4F355E002EE8EC /* ViedoPlayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViedoPlayViewController.h; sourceTree = "<group>"; };
+		BD0A78F81C4F355E002EE8EC /* ViedoPlayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViedoPlayViewController.m; sourceTree = "<group>"; };
 		BD0AFEB91C435360003F42B4 /* ZBYTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZBYTextField.h; sourceTree = "<group>"; };
 		BD0AFEBA1C435360003F42B4 /* ZBYTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZBYTextField.m; sourceTree = "<group>"; };
 		BD1740B21C4DC792002E9EB9 /* PlayViedoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayViedoViewController.h; sourceTree = "<group>"; };
@@ -301,8 +301,8 @@
 		BD1740B81C4DDD54002E9EB9 /* More.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = More.png; sourceTree = "<group>"; };
 		BD1740BD1C4E30F7002E9EB9 /* MovNameCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MovNameCell.h; sourceTree = "<group>"; };
 		BD1740BE1C4E30F7002E9EB9 /* MovNameCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MovNameCell.m; sourceTree = "<group>"; };
-		BD1F10A71C5B4A4F00095E25 /* OutPutLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OutPutLabel.h; sourceTree = "<group>"; };
-		BD1F10A81C5B4A4F00095E25 /* OutPutLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OutPutLabel.m; sourceTree = "<group>"; };
+		BD1F10A71C5B4A4F00095E25 /* outPutLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = outPutLabel.h; sourceTree = "<group>"; };
+		BD1F10A81C5B4A4F00095E25 /* outPutLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = outPutLabel.m; sourceTree = "<group>"; };
 		BD1F10AA1C5B66BD00095E25 /* get.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = get.png; sourceTree = "<group>"; };
 		BD1F10AC1C5B6F5300095E25 /* CLNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CLNavigationController.h; path = Xpai/upLineViewController/VRCViewController/SettingView/SubViews/CLNavigationController.h; sourceTree = SOURCE_ROOT; };
 		BD1F10AD1C5B6F5300095E25 /* CLNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CLNavigationController.m; path = Xpai/upLineViewController/VRCViewController/SettingView/SubViews/CLNavigationController.m; sourceTree = SOURCE_ROOT; };
@@ -338,21 +338,21 @@
 		BD9DE6361C48D63600EE4130 /* BitStreamView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BitStreamView.m; path = ../BitStreamView.m; sourceTree = "<group>"; };
 		BD9DE6391C48FAA400EE4130 /* NetOverTimeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetOverTimeView.h; sourceTree = "<group>"; };
 		BD9DE63A1C48FAA400EE4130 /* NetOverTimeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetOverTimeView.m; sourceTree = "<group>"; };
-		BD9DE63C1C49018900EE4130 /* TranscribeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TranscribeView.h; sourceTree = "<group>"; };
-		BD9DE63D1C49018900EE4130 /* TranscribeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TranscribeView.m; sourceTree = "<group>"; };
+		BD9DE63C1C49018900EE4130 /* transcribeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = transcribeView.h; sourceTree = "<group>"; };
+		BD9DE63D1C49018900EE4130 /* transcribeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = transcribeView.m; sourceTree = "<group>"; };
 		BDA2AD201C4498CB00482E3E /* VRCViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VRCViewController.h; path = ../VRCViewController.h; sourceTree = "<group>"; };
 		BDA2AD211C4498CB00482E3E /* VRCViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VRCViewController.m; path = ../VRCViewController.m; sourceTree = "<group>"; };
 		BDAB49C91C475D31006273E6 /* IconsLand_017.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = IconsLand_017.png; sourceTree = "<group>"; };
-		BDAB49CE1C477107006273E6 /* SettingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SettingView.h; path = ../../../../SettingView.h; sourceTree = "<group>"; };
-		BDAB49CF1C477107006273E6 /* SettingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SettingView.m; path = ../../../../SettingView.m; sourceTree = "<group>"; };
+		BDAB49CE1C477107006273E6 /* SwttingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SwttingView.h; path = ../../../../SwttingView.h; sourceTree = "<group>"; };
+		BDAB49CF1C477107006273E6 /* SwttingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SwttingView.m; path = ../../../../SwttingView.m; sourceTree = "<group>"; };
 		BDAB49D21C4774D7006273E6 /* SettingViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingViewCell.h; sourceTree = "<group>"; };
 		BDAB49D31C4774D7006273E6 /* SettingViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingViewCell.m; sourceTree = "<group>"; };
 		BDAB49D51C479961006273E6 /* CLSettingConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CLSettingConfig.h; path = SettingView/CLSettingConfig.h; sourceTree = "<group>"; };
 		BDAB49D61C479961006273E6 /* CLSettingConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CLSettingConfig.m; path = SettingView/CLSettingConfig.m; sourceTree = "<group>"; };
-		BDAB49D81C479B25006273E6 /* ResolutionRatioView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ResolutionRatioView.h; path = ../ResolutionRatioView.h; sourceTree = "<group>"; };
-		BDAB49D91C479B25006273E6 /* ResolutionRatioView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ResolutionRatioView.m; path = ../ResolutionRatioView.m; sourceTree = "<group>"; };
-		BDAB49DB1C47A32E006273E6 /* ResolutionRatioCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ResolutionRatioCell.h; path = ../ResolutionRatioCell.h; sourceTree = "<group>"; };
-		BDAB49DC1C47A32E006273E6 /* ResolutionRatioCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ResolutionRatioCell.m; path = ../ResolutionRatioCell.m; sourceTree = "<group>"; };
+		BDAB49D81C479B25006273E6 /* resolutionRatioView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = resolutionRatioView.h; path = ../resolutionRatioView.h; sourceTree = "<group>"; };
+		BDAB49D91C479B25006273E6 /* resolutionRatioView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = resolutionRatioView.m; path = ../resolutionRatioView.m; sourceTree = "<group>"; };
+		BDAB49DB1C47A32E006273E6 /* resolutionRatioCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = resolutionRatioCell.h; path = ../resolutionRatioCell.h; sourceTree = "<group>"; };
+		BDAB49DC1C47A32E006273E6 /* resolutionRatioCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = resolutionRatioCell.m; path = ../resolutionRatioCell.m; sourceTree = "<group>"; };
 		BDBBEEDE1C44AA61009B4A7B /* MainNaVi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainNaVi.h; sourceTree = "<group>"; };
 		BDBBEEDF1C44AA61009B4A7B /* MainNaVi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainNaVi.m; sourceTree = "<group>"; };
 		BDBBEEE21C44B767009B4A7B /* change_camera_id.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = change_camera_id.png; sourceTree = "<group>"; };
@@ -557,8 +557,8 @@
 		BDE3CB6D1C72FA6A00161539 /* UIView+MJExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+MJExtension.m"; sourceTree = "<group>"; };
 		BDE3CC051C730B3D00161539 /* logo-640-480.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo-640-480.png"; sourceTree = "<group>"; };
 		BDE3CC071C730DFB00161539 /* logo-505-200.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo-505-200.png"; sourceTree = "<group>"; };
-		BDE6200A1C6196250079587B /* ReconnectTimeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReconnectTimeView.h; sourceTree = "<group>"; };
-		BDE6200B1C6196250079587B /* ReconnectTimeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReconnectTimeView.m; sourceTree = "<group>"; };
+		BDE6200A1C6196250079587B /* reconnectTimeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = reconnectTimeView.h; sourceTree = "<group>"; };
+		BDE6200B1C6196250079587B /* reconnectTimeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = reconnectTimeView.m; sourceTree = "<group>"; };
 		BDE6200D1C61A8ED0079587B /* CLUploadConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLUploadConfig.h; sourceTree = "<group>"; };
 		BDE6200E1C61A8ED0079587B /* CLUploadConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLUploadConfig.m; sourceTree = "<group>"; };
 		DC48C31A135748C700D2C16E /* Xpai.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Xpai.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -699,18 +699,18 @@
 		BD9DE6381C48F98A00EE4130 /* SubViews */ = {
 			isa = PBXGroup;
 			children = (
-				BDAB49D81C479B25006273E6 /* ResolutionRatioView.h */,
-				BDAB49D91C479B25006273E6 /* ResolutionRatioView.m */,
-				BDAB49DB1C47A32E006273E6 /* ResolutionRatioCell.h */,
-				BDAB49DC1C47A32E006273E6 /* ResolutionRatioCell.m */,
+				BDAB49D81C479B25006273E6 /* resolutionRatioView.h */,
+				BDAB49D91C479B25006273E6 /* resolutionRatioView.m */,
+				BDAB49DB1C47A32E006273E6 /* resolutionRatioCell.h */,
+				BDAB49DC1C47A32E006273E6 /* resolutionRatioCell.m */,
 				BD9DE6351C48D63600EE4130 /* BitStreamView.h */,
 				BD9DE6361C48D63600EE4130 /* BitStreamView.m */,
 				BD9DE6391C48FAA400EE4130 /* NetOverTimeView.h */,
 				BD9DE63A1C48FAA400EE4130 /* NetOverTimeView.m */,
-				BDE6200A1C6196250079587B /* ReconnectTimeView.h */,
-				BDE6200B1C6196250079587B /* ReconnectTimeView.m */,
-				BD9DE63C1C49018900EE4130 /* TranscribeView.h */,
-				BD9DE63D1C49018900EE4130 /* TranscribeView.m */,
+				BDE6200A1C6196250079587B /* reconnectTimeView.h */,
+				BDE6200B1C6196250079587B /* reconnectTimeView.m */,
+				BD9DE63C1C49018900EE4130 /* transcribeView.h */,
+				BD9DE63D1C49018900EE4130 /* transcribeView.m */,
 				BD978CAC1C4C77CB0086F9A6 /* AudioParameterView.h */,
 				BD978CAD1C4C77CB0086F9A6 /* AudioParameterView.m */,
 				BD978CAF1C4CE2630086F9A6 /* NetDeptionView.h */,
@@ -721,8 +721,8 @@
 				BD1740B61C4DDC08002E9EB9 /* PlayMoreView.m */,
 				BDBF879D1C51EE9A00CAE411 /* UploadVideoView.h */,
 				BDBF879E1C51EE9A00CAE411 /* UploadVideoView.m */,
-				BD1F10A71C5B4A4F00095E25 /* OutPutLabel.h */,
-				BD1F10A81C5B4A4F00095E25 /* OutPutLabel.m */,
+				BD1F10A71C5B4A4F00095E25 /* outPutLabel.h */,
+				BD1F10A81C5B4A4F00095E25 /* outPutLabel.m */,
 			);
 			path = SubViews;
 			sourceTree = "<group>";
@@ -745,8 +745,8 @@
 			children = (
 				BDA2AD201C4498CB00482E3E /* VRCViewController.h */,
 				BDA2AD211C4498CB00482E3E /* VRCViewController.m */,
-				BDAB49CE1C477107006273E6 /* SettingView.h */,
-				BDAB49CF1C477107006273E6 /* SettingView.m */,
+				BDAB49CE1C477107006273E6 /* SwttingView.h */,
+				BDAB49CF1C477107006273E6 /* SwttingView.m */,
 				BDAB49D21C4774D7006273E6 /* SettingViewCell.h */,
 				BDAB49D31C4774D7006273E6 /* SettingViewCell.m */,
 				BD1740B21C4DC792002E9EB9 /* PlayViedoViewController.h */,
@@ -755,8 +755,8 @@
 				BD1740BE1C4E30F7002E9EB9 /* MovNameCell.m */,
 				9BA05F6F1935ED2300BC8DC4 /* SuperViewController.h */,
 				9BA05F701935ED2300BC8DC4 /* SuperViewController.m */,
-				BD0A78F71C4F355E002EE8EC /* VideoPlayViewController.h */,
-				BD0A78F81C4F355E002EE8EC /* VideoPlayViewController.m */,
+				BD0A78F71C4F355E002EE8EC /* ViedoPlayViewController.h */,
+				BD0A78F81C4F355E002EE8EC /* ViedoPlayViewController.m */,
 				BD9DE6381C48F98A00EE4130 /* SubViews */,
 			);
 			path = SettingView;
@@ -1861,10 +1861,10 @@
 				BDE3CBFD1C72FA6A00161539 /* MJDIYAutoFooter.m in Sources */,
 				BDE3CBFB1C72FA6A00161539 /* MJChiBaoZiFooter2.m in Sources */,
 				BD978CB11C4CE2630086F9A6 /* NetDeptionView.m in Sources */,
-				BDAB49DA1C479B25006273E6 /* ResolutionRatioView.m in Sources */,
+				BDAB49DA1C479B25006273E6 /* resolutionRatioView.m in Sources */,
 				BDE3CBFF1C72FA6A00161539 /* MJDIYHeader.m in Sources */,
 				BD978CB41C4CE9D10086F9A6 /* SaveRedioView.m in Sources */,
-				BDAB49D01C477107006273E6 /* SettingView.m in Sources */,
+				BDAB49D01C477107006273E6 /* SwttingView.m in Sources */,
 				BDBBEEE01C44AA61009B4A7B /* MainNaVi.m in Sources */,
 				BDE3CB731C72FA6A00161539 /* MJRefreshAutoGifFooter.m in Sources */,
 				BDE3CC041C72FA6A00161539 /* UIView+MJExtension.m in Sources */,
@@ -1877,7 +1877,7 @@
 				DC8471B51328B57D00CE167E /* XpaiAppDelegate.m in Sources */,
 				BDE3CB711C72FA6A00161539 /* MJRefreshFooter.m in Sources */,
 				BDE3CBFA1C72FA6A00161539 /* MJChiBaoZiFooter.m in Sources */,
-				BDAB49DD1C47A32E006273E6 /* ResolutionRatioCell.m in Sources */,
+				BDAB49DD1C47A32E006273E6 /* resolutionRatioCell.m in Sources */,
 				BDA2AD221C4498CB00482E3E /* VRCViewController.m in Sources */,
 				BD0AFEBB1C435360003F42B4 /* ZBYTextField.m in Sources */,
 				BD7929E01C3FA3510024E112 /* SYYRegisterViewController.m in Sources */,
@@ -1897,15 +1897,15 @@
 				BDE3CB741C72FA6A00161539 /* MJRefreshAutoNormalFooter.m in Sources */,
 				BD53ECE41C71C508004A364E /* UIView+Extension.m in Sources */,
 				BD7929CC1C3F76070024E112 /* NewRecordViewController.m in Sources */,
-				BD1F10A91C5B4A4F00095E25 /* OutPutLabel.m in Sources */,
+				BD1F10A91C5B4A4F00095E25 /* outPutLabel.m in Sources */,
 				BDE3CC021C72FA6A00161539 /* UIScrollView+MJExtension.m in Sources */,
 				BDBBEF0C1C44C9A3009B4A7B /* UILabel+VRCLabel.m in Sources */,
 				BD1F10AE1C5B6F5300095E25 /* CLNavigationController.m in Sources */,
-				BDE6200C1C6196250079587B /* ReconnectTimeView.m in Sources */,
-				BD0A78F91C4F355E002EE8EC /* VideoPlayViewController.m in Sources */,
+				BDE6200C1C6196250079587B /* reconnectTimeView.m in Sources */,
+				BD0A78F91C4F355E002EE8EC /* ViedoPlayViewController.m in Sources */,
 				BD7929E31C3FA36D0024E112 /* SPFWQRegisterViewController.m in Sources */,
 				BDE3CB721C72FA6A00161539 /* MJRefreshHeader.m in Sources */,
-				BD9DE63E1C49018900EE4130 /* TranscribeView.m in Sources */,
+				BD9DE63E1C49018900EE4130 /* transcribeView.m in Sources */,
 				BD9DE6371C48D63600EE4130 /* BitStreamView.m in Sources */,
 				BDE3CB761C72FA6A00161539 /* MJRefreshBackGifFooter.m in Sources */,
 				BDAB49D41C4774D7006273E6 /* SettingViewCell.m in Sources */,

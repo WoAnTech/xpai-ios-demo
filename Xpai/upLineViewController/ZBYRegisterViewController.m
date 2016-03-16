@@ -3,7 +3,7 @@
 //  Xpai
 //
 //  Created by  cLong on 16/1/8.
-//  Copyright © 2016年 北京沃安科技有限公司. All rights reserved.
+//  Copyright © 2016年 B-Star. All rights reserved.
 //
 
 #import "ZBYRegisterViewController.h"
@@ -108,10 +108,10 @@
     _ServiceCode.keyboardType = UIKeyboardTypeDefault;
     _ServiceCode.delegate = self;
     _UserName = [ZBYTextField initTextFieldWith:@"" frame:CGRectMake(kScreenW * 0.47, _ServiceCode.maxY + crack, textFieldW, textFieldH)];//输入用户名
-    _UserName.keyboardType = UIKeyboardTypePhonePad;
+    _UserName.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
     _UserName.delegate = self;
     _PassWord = [ZBYTextField initTextFieldWith:@"" frame:CGRectMake(kScreenW * 0.47, _UserName.maxY + crack, textFieldW, textFieldH)];//输入密码
-    _PassWord.keyboardType = UIKeyboardTypePhonePad;
+    _PassWord.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
     _PassWord.delegate = self;
 
     NSString * userNames = [[NSString alloc]initWithString:[CLUploadConfig sharedInstance].UserName] ;

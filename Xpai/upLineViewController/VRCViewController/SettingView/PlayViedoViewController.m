@@ -3,13 +3,13 @@
 //  Xpai
 //
 //  Created by  cLong on 16/1/19.
-//  Copyright © 2016年 北京沃安科技有限公司. All rights reserved.
+//  Copyright © 2016年 B-Star. All rights reserved.
 //
 
 #import "PlayViedoViewController.h"
 #import "PlayMoreView.h"
 #import "MovNameCell.h"
-#import "VideoPlayViewController.h"
+#import "ViedoPlayViewController.h"
 #import "MJChiBaoZiHeader.h"
 
 @interface PlayViedoViewController ()<chooseOption,UITableViewDataSource,UITableViewDelegate>
@@ -216,7 +216,7 @@
 
 //播放URL页面
 -(void)playViedo {
-    VideoPlayViewController * vc = [[VideoPlayViewController alloc]init];
+    ViedoPlayViewController * vc = [[ViedoPlayViewController alloc]init];
     vc.PlayFileURL = _textView.text;
     [self presentViewController:vc animated:YES completion:^{
         _urlView.alpha = 0;
@@ -275,7 +275,7 @@
         return;
     }
     
-    VideoPlayViewController * viedoPlayView = [[VideoPlayViewController alloc]init];
+    ViedoPlayViewController * viedoPlayView = [[ViedoPlayViewController alloc]init];
 //    NSString * str = [NSString stringWithContentsOfFile:<#(nonnull NSString *)#> encoding:NSUTF8StringEncoding error:nil]
     viedoPlayView.PlayFileURL = [NSString stringWithFormat:@"%@/Library/%@",NSHomeDirectory(),_movNameArr[indexPath.row]];
     NSLog(@"%@",viedoPlayView.PlayFileURL);

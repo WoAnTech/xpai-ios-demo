@@ -3,7 +3,7 @@
 //  Xpai
 //
 //  Created by  cLong on 16/1/8.
-//  Copyright © 2016年 北京沃安科技有限公司. All rights reserved.
+//  Copyright © 2016年 B-Star. All rights reserved.
 //
 
 #import "SYYRegisterViewController.h"
@@ -21,6 +21,7 @@
     ZBYTextField * _ServiceCode;
     UITextView * _GetVCUrl;
     UISegmentedControl * _segment;
+    
     
     UIAlertView *  _failCodeAlertView;
 }
@@ -93,11 +94,10 @@
     _ServiceCode = [ZBYTextField initTextFieldWith:@"" frame:CGRectMake(kScreenW * 0.47, _explainLabel.maxY + 5, textFieldW, textFieldH)];
     _ServiceCode.delegate = self;
     _UserName = [ZBYTextField initTextFieldWith:@"" frame:CGRectMake(kScreenW * 0.47, _ServiceCode.maxY + crack, textFieldW, textFieldH)];
-    _UserName.delegate = self;
-    _UserName.keyboardType = UIKeyboardTypePhonePad;
+    _UserName.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
     _ServiceCode.delegate = self;
      _PassWord = [ZBYTextField initTextFieldWith:@"" frame:CGRectMake(kScreenW * 0.47, _UserName.maxY + crack, textFieldW, textFieldH)];
-    _PassWord.keyboardType = UIKeyboardTypePhonePad;
+    _PassWord.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
     _PassWord.delegate = self;
     NSArray * kindOfOrientation = @[@"横屏",@"竖屏"];
     _segment = [[UISegmentedControl alloc]initWithItems:kindOfOrientation];
@@ -114,6 +114,7 @@
     NSString * service = [[NSString alloc]initWithString:[CLSettingConfig sharedInstance].SYYServiceCode];
     NSString * getUrl = [[NSString alloc]initWithString:[CLSettingConfig sharedInstance].GetVCUrl];
     
+    NSLog(@"SYY%@",username);
     _UserName.text = username;
     _PassWord.text = password;
     _ServiceCode.text = service;
@@ -170,12 +171,11 @@
 }
 //登录
 -(void)login {
-    [XpaiInterface connectCloud:_GetVCUrl.text u:_UserName.text pd:_PassWord.text svcd:_ServiceCode.text];
     [CLSettingConfig sharedInstance].SYYUserName = _UserName.text;
     [CLSettingConfig sharedInstance].SYYPassWord = _PassWord.text;
     [CLSettingConfig sharedInstance].SYYServiceCode = _ServiceCode.text;
-    [CLSettingConfig sharedInstance].GetVCUrl = _GetVCUrl.text;
     [[CLSettingConfig sharedInstance] WriteData];
+    [XpaiInterface connectCloud:_GetVCUrl.text u:_UserName.text pd:_PassWord.text svcd:_ServiceCode.text];
 }
 
 #pragma mark -- 代理方法

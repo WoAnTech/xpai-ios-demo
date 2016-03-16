@@ -1,15 +1,15 @@
 //
-//  VideoPlayViewController.m
+//  ViedoPlayViewController.m
 //  Xpai
 //
 //  Created by  cLong on 16/1/20.
-//  Copyright © 2016年 北京沃安科技有限公司. All rights reserved.
+//  Copyright © 2016年 B-Star. All rights reserved.
 //
 
-#import "VideoPlayViewController.h"
+#import "ViedoPlayViewController.h"
 #import "WoanPlayerInterface.h"
 
-@interface VideoPlayViewController ()
+@interface ViedoPlayViewController ()
 {
     WoanPlayerInterface * _player ; //播放管理者
     UIView * _showViedoPlay;//播放控制页
@@ -29,7 +29,7 @@
 }
 @end
 
-@implementation VideoPlayViewController
+@implementation ViedoPlayViewController
 
 -(void)dealloc {
     [_player release];
@@ -49,6 +49,9 @@
 -(void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
+    
+    
+    
     
     [self initView];//创建控制页面
     [self createNotificationCentre];//通知中心
@@ -98,12 +101,20 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveDuration:) name:WoanPlayerLoadDidPreparedNotification object:nil];//初始化结束
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playOver) name:WoanPlayerPlaybackDidFinishNotification object:nil];//播放结束
+    
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationWillResignActive:)
+                                                 name:UIApplicationWillResignActiveNotification object:nil]; //监听是否触发home键挂起程序.
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidBecomeActive:)
+                                                 name:UIApplicationDidBecomeActiveNotification object:nil]; //监听是否重新进入程序.
 }
 
 #pragma mark --搭建界面
 //创建播放页面
 -(void)CreatePlayView {
-    _player = [[WoanPlayerInterface alloc]initWithContentString:_PlayFileURL parameters:nil];//初始化播放管理者
+    NSArray *parameters = [NSArray arrayWithObjects:@"-probesize", @"200000", @"-realtime", nil];
+    _player = [[WoanPlayerInterface alloc]initWithContentString:_PlayFileURL parameters:parameters];//初始化播放管理者
     NSLog(@"playView%@",_PlayFileURL);
     
     _playView = [_player getPlayViewWithFrame:self.view.bounds];
@@ -279,5 +290,23 @@
     }
     NSLog(@"屏幕旋转");
 }
+
+#pragma mark --监听Home按钮
+//按下Home键及电话
+- (void)applicationWillResignActive:(UIApplication *)application
+//当应用程序将要入非活动状态执行，在此期间，应用程序不接收消息或事件，比如来电话了
+{
+    [_player pause];
+    [_player stop];
+}
+//重新进入程序
+- (void)applicationDidBecomeActive:(UIApplication *)application
+//当应用程序入活动状态执行，这个刚好跟上面那个方法相反
+{
+    [self CreatePlayView];
+    [_player play];
+    
+}
+
 
 @end

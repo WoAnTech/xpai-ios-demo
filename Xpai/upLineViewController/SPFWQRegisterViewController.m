@@ -3,7 +3,7 @@
 //  Xpai
 //
 //  Created by  cLong on 16/1/8.
-//  Copyright © 2016年 北京沃安科技有限公司. All rights reserved.
+//  Copyright © 2016年 B-Star. All rights reserved.
 //
 
 #import "SPFWQRegisterViewController.h"
@@ -108,10 +108,10 @@
     _serviceCode.delegate = self;
     _UserName = [ZBYTextField initTextFieldWith:@"请输入账号" frame:CGRectMake(kScreenW * 0.47, _serviceCode.maxY + crack, textFieldW, textFieldH)];
     _UserName.delegate = self;
-    _UserName.keyboardType = UIKeyboardTypePhonePad;
+    _UserName.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
     _PassWord = [ZBYTextField initTextFieldWith:@"请输入密码" frame:CGRectMake(kScreenW * 0.47, _UserName.maxY + crack, textFieldW, textFieldH)];
     _PassWord.delegate = self;
-    _PassWord.keyboardType = UIKeyboardTypePhonePad;
+    _PassWord.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
     _mainUrl = [[UITextView alloc]initWithFrame: CGRectMake(kScreenW * 0.13, _PassWord.maxY + crack + textFieldH + 5 ,  kScreenW - kScreenW * 0.13 *2 + 20, textFieldH)];
     _mainUrl.layer.borderWidth = 1;
     _mainUrl.layer.cornerRadius = 8;
@@ -126,8 +126,20 @@
     _segment = [[UISegmentedControl alloc]initWithItems:kindOfOrientation];
     _segment.frame = CGRectMake(kScreenW * 0.47, _mainPort.maxY + crack, textFieldW, 30);
     _segment.selectedSegmentIndex = 0;
-    [_backgroundView addSubview:_segment];
+    [self.view addSubview:_segment];
     
+    NSString * userName = [[NSString alloc]initWithString:[CLSettingConfig sharedInstance].SPFWQUserName];
+    NSString * password = [[NSString alloc]initWithString:[CLSettingConfig sharedInstance].SPFWQPassWord];
+    NSString * serviceCode = [[NSString alloc]initWithString:[CLSettingConfig sharedInstance].SPFWQServiceCode];
+    NSString * mainUrl = [[NSString alloc]initWithString:[CLSettingConfig sharedInstance].mainUrl];
+    NSString * mainPort = [[NSString alloc]initWithFormat:@"%d",[CLSettingConfig sharedInstance].mainPort];
+    
+    _UserName.text = userName;
+    _PassWord.text = password;
+    _serviceCode.text = serviceCode;
+    _mainUrl.text = mainUrl;
+    _mainPort.text = mainPort;
+
     [_backgroundView addSubview:_UserName];
     [_backgroundView addSubview:_PassWord];
     [_backgroundView addSubview:_serviceCode];
@@ -176,20 +188,11 @@
     [_backgroundView addSubview:loginButton];
     
     [labelName release];
-//    [TCPLB release];
     
-    NSString * userName = [[NSString alloc]initWithString:[CLSettingConfig sharedInstance].SPFWQUserName];
-    NSString * password = [[NSString alloc]initWithString:[CLSettingConfig sharedInstance].SPFWQPassWord];
-    NSString * service = [[NSString alloc]initWithString:[CLSettingConfig sharedInstance].SPFWQServiceCode];
-    NSString * mainUrl = [[NSString alloc]initWithString:[CLSettingConfig sharedInstance].mainUrl];
     BOOL isTcp = [CLSettingConfig sharedInstance].isTcp;
-    
-    _UserName.text = userName;
-    _PassWord.text =password;
-    _serviceCode.text = service;
-    _mainUrl.text = mainUrl;
-    _mainPort.text = [NSString stringWithFormat:@"%d",[CLSettingConfig sharedInstance].mainPort];
     _TCPWwitch.selected = isTcp;
+
+//    [TCPLB release];
     
 //    [userName release];
 //    [password release];
@@ -208,13 +211,14 @@
 //登录
 -(void)login {
     [XpaiInterface connectToServer:_mainUrl.text p:[_mainPort.text intValue] u:_UserName.text pd:_PassWord.text svcd:_serviceCode.text OnUDP:_TCPWwitch.on];
+    [CLSettingConfig sharedInstance].SPFWQUserName = _UserName.text;
     [CLSettingConfig sharedInstance].SPFWQPassWord = _PassWord.text;
     [CLSettingConfig sharedInstance].SPFWQServiceCode = _serviceCode.text;
-    [CLSettingConfig sharedInstance].SPFWQUserName = _UserName.text;
     [CLSettingConfig sharedInstance].mainUrl = _mainUrl.text;
     [CLSettingConfig sharedInstance].mainPort = [_mainPort.text integerValue];
-    [CLSettingConfig sharedInstance].isTcp = _TCPWwitch.selected;
     [[CLSettingConfig sharedInstance] WriteData];
+    
+//            [XpaiInterface connectCloud:@"http://c.zhiboyun.com/api/20140928/get_vs" u:@"001" pd:@"001" svcd:@"ZBK_WEIXIN"];
 }
 
 -(void)OnTcp {

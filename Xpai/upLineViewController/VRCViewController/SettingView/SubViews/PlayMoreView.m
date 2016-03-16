@@ -3,11 +3,11 @@
 //  Xpai
 //
 //  Created by  cLong on 16/1/19.
-//  Copyright © 2016年 北京沃安科技有限公司. All rights reserved.
+//  Copyright © 2016年 B-Star. All rights reserved.
 //
 
 #import "PlayMoreView.h"
-#import "ResolutionRatioCell.h"
+#import "resolutionRatioCell.h"
 
 @interface PlayMoreView ()<UITableViewDataSource,UITableViewDelegate>
 {
@@ -53,7 +53,7 @@
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    ResolutionRatioCell * cell = [ResolutionRatioCell cellWithTableView:tableView];
+    resolutionRatioCell * cell = [resolutionRatioCell cellWithTableView:tableView];
     cell.contentLB.text = _DataSource[indexPath.row];
     return  cell;
 }

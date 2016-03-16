@@ -4,11 +4,11 @@
 //  Xpai
 //
 //  Created by  cLong on 16/1/18.
-//  Copyright © 2016年 北京沃安科技有限公司. All rights reserved.
+//  Copyright © 2016年 B-Star. All rights reserved.
 //
 
 #import "SaveRedioView.h"
-#import "ResolutionRatioCell.h"
+#import "resolutionRatioCell.h"
 #import "CLSettingConfig.h"
 
 @interface SaveRedioView ()<UITableViewDataSource,UITableViewDelegate>
@@ -65,7 +65,7 @@
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    ResolutionRatioCell * cell = [ResolutionRatioCell cellWithTableView:tableView];
+    resolutionRatioCell * cell = [resolutionRatioCell cellWithTableView:tableView];
     
     cell.contentLB.text = _dataSource[indexPath.row];
     

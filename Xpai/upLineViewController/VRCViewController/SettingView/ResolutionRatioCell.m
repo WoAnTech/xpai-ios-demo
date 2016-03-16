@@ -3,12 +3,12 @@
 //  Xpai
 //
 //  Created by  cLong on 16/1/14.
-//  Copyright © 2016年 北京沃安科技有限公司. All rights reserved.
+//  Copyright © 2016年 B-Star. All rights reserved.
 //
 
-#import "ResolutionRatioCell.h"
+#import "resolutionRatioCell.h"
 
-@implementation ResolutionRatioCell
+@implementation resolutionRatioCell
 
 -(void)dealloc {
     [_contentLB release];
@@ -18,10 +18,10 @@
 +(instancetype)cellWithTableView:(UITableView *)tableView {
     NSString * str = @"resolutionRation";
     
-    ResolutionRatioCell * cell = [tableView dequeueReusableCellWithIdentifier:str];
+    resolutionRatioCell * cell = [tableView dequeueReusableCellWithIdentifier:str];
     
     if (!cell) {
-        cell = [[ResolutionRatioCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:str];
+        cell = [[resolutionRatioCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:str];
         [cell addSubViews];
     }
     return cell;

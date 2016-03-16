@@ -3,7 +3,7 @@
 //  Xpai
 //
 //  Created by  cLong on 16/1/14.
-//  Copyright © 2016年 北京沃安科技有限公司. All rights reserved.
+//  Copyright © 2016年 B-Star. All rights reserved.
 //
 
 #import "CLSettingConfig.h"
@@ -32,7 +32,7 @@ static CLSettingConfig * _clSettingConfig;
     NSLog(@"%@",defaults);
     NSLog(@"%d",[defaults boolForKey:@"first"]);
     if (![defaults boolForKey:@"first"]) {
-        _resolution = 0;
+        _resolution = 2;
         _BitStream = 480;
         _NetOverTime = 10;
         _reconnectOverTime = 30;

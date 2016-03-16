@@ -3,11 +3,11 @@
 //  Xpai
 //
 //  Created by  cLong on 16/1/14.
-//  Copyright © 2016年 北京沃安科技有限公司. All rights reserved.
+//  Copyright © 2016年 B-Star. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 
-@interface ResolutionRatioView : UIView
+@interface resolutionRatioView : UIView
 
 @end

@@ -3,14 +3,14 @@
 //  Xpai
 //
 //  Created by  cLong on 16/1/14.
-//  Copyright © 2016年 北京沃安科技有限公司. All rights reserved.
+//  Copyright © 2016年 B-Star. All rights reserved.
 //
 
-#import "ResolutionRatioView.h"
-#import "ResolutionRatioCell.h"
+#import "resolutionRatioView.h"
+#import "resolutionRatioCell.h"
 #import "CLSettingConfig.h"
 
-@interface ResolutionRatioView ()<UITableViewDataSource,UITableViewDelegate>
+@interface resolutionRatioView ()<UITableViewDataSource,UITableViewDelegate>
 {
     UITableView *_resolutionRatioTV;
     NSArray *_dataSource;
@@ -18,7 +18,7 @@
 
 @end
 
-@implementation ResolutionRatioView
+@implementation resolutionRatioView
 
 -(void)dealloc {
     [_resolutionRatioTV release];
@@ -64,7 +64,7 @@
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    ResolutionRatioCell * cell = [ResolutionRatioCell cellWithTableView:tableView];
+    resolutionRatioCell * cell = [resolutionRatioCell cellWithTableView:tableView];
     cell.contentLB.text = _dataSource[indexPath.row];
     
     return cell;

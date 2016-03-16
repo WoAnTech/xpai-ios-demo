@@ -3,21 +3,21 @@
 //  Xpai
 //
 //  Created by  cLong on 16/1/29.
-//  Copyright © 2016年 北京沃安科技有限公司. All rights reserved.
+//  Copyright © 2016年 B-Star. All rights reserved.
 //
 
-#import "OutPutLabel.h"
+#import "outPutLabel.h"
 #import "ZBYTextField.h"
 #import "CLSettingConfig.h"
 
-@interface OutPutLabel ()<UITextFieldDelegate>
+@interface outPutLabel ()<UITextFieldDelegate>
 {
     ZBYTextField * _outPutLabel;
 }
 
 @end
 
-@implementation OutPutLabel
+@implementation outPutLabel
 
 -(void)dealloc {
     [_outPutLabel release];

@@ -3,14 +3,14 @@
 //  Xpai
 //
 //  Created by  cLong on 16/1/15.
-//  Copyright © 2016年 北京沃安科技有限公司. All rights reserved.
+//  Copyright © 2016年 B-Star. All rights reserved.
 //
 
-#import "TranscribeView.h"
-#import "ResolutionRatioCell.h"
+#import "transcribeView.h"
+#import "resolutionRatioCell.h"
 #import "CLSettingConfig.h"
 
-@interface TranscribeView ()<UITableViewDataSource,UITableViewDelegate>
+@interface transcribeView ()<UITableViewDataSource,UITableViewDelegate>
 {
     UITableView * _tableView;
     NSArray * _dataSource;
@@ -18,7 +18,7 @@
 
 @end
 
-@implementation TranscribeView
+@implementation transcribeView
 
 -(void)dealloc {
     [_tableView release];
@@ -71,7 +71,7 @@
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    ResolutionRatioCell * cell = [ResolutionRatioCell cellWithTableView:tableView];
+    resolutionRatioCell * cell = [resolutionRatioCell cellWithTableView:tableView];
     
     cell.contentLB.text = _dataSource[indexPath.row];
     

@@ -3,7 +3,7 @@
 //  Xpai
 //
 //  Created by  cLong on 16/1/12.
-//  Copyright © 2016年 北京沃安科技有限公司. All rights reserved.
+//  Copyright © 2016年 B-Star. All rights reserved.
 //
 
 #import <AVFoundation/AVAudioPlayer.h>
@@ -11,19 +11,19 @@
 #import "UIButton+VRCButton.h"
 #import "UILabel+VRCLabel.h"
 #import "XpaiInterface.h"
-#import "SettingView.h"
-#import "ResolutionRatioView.h"
+#import "SwttingView.h"
+#import "resolutionRatioView.h"
 #import "BitStreamView.h"
 #import "CLSettingConfig.h"
 #import "NetOverTimeView.h"
 #import "reconnectTimeView.h"
-#import "TranscribeView.h"
+#import "transcribeView.h"
 #import "AudioParameterView.h"
 #import "NetDeptionView.h"
 #import "SaveRedioView.h"
 #import "PlayViedoViewController.h"
 #import "UploadVideoView.h"
-#import "OutPutLabel.h"
+#import "outPutLabel.h"
 
 
 
@@ -51,14 +51,14 @@
     UILabel * _informationLabel;//显示消息
     
     UIView * _settingBackgroundView;//设置页面背景
-    SettingView * _settingView;//设置页面
-    ResolutionRatioView * _resolution;//分辨率页面
+    SwttingView * _settingView;//设置页面
+    resolutionRatioView * _resolution;//分辨率页面
     BitStreamView * _bitStreamView;//码流页面
     NetOverTimeView * _netOverTimeView;//网络超时页面
-    ReconnectTimeView * _reconnectOverTimeView;//重连超时页面
-    TranscribeView * _transcribeView;//录制类型页面
+    reconnectTimeView * _reconnectOverTimeView;//重连超时页面
+    transcribeView * _transcribeView;//录制类型页面
     AudioParameterView * _audioParameterView;//音频编码参数页面
-    OutPutLabel * _outPutView;//输出格式标签页面
+    outPutLabel * _outPutView;//输出格式标签页面
     NetDeptionView * _deptionView;//网络自适应页面
     SaveRedioView * _saveRedioView;//是否自动保存视频页面
     PlayViedoViewController * _playViedoView;//播放本地视频视频控制器
@@ -86,6 +86,7 @@
     BOOL isMKViedo;//开启录像模式
     BOOL isBackCamera; //是否为后摄像头
     BOOL isSuspend; //是否暂停
+    BOOL isMute;//是否静音
     BOOL isback;//返回
     BOOL isReconnect;//是否重连
     
@@ -161,13 +162,30 @@
     
     [XpaiInterface setDelegate:self];
     
+    
     [self NotificationCenter];
     [self addLogoView];//创建Logo标志
     [self addLabel];//创建实时提示Label
     [self addButton];//创建各类按钮
     [self addSettingView];//创建设置页面
     [self adduploadVideoView];//上传视频页面
+    
+    
+    
+//    UIButton * button = [[UIButton alloc]initWithFrame:CGRectMake(20, 20, 60, 60)];
+//    [button setTitle:@"change" forState:UIControlStateNormal];
+//    [button addTarget:self action:@selector( changeSize) forControlEvents:UIControlEventTouchUpInside];
+//    
+//    [self.view addSubview:button];
 }
+
+//-(void)changeSize {
+//    if (_PlayLayer.frame.size.height == 300) {
+//        _PlayLayer.frame = CGRectMake(0, 0, 50, 50);
+//    }else {
+//    _PlayLayer.frame = CGRectMake(0, 0, 300, 300);
+//    }
+//}
 
 #pragma 搭建通知中心
 -(void)NotificationCenter {
@@ -206,6 +224,7 @@
     }
     isBackCamera = YES;
     isSuspend = NO;
+    isMute = NO;
     [[CLSettingConfig sharedInstance] loadData];
     
     
@@ -404,7 +423,7 @@
     _soundButton = [UIButton ButtonWithFrame:CGRectMake(_makeVideoButton.x, _suspendButton.maxY + 10, buttonW, buttonH) image:@"mic"];
     _soundButton.hidden = YES;
     [_soundButton addTarget:self action:@selector(mute) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:_soundButton];
+//    [self.view addSubview:_soundButton];
     
     //拍照
     _photographButton = [UIButton ButtonWithFrame:CGRectMake(_makeVideoButton.x, kScreenW - buttonH - 10, buttonW, buttonH) image:@"take_picture"];
@@ -433,7 +452,7 @@
 //    _settingBackgroundView.alpha = 0.5;
     [self.view addSubview:_settingBackgroundView];
     
-    _settingView = [[SettingView alloc]initWithFrame:CGRectMake(0, 15, settingViewW, settingViewH)];
+    _settingView = [[SwttingView alloc]initWithFrame:CGRectMake(0, 15, settingViewW, settingViewH)];
     _settingView.delegate = self;
     [_settingBackgroundView addSubview:_settingView];
     
@@ -467,7 +486,7 @@
 #pragma mark --设置页面子页面
 //分辨率
 -(void) resolutionView {
-    _resolution = [[ResolutionRatioView alloc]initWithFrame:CGRectMake(0, 15, settingViewW, settingViewH)];
+    _resolution = [[resolutionRatioView alloc]initWithFrame:CGRectMake(0, 15, settingViewW, settingViewH)];
     
     _resolution.alpha = 0;
     [self.view addSubview:_resolution];
@@ -490,14 +509,14 @@
 
 //重连超时页面
 -(void)ReconnectOverTimeView {
-    _reconnectOverTimeView = [[ReconnectTimeView alloc]initWithFrame:CGRectMake(0, kScreenW / 2 - 30, kScreenW, 90)];
+    _reconnectOverTimeView = [[reconnectTimeView alloc]initWithFrame:CGRectMake(0, kScreenW / 2 - 30, kScreenW, 90)];
     _reconnectOverTimeView.alpha = 0;
     [self.view addSubview:_reconnectOverTimeView];
 }
 
 //录制类型页面
 -(void)transcribeView {
-    _transcribeView = [[TranscribeView alloc]initWithFrame:CGRectMake(0, kScreenW / 2 - 30, settingViewW, 140)];
+    _transcribeView = [[transcribeView alloc]initWithFrame:CGRectMake(0, kScreenW / 2 - 30, settingViewW, 140)];
     _transcribeView.alpha = 0;
     [self.view addSubview:_transcribeView];
 }
@@ -527,7 +546,7 @@
 
 //输出格式标签
 -(void)outPutView {
-    _outPutView = [[OutPutLabel alloc]initWithFrame:CGRectMake(0, _sentLabel.maxY, settingViewW, 70)];
+    _outPutView = [[outPutLabel alloc]initWithFrame:CGRectMake(0, _sentLabel.maxY, settingViewW, 70)];
     _outPutView.alpha = 0;
     [self.view addSubview:_outPutView];
 }
@@ -594,7 +613,7 @@
 //连接 断开连接
 -(void)login {
     if (_isLogin == NO) {
-        _loginButton.enabled = NO;
+        
         if ([[[UIDevice currentDevice] systemVersion] floatValue]>=8.0) {
             self.modalPresentationStyle=UIModalPresentationOverCurrentContext;
         }
@@ -649,14 +668,14 @@
             orientation = AVCaptureVideoOrientationPortrait;
             playerOrientation = AVCaptureVideoOrientationPortrait;
         }
-        [XpaiInterface initRecorder:camera workMode:PHOTO_MODE resolution:(int)[CLSettingConfig sharedInstance].resolution audioSampleRate:22050 focusMode:AVCaptureFocusModeContinuousAutoFocus  torchMode:AVCaptureTorchModeOff  glView:nil prevRect:self.view.bounds captureVideoOrientation:orientation];
+        [XpaiInterface initRecorder:camera workMode:PHOTO_MODE resolution:(int)[CLSettingConfig sharedInstance].resolution audioSampleRate:22050 focusMode:AVCaptureFocusModeContinuousAutoFocus  torchMode:AVCaptureTorchModeOff  glView:nil prevRect:self.view.frame captureVideoOrientation:orientation];
         NSLog(@"分辨率%ld",(long)[CLSettingConfig sharedInstance].resolution);
 
             _PlayLayer = [AVCaptureVideoPreviewLayer layerWithSession:[XpaiInterface getVideoCaptureSession] ];
-            _PlayLayer.frame = self.view.bounds;
+            _PlayLayer.frame = self.view.frame;
         
             _PlayLayer.connection.videoOrientation =playerOrientation;//设置预览方向向右边
-            _PlayLayer.videoGravity = AVLayerVideoGravityResize;//设置预览页全屏
+            _PlayLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;//设置预览页全屏
             [self.view.layer insertSublayer:_PlayLayer atIndex:1];
         [XpaiInterface startVideoCapture];
         
@@ -741,8 +760,8 @@
 //录制视频
 -(void)makeVideo {
     if (isMKPhoto ==NO) {
-        UIAlertView * al = [[UIAlertView alloc]initWithTitle:@"提示" message:@"请开启预览" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
-        [al show];
+//        UIAlertView * al = [[UIAlertView alloc]initWithTitle:@"提示" message:@"请开启预览" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+//        [al show];
         return;
     }
     int camera;//判定前后摄像头
@@ -789,47 +808,70 @@
         _UploadingButton.hidden = NO;
         isMKViedo = NO;
     }
+    
+//    _PlayLayer.frame = CGRectMake(0, 0, 200, 200);
 }
 
 //暂停视频录制
 -(void)suspend {
     
     if (_isLogin == YES) {
-        [self informationWithSte:@"直播暂不支持暂停"];
-        return;
-    }
-    
-    if (isSuspend == NO) {
-        [XpaiInterface pauseRecord];
-        CABasicAnimation * basic = [CABasicAnimation animationWithKeyPath:@"opacity"];
-        basic.toValue = [NSNumber numberWithFloat:0];
-        basic.duration = 1;
-        basic.autoreverses = YES;
-        basic.repeatCount = MAXFLOAT;
-        basic.removedOnCompletion = NO;
-        [_suspendButton.layer addAnimation:basic forKey:@"123"];
-        isSuspend = YES;
-        [_timer setFireDate:[NSDate distantFuture]];
-        [self informationWithSte:@"暂停录制"];
+        if (isSuspend == NO) {
+            [self informationWithSte:@"暂停录制"];
+            CABasicAnimation * basic = [CABasicAnimation animationWithKeyPath:@"opacity"];
+            basic.toValue = [NSNumber numberWithFloat:0];
+            basic.duration = 1;
+            basic.autoreverses = YES;
+            basic.repeatCount = MAXFLOAT;
+            basic.removedOnCompletion = NO;
+            [_suspendButton.layer addAnimation:basic forKey:@"123"];
+            isSuspend = YES;
+            [_timer setFireDate:[NSDate distantFuture]];
+            [XpaiInterface interruptLive];
+            
+        }else {
+            [_suspendButton setBackgroundImage:[UIImage imageNamed:@"record_pause"] forState:UIControlStateNormal];
+            isSuspend = NO;
+            [_suspendButton.layer removeAnimationForKey:@"123"];
+            [_timer setFireDate:[NSDate distantPast]];
+            [self informationWithSte:@"继续录制"];
+            [XpaiInterface resumeRecord];
+        }
     }else {
-        [XpaiInterface resumeRecord];
-        [_suspendButton setBackgroundImage:[UIImage imageNamed:@"record_pause"] forState:UIControlStateNormal];
-        isSuspend = NO;
-        [_suspendButton.layer removeAnimationForKey:@"123"];
-        [_timer setFireDate:[NSDate distantPast]];
-        [self informationWithSte:@"继续录制"];
+        
+        
+        if (isSuspend == NO) {
+            [XpaiInterface pauseRecord];
+            CABasicAnimation * basic = [CABasicAnimation animationWithKeyPath:@"opacity"];
+            basic.toValue = [NSNumber numberWithFloat:0];
+            basic.duration = 1;
+            basic.autoreverses = YES;
+            basic.repeatCount = MAXFLOAT;
+            basic.removedOnCompletion = NO;
+            [_suspendButton.layer addAnimation:basic forKey:@"123"];
+            isSuspend = YES;
+            [_timer setFireDate:[NSDate distantFuture]];
+            [self informationWithSte:@"暂停录制"];
+        }else {
+            [XpaiInterface resumeRecord];
+            [_suspendButton setBackgroundImage:[UIImage imageNamed:@"record_pause"] forState:UIControlStateNormal];
+            isSuspend = NO;
+            [_suspendButton.layer removeAnimationForKey:@"123"];
+            [_timer setFireDate:[NSDate distantPast]];
+            [self informationWithSte:@"继续录制"];
+        }
     }
 }
 
 //静音
 -(void)mute {
-    NSLog(@"静音%d",[XpaiInterface isMute]);
-    if ([XpaiInterface isMute]) {
+    if (isMute == YES) {
         [_soundButton setBackgroundImage:[UIImage imageNamed:@"mic"] forState:UIControlStateNormal];
-        [XpaiInterface toggleMute:false];
+        isMute = NO;
     }else {
         [_soundButton setBackgroundImage:[UIImage imageNamed:@"mic_mute"] forState:UIControlStateNormal];
-        [XpaiInterface toggleMute:true];
+        isMute = YES;
+                
     }
 }
 
@@ -886,7 +928,7 @@
 //直播
 -(void)live {
     [self informationWithSte:@"开始直播"];
-    NSLog(@"静音%d",[XpaiInterface isMute]);
+    
     [XpaiInterface setVideoBitRate:(int)[CLSettingConfig sharedInstance].BitStream];//设置码流
     NSLog(@"码流%d",(int)[CLSettingConfig sharedInstance].BitStream);
     [XpaiInterface setNetWorkingAdaptive:[CLSettingConfig sharedInstance].NetDeption];//网络自适应
@@ -916,6 +958,8 @@
 //    }
 
     VideoID = [XpaiInterface startRecord:HARDWARE_ENCODER_LOCAL_STORAGE_ONLY TransferMode:VIDEO_AND_AUDIO forceReallyFile:TRUE volume:0 parameters:nil];
+    
+    
 }
 
 
@@ -976,7 +1020,6 @@
     _isLogin = YES;
     [_loginButton setBackgroundImage:[UIImage imageNamed:@"link"] forState:UIControlStateNormal];
     [_loginButton.layer removeAnimationForKey:@"disconnect"];
-    _loginButton.enabled = YES;
 }
 
 //尝试重新连接回调
@@ -1011,7 +1054,7 @@
 //设置页面的代理方法
 -(void)subViewAppearWithNum:(NSInteger)num {
     for (UIView * view in self.view.subviews) {
-        if ([view isKindOfClass:[ResolutionRatioView class]] || [view isKindOfClass:[BitStreamView class]] || [view isKindOfClass:[NetOverTimeView class]] ||[view isKindOfClass:[TranscribeView class]] || [view isKindOfClass:[AudioParameterView class]] || [view isKindOfClass:[NetDeptionView class]]|| [view isKindOfClass:[SaveRedioView class]] || [view isKindOfClass:[OutPutLabel class]] || [view isKindOfClass:[ReconnectTimeView class]]) {
+        if ([view isKindOfClass:[resolutionRatioView class]] || [view isKindOfClass:[BitStreamView class]] || [view isKindOfClass:[NetOverTimeView class]] ||[view isKindOfClass:[transcribeView class]] || [view isKindOfClass:[AudioParameterView class]] || [view isKindOfClass:[NetDeptionView class]]|| [view isKindOfClass:[SaveRedioView class]] || [view isKindOfClass:[outPutLabel class]] || [view isKindOfClass:[reconnectTimeView class]]) {
             view.alpha = 0 ;
             view.x = 0;
         }
@@ -1320,21 +1363,3 @@
 
 @end
 
-//旋转
-/** if (_PlayLayer.connection.videoOrientation == AVCaptureVideoOrientationLandscapeRight) {
- _PlayLayer.connection.videoOrientation =AVCaptureVideoOrientationPortrait;
- 
- CATransform3D transfrom = CATransform3DIdentity;
- transfrom = CATransform3DRotate(transfrom, M_PI / 2 * -1, 0.0f, 0.0f,1.0f);
- 
- _PlayLayer.transform = transfrom;
- _PlayLayer.bounds = CGRectMake(0, 0, kScreenH, kScreenW);
- 
- }else {
- _PlayLayer.connection.videoOrientation =AVCaptureVideoOrientationLandscapeRight;
- CATransform3D transfrom = CATransform3DIdentity;
- transfrom = CATransform3DRotate(transfrom, 2 /3 *  M_PI  , 0.0f, 0.0f,1.0f);
- 
- _PlayLayer.transform = transfrom;
- _PlayLayer.bounds = CGRectMake(0, 0, kScreenH, kScreenW);
- */

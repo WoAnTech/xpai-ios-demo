@@ -435,6 +435,7 @@
         _preViewButton.frame = CGRectMake(10, _settingButton.y - buttonW - 10, buttonW, buttonH);
         _changeCameraButton.frame = CGRectMake(10, _preViewButton.y - buttonW -10, buttonW, buttonH);
         _suspendButton.frame = CGRectMake(_makeVideoButton.maxX + 10, _makeVideoButton.y, buttonW, buttonH);
+        _soundButton.frame = CGRectMake(_makeVideoButton.x - buttonW - 10, _makeVideoButton.y, buttonW - 5, buttonH - 5);
     }
     [_photographButton addTarget:self action:@selector(Photograph) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_photographButton];
@@ -826,16 +827,16 @@
             basic.removedOnCompletion = NO;
             [_suspendButton.layer addAnimation:basic forKey:@"123"];
             isSuspend = YES;
+            [XpaiInterface pauseRecord];
             [_timer setFireDate:[NSDate distantFuture]];
-            [XpaiInterface interruptLive];
-            
+            NSLog(@"%d",[XpaiInterface isConnected]);
         }else {
             [_suspendButton setBackgroundImage:[UIImage imageNamed:@"record_pause"] forState:UIControlStateNormal];
             isSuspend = NO;
             [_suspendButton.layer removeAnimationForKey:@"123"];
+            [XpaiInterface resumeRecord];
             [_timer setFireDate:[NSDate distantPast]];
             [self informationWithSte:@"继续录制"];
-            [XpaiInterface resumeRecord];
         }
     }else {
         

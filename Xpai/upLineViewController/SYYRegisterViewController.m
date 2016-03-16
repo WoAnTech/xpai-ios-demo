@@ -16,13 +16,15 @@
 {
     UILabel * _explainLabel;
     
+    UIView * _backGroundView;
+    
     ZBYTextField * _UserName;
     ZBYTextField * _PassWord;
     ZBYTextField * _ServiceCode;
     UITextView * _GetVCUrl;
     UISegmentedControl * _segment;
     
-    
+    BOOL isLogin;
     UIAlertView *  _failCodeAlertView;
 }
 
@@ -38,7 +40,15 @@
     [_GetVCUrl release];
     [_failCodeAlertView release];
     [_segment release];
+    [_backGroundView release];
     [super dealloc];
+}
+
+-(void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    if (isLogin == YES) {
+        [self.navigationController popViewControllerAnimated:NO ];
+    }
 }
 
 - (void)viewDidLoad {
@@ -64,15 +74,21 @@
 #pragma mark --搭建界面
 //添加文字说明
 -(void)addExplainLabel {
-    _explainLabel = [[UILabel alloc]initWithFrame:CGRectMake(kScreenW , 70, 160, 50)];
+    _backGroundView = [[UIView alloc]initWithFrame:CGRectMake(0, 70, kScreenW, 60)];
+    _backGroundView.backgroundColor = [UIColor whiteColor];
+    [self.view addSubview:_backGroundView];
+    
+    _explainLabel = [[UILabel alloc]initWithFrame:CGRectMake(kScreenW , 5, 250, 50)];
     _explainLabel.numberOfLines = 0;
     _explainLabel.text = @"欢迎使用私有云服务";
+    _explainLabel.backgroundColor = [UIColor whiteColor];
     _explainLabel.textColor = self.navigationController.navigationBar.tintColor;
-    [self.view addSubview:_explainLabel];
+    _explainLabel.textAlignment = NSTextAlignmentCenter;
+    [_backGroundView addSubview:_explainLabel];
     
     CABasicAnimation *animation=[CABasicAnimation animationWithKeyPath:@"transform.translation.x"];
-    animation.toValue=@( -kScreenW - 160);
-    animation.duration=8;
+    animation.toValue=@( -kScreenW - 250);
+    animation.duration=9;
     animation.repeatCount = MAXFLOAT;
     animation.fillMode=kCAFillModeForwards;
     [_explainLabel.layer addAnimation:animation forKey:nil];
@@ -91,9 +107,10 @@
     CGFloat crack = 10;
     
     //创建TextField
-    _ServiceCode = [ZBYTextField initTextFieldWith:@"" frame:CGRectMake(kScreenW * 0.47, _explainLabel.maxY + 5, textFieldW, textFieldH)];
+    _ServiceCode = [ZBYTextField initTextFieldWith:@"" frame:CGRectMake(kScreenW * 0.47, _backGroundView.maxY + 5, textFieldW, textFieldH)];
     _ServiceCode.delegate = self;
     _UserName = [ZBYTextField initTextFieldWith:@"" frame:CGRectMake(kScreenW * 0.47, _ServiceCode.maxY + crack, textFieldW, textFieldH)];
+    _UserName.delegate = self;
     _UserName.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
     _ServiceCode.delegate = self;
      _PassWord = [ZBYTextField initTextFieldWith:@"" frame:CGRectMake(kScreenW * 0.47, _UserName.maxY + crack, textFieldW, textFieldH)];
@@ -180,36 +197,48 @@
 
 #pragma mark -- 代理方法
 -(void)textFieldDidBeginEditing:(UITextField *)textField {
+    [self.view bringSubviewToFront:_backGroundView];
     if ([textField isEqual:_PassWord]) {
+        _explainLabel.text = @"请输入私有云密码";
         [UIView animateWithDuration:0.3 animations:^{
             self.view.y = -50;
+            _backGroundView.y = 46 + 50;
+            
         }];
     }else if ([textField isEqual:_ServiceCode]) {
+        _explainLabel.text = @"请输入服务码(服务码通常不为空)";
         [UIView animateWithDuration:0.3 animations:^{
             self.view.y = -50;
+            _backGroundView.y = 46 + 50;
         }];
     }else if ([textField isEqual:_UserName]) {
-        [UIView animateWithDuration:0.3 animations:^{
-            self.view.y = -50;
-        }];
+        _explainLabel.text = @"请输入私有云用户名";
     }
 }
 
 -(void)textFieldDidEndEditing:(UITextField *)textField {
+    _explainLabel.text = @"欢迎私有云服务";
     [UIView animateWithDuration:0.3 animations:^{
         self.view.y = 0;
+        _backGroundView.y = 70;
     }];
 }
 
 -(void)textViewDidBeginEditing:(UITextView *)textView {
+    [self.view bringSubviewToFront:_explainLabel];
+    _explainLabel.text = @"请输入私有云GetVs地址";
     [UIView animateWithDuration:0.3 animations:^{
-        self.view.y = -50;
+        self.view.y = -70;
+        _backGroundView.y = 70 + 46;
     }];
 }
 
 -(void)textViewDidEndEditing:(UITextView *)textView {
+    [self.view bringSubviewToFront:_backGroundView];
+    _explainLabel.text = @"欢迎使用私有云服务";
     [UIView animateWithDuration:0.3 animations:^{
         self.view.y = 0;
+        _backGroundView.y = 70;
     }];
 }
 
@@ -230,6 +259,7 @@
     VRC.GetVCUrl = _GetVCUrl.text;
     VRC.kindOfLogin = 2;
     VRC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    isLogin = YES;
     [self presentViewController:VRC animated:YES completion:^{
     }];
 }

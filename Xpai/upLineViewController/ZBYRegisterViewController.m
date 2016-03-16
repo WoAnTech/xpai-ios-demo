@@ -16,6 +16,7 @@
 @interface ZBYRegisterViewController ()<UITextFieldDelegate>
 {
     UILabel * _explainLabel;
+    UIView * _backGroundView;
     ZBYTextField * _UserName;
     ZBYTextField * _PassWord;
     ZBYTextField * _ServiceCode;
@@ -40,8 +41,6 @@
     if (isLogin == YES) {
         [self.navigationController popViewControllerAnimated:NO ];
     }
-    
-    
 }
 
 -(void)dealloc {
@@ -52,6 +51,7 @@
     [_PassWord release];
     [_ServiceCode release];
     [_segment release];
+    [_backGroundView release];
     [super dealloc];
 }
 
@@ -77,15 +77,19 @@
 #pragma mark --搭建界面
 //添加文字说明
 -(void)addExplainLabel {
-    _explainLabel = [[UILabel alloc]initWithFrame:CGRectMake(kScreenW, 70, 160, 50)];
+    _backGroundView = [[UIView alloc]initWithFrame:CGRectMake(0, 46, kScreenW, 55)];
+    _backGroundView.backgroundColor = [UIColor whiteColor];
+    [self.view addSubview:_backGroundView];
+    
+    _explainLabel = [[UILabel alloc]initWithFrame:CGRectMake(kScreenW, 5, 250, 50)];
     _explainLabel.numberOfLines = 0;
     _explainLabel.text = @"欢迎使用直播云服务";
     _explainLabel.textAlignment = NSTextAlignmentCenter;
     _explainLabel.textColor = self.navigationController.navigationBar.tintColor;
-    [self.view addSubview:_explainLabel];
+    [_backGroundView addSubview:_explainLabel];
     
     CABasicAnimation *animation=[CABasicAnimation animationWithKeyPath:@"transform.translation.x"];
-    animation.toValue=@( -kScreenW - 160);
+    animation.toValue=@( -kScreenW - 250);
     animation.duration=8;
     animation.repeatCount = MAXFLOAT;
     animation.fillMode=kCAFillModeForwards;
@@ -104,7 +108,7 @@
     CGFloat crack = 10;
     
     //创建TextField
-    _ServiceCode = [ZBYTextField initTextFieldWith:@"" frame:CGRectMake(kScreenW * 0.47, _explainLabel.maxY + 10, textFieldW, textFieldH)];//输入服务码
+    _ServiceCode = [ZBYTextField initTextFieldWith:@"" frame:CGRectMake(kScreenW * 0.47, _backGroundView.maxY + 10, textFieldW, textFieldH)];//输入服务码
     _ServiceCode.keyboardType = UIKeyboardTypeDefault;
     _ServiceCode.delegate = self;
     _UserName = [ZBYTextField initTextFieldWith:@"" frame:CGRectMake(kScreenW * 0.47, _ServiceCode.maxY + crack, textFieldW, textFieldH)];//输入用户名
@@ -258,21 +262,29 @@
 
 #pragma mark --textField代理方法
 -(void)textFieldDidBeginEditing:(UITextField *)textField {
+    _explainLabel.textColor = self.navigationController.navigationBar.tintColor;
     if ([textField isEqual:_PassWord]) {
+        _explainLabel.text = @"请输入直播云密码";
 //            [UIView animateWithDuration:0.3 animations:^{
 //                self.view.y = -150;
 //            }];
     }else if([textField isEqual:_ServiceCode]) {
+        _explainLabel.text = @"请输入直播云服务码(通常不为空)";
 //            [UIView animateWithDuration:0.3 animations:^{
 //                self.view.y = -200;
 //            }];
     }else if([textField isEqual:_UserName]){
+        _explainLabel.text = @"请输入直播云用户名";
 //            [UIView animateWithDuration:0.3 animations:^{
 //                self.view.y = -100;
 //            }];
     }
 }
 
+-(void)textFieldDidEndEditing:(UITextField *)textField {
+    _explainLabel.textColor = self.navigationController.navigationBar.tintColor;
+    _explainLabel.text = @"请输入服务码";
+}
 #pragma mark --点击空白处方法
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     [UIView animateWithDuration:0.3 animations:^{

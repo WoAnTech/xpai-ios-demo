@@ -967,6 +967,12 @@
 
 
 #pragma mark -- xpaiInterface回调
+//文字消息
+-(void)doReceiveMessage:(NSString *)userName msg:(NSString *)message {
+    NSString * str = [NSString stringWithFormat:@"用户:%@  发送消息:%@",userName,message];
+    [self informationWithSte:str];
+}
+
 //拍照回调
 - (void)didTakePhoto:(NSString *)url {
     NSLog(@"拍照回调%@",url);

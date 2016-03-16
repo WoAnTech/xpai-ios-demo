@@ -16,6 +16,7 @@
 {
     UILabel * _explainLabel;
     UIView * _backgroundView;
+    UIView * _lbBackgroundView;
     
     ZBYTextField * _UserName;
     ZBYTextField * _PassWord;
@@ -27,6 +28,8 @@
     
     UISwitch * _TCPWwitch;
     UIAlertView * _failCodeAlertView;
+    
+    BOOL isLogin;
 }
 
 @end
@@ -44,8 +47,16 @@
     [_TCPWwitch release];
     [_failCodeAlertView release];
     [_segment release];
+    [_lbBackgroundView release];
     
     [super dealloc];
+}
+
+-(void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    if (isLogin == YES) {
+        [self.navigationController popViewControllerAnimated:NO ];
+    }
 }
 
 - (void)viewDidLoad {
@@ -76,15 +87,19 @@
 #pragma mark --搭建界面
 //创建说明视图
 -(void)addExplainLabel {
-    _explainLabel = [[UILabel alloc]initWithFrame:CGRectMake(kScreenW, 70, 190, 50)];
+    _lbBackgroundView = [[UIView alloc]initWithFrame:CGRectMake(0, 46, kScreenW, 60)];
+    _lbBackgroundView.backgroundColor = [UIColor whiteColor];
+    [_backgroundView addSubview:_lbBackgroundView];
+    
+    _explainLabel = [[UILabel alloc]initWithFrame:CGRectMake(kScreenW, 5, 300, 50)];
     _explainLabel.numberOfLines = 0;
     _explainLabel.text = @"欢迎使用视频服务器服务";
     _explainLabel.textColor = self.navigationController.navigationBar.tintColor;
-    [_backgroundView addSubview:_explainLabel];
+    [_lbBackgroundView addSubview:_explainLabel];
     
     CABasicAnimation *animation=[CABasicAnimation animationWithKeyPath:@"transform.translation.x"];
-    animation.toValue=@( -kScreenW - 190);
-    animation.duration=8;
+    animation.toValue=@( -kScreenW - 300);
+    animation.duration=10;
     animation.repeatCount = MAXFLOAT;
     animation.fillMode=kCAFillModeForwards;
     [_explainLabel.layer addAnimation:animation forKey:nil];
@@ -104,7 +119,7 @@
     CGFloat crack = 10;
     
     //设置textField
-    _serviceCode = [ZBYTextField initTextFieldWith:@"请输入服务码" frame:CGRectMake(kScreenW * 0.47, _explainLabel.maxY + 10, textFieldW, textFieldH)];
+    _serviceCode = [ZBYTextField initTextFieldWith:@"请输入服务码" frame:CGRectMake(kScreenW * 0.47, _lbBackgroundView.maxY + 10, textFieldW, textFieldH)];
     _serviceCode.delegate = self;
     _UserName = [ZBYTextField initTextFieldWith:@"请输入账号" frame:CGRectMake(kScreenW * 0.47, _serviceCode.maxY + crack, textFieldW, textFieldH)];
     _UserName.delegate = self;
@@ -126,7 +141,7 @@
     _segment = [[UISegmentedControl alloc]initWithItems:kindOfOrientation];
     _segment.frame = CGRectMake(kScreenW * 0.47, _mainPort.maxY + crack, textFieldW, 30);
     _segment.selectedSegmentIndex = 0;
-    [self.view addSubview:_segment];
+    [_backgroundView addSubview:_segment];
     
     NSString * userName = [[NSString alloc]initWithString:[CLSettingConfig sharedInstance].SPFWQUserName];
     NSString * password = [[NSString alloc]initWithString:[CLSettingConfig sharedInstance].SPFWQPassWord];
@@ -154,7 +169,7 @@
         }else if (i == 5){
             crack += 3.5;
         }
-        UILabel * label = [[UILabel alloc]initWithFrame:CGRectMake(kScreenW * 0.13 , _explainLabel.maxY + 10 + i * (labelH + crack), labelW, labelH)];
+        UILabel * label = [[UILabel alloc]initWithFrame:CGRectMake(kScreenW * 0.13 , _lbBackgroundView.maxY + 10 + i * (labelH + crack), labelW, labelH)];
         label.text = labelName[i];
         label.textColor = [UIColor blueColor];
         label.font = [UIFont boldSystemFontOfSize:20.0];
@@ -168,7 +183,7 @@
     TCPLB.textColor = [UIColor blueColor];
     [_backgroundView addSubview:TCPLB];
     _TCPWwitch = [[UISwitch alloc]initWithFrame:CGRectMake(TCPLB.maxX + 10, TCPLB.y, 0, 0)];
-    [_TCPWwitch addTarget:self action:@selector(OnTcp) forControlEvents:UIControlEventValueChanged];
+    [_TCPWwitch addTarget:self action:@selector(OnTcp:) forControlEvents:UIControlEventValueChanged];
     _TCPWwitch.on =NO;
     [_backgroundView addSubview:_TCPWwitch];
     
@@ -210,7 +225,7 @@
 
 //登录
 -(void)login {
-    [XpaiInterface connectToServer:_mainUrl.text p:[_mainPort.text intValue] u:_UserName.text pd:_PassWord.text svcd:_serviceCode.text OnUDP:_TCPWwitch.on];
+    [XpaiInterface connectToServer:_mainUrl.text p:[_mainPort.text intValue] u:_UserName.text pd:_PassWord.text svcd:_serviceCode.text OnUDP:!_TCPWwitch.on];
     [CLSettingConfig sharedInstance].SPFWQUserName = _UserName.text;
     [CLSettingConfig sharedInstance].SPFWQPassWord = _PassWord.text;
     [CLSettingConfig sharedInstance].SPFWQServiceCode = _serviceCode.text;
@@ -221,34 +236,61 @@
 //            [XpaiInterface connectCloud:@"http://c.zhiboyun.com/api/20140928/get_vs" u:@"001" pd:@"001" svcd:@"ZBK_WEIXIN"];
 }
 
--(void)OnTcp {
-    
+-(void)OnTcp:(UISwitch *)tcp {
+    if (tcp.on == YES) {
+        _explainLabel.text = @"当前为直连Tcp";
+    }else {
+        _explainLabel.text = @"当前为UDP端口";
+    }
 }
 
 
 #pragma mark -- 代理方法
 //textFiled代理
 -(void)textFieldDidBeginEditing:(UITextField *)textField {
+    _explainLabel.textColor = self.navigationController.navigationBar.tintColor;
+    [_backgroundView bringSubviewToFront:_lbBackgroundView];
     if ([textField isEqual:_PassWord]) {
         [UIView animateWithDuration:0.3 animations:^{
+            _explainLabel.text = @"请输入视频服务器密码";
             _backgroundView.y = 0;
+            _lbBackgroundView.y = 46;
         }];
     }else if ([textField isEqual:_serviceCode]) {
         [UIView animateWithDuration:0.3 animations:^{
+            _explainLabel.text = @"请输入视频服务器服务码，可以为空";
 //            _backgroundView.y = -150;
         }];
     }else if([textField isEqual:_mainPort]) {
         [UIView animateWithDuration:0.3 animations:^{
+            _explainLabel.text = @"通常9999为UDP端口,2999为TCP端口";
             _backgroundView.y = -150;
+            _lbBackgroundView.y = 46 + 150;
         }];
     }
 }
 
 -(void)textViewDidBeginEditing:(UITextView *)textView {
+    [_backgroundView bringSubviewToFront:_lbBackgroundView];
+    _explainLabel.textColor = self.navigationController.navigationBar.tintColor;
+    [self.view bringSubviewToFront:_lbBackgroundView];
     [UIView animateWithDuration:0.3 animations:^{
+        _explainLabel.text =@"请输入视频服务器地址";
         _backgroundView.y = -150;
+        _lbBackgroundView.y = 46+ 150;
     }];
 }
+
+-(void)textFieldDidEndEditing:(UITextField *)textField {
+    _explainLabel.textColor = self.navigationController.navigationBar.tintColor;
+    _explainLabel.text = @"欢迎使用视频服务器服务";
+    [UIView animateWithDuration:0.3 animations:^{
+        _backgroundView.y = 0;
+        _lbBackgroundView.y = 46;
+    }];
+}
+
+
 
 #pragma mark --XpaiInterface的回调
 //连接成功
@@ -269,6 +311,7 @@
     VRC.mainUrl = _mainUrl.text;
     VRC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
     [self presentViewController:VRC animated:YES completion:^{
+        isLogin = YES;
     }];
 }
 
@@ -293,6 +336,7 @@
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     [UIView animateWithDuration:0.3 animations:^{
         _backgroundView.y = 0;
+        _lbBackgroundView.y = 46;
     }];
     [_backgroundView endEditing:YES];
 }

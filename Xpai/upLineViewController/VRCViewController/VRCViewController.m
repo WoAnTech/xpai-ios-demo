@@ -24,6 +24,7 @@
 #import "PlayViedoViewController.h"
 #import "UploadVideoView.h"
 #import "outPutLabel.h"
+#import "WoanPlayerInterface.h"
 
 
 
@@ -81,6 +82,8 @@
     AVCaptureVideoPreviewLayer * _PlayLayer;//预览层
     AVCaptureDevicePosition * _DevicePosition;//前置或后置摄像头
     AVCaptureVideoOrientation * _VideoOeientation;//视频方向
+    
+    AVAudioPlayer * _audioPlayer;//播放音频消息
     
     BOOL isMKPhoto;//是否开始预览(照片模式)
     BOOL isMKViedo;//开启录像模式
@@ -198,7 +201,19 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidBecomeActive:)
                                                  name:UIApplicationDidBecomeActiveNotification object:nil]; //监听是否重新进入程序.
+    
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(finishVudioMessage) name:WoanPlayerPlaybackDidFinishNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(finishVudioMessage) name:WoanPlayerLoadDidPreparedNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(finishVudioMessage) name:WoanPlayerPlaybackErrorNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(finishVudioMessage) name:WoanPlayerSeekingDidFinishNotification object:nil];
+    
 
+}
+
+//语音消息播放结束
+-(void)finishVudioMessage {
+    [self informationWithSte:@"语音消息播放结束"];
+    NSLog(@"语音播放结束");
 }
 
 //更改分辨率
@@ -669,15 +684,17 @@
             orientation = AVCaptureVideoOrientationPortrait;
             playerOrientation = AVCaptureVideoOrientationPortrait;
         }
-        [XpaiInterface initRecorder:camera workMode:PHOTO_MODE resolution:(int)[CLSettingConfig sharedInstance].resolution audioSampleRate:22050 focusMode:AVCaptureFocusModeContinuousAutoFocus  torchMode:AVCaptureTorchModeOff  glView:nil prevRect:self.view.frame captureVideoOrientation:orientation];
+
+        [XpaiInterface initRecorder:camera workMode:VIDEO_MODE resolution:(int)[CLSettingConfig sharedInstance].resolution audioSampleRate:22050 focusMode:AVCaptureFocusModeContinuousAutoFocus  torchMode:AVCaptureTorchModeOff  glView:nil prevRect:self.view.frame captureVideoOrientation:orientation];
+        _PlayLayer = [AVCaptureVideoPreviewLayer layerWithSession:[XpaiInterface getVideoCaptureSession] ];
         NSLog(@"分辨率%ld",(long)[CLSettingConfig sharedInstance].resolution);
 
-            _PlayLayer = [AVCaptureVideoPreviewLayer layerWithSession:[XpaiInterface getVideoCaptureSession] ];
+        [self.view.layer insertSublayer:_PlayLayer atIndex:1];
+
             _PlayLayer.frame = self.view.frame;
         
             _PlayLayer.connection.videoOrientation =playerOrientation;//设置预览方向向右边
             _PlayLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;//设置预览页全屏
-            [self.view.layer insertSublayer:_PlayLayer atIndex:1];
         [XpaiInterface startVideoCapture];
         
         [_preViewButton setBackgroundImage:[UIImage imageNamed:@"preview"] forState:UIControlStateNormal];
@@ -961,17 +978,32 @@
 //    }
 
     VideoID = [XpaiInterface startRecord:HARDWARE_ENCODER_LOCAL_STORAGE_ONLY TransferMode:VIDEO_AND_AUDIO forceReallyFile:TRUE volume:0 parameters:nil];
-    
-    
+}
+#pragma mark -- xpaiInterface回调
+//语音消息
+-(void)doReceiveAudioMessage:(NSString *)userName msgFile:(NSString *)url {
+    [self informationWithSte:[NSString stringWithFormat:@"收到一条来自%@用户的语音消息",userName]];
+    WoanPlayerInterface * woanPlayer = [[WoanPlayerInterface alloc]initWithContentString:url parameters:nil];
+    [woanPlayer prepareToPlay];
+    [woanPlayer release];
 }
 
+-(void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag {
+    [self informationWithSte:@"语音消息播放结束"];
+}
 
-#pragma mark -- xpaiInterface回调
 //文字消息
 -(void)doReceiveMessage:(NSString *)userName msg:(NSString *)message {
-    NSString * str = [NSString stringWithFormat:@"用户:%@  发送消息:%@",userName,message];
-    [self informationWithSte:str];
+        NSString * str = [NSString stringWithFormat:@"用户:%@  发送消息:%@",userName,message];
+        [self informationWithSte:str];
+        
+        WoanPlayerInterface * woanPlayer = [[WoanPlayerInterface alloc]initWithContentString:message parameters:nil];
+        [woanPlayer prepareToPlay];
+        [woanPlayer release];
+    
 }
+
+
 
 //拍照回调
 - (void)didTakePhoto:(NSString *)url {

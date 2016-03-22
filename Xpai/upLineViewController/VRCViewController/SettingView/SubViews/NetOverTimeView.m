@@ -72,7 +72,7 @@
     [CLSettingConfig sharedInstance].NetOverTime = slider.value;
     [[CLSettingConfig sharedInstance] WriteData];
     
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"resolution" object:nil];
+    kNSNotificationCenter;
 }
 
 

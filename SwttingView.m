@@ -54,6 +54,7 @@
 //通知中心
 -(void)receiveNotification {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(GetResolution:) name:@"resolution" object:nil]; //分辨率通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(GetResolution:) name:@"changOtherPara" object:nil];//改变其他参数
 }
 
 -(void)dealloc {

@@ -9,7 +9,7 @@
 #define uploadTag 300
 #define KtitleColor [UIColor colorWithRed:0 green:0.6 blue:1 alpha:1]
 
-#define kNSNotificationCenter [[NSNotificationCenter defaultCenter] postNotificationName:@"resolution" object:nil]
+#define kNSNotificationCenter [[NSNotificationCenter defaultCenter] postNotificationName:@"changOtherPara" object:nil]
 
 #define KaudioSamlingNotication [[NSNotificationCenter defaultCenter] postNotificationName:@"audioSampling" object:nil]
 

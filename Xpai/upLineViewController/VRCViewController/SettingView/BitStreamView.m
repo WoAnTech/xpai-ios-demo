@@ -71,7 +71,7 @@
     [CLSettingConfig sharedInstance].BitStream = slider.value;
     [[CLSettingConfig sharedInstance] WriteData];
     
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"resolution" object:nil];
+    kNSNotificationCenter;
 }
 
 @end

@@ -779,9 +779,7 @@
 //录制视频
 -(void)makeVideo {
     if (isMKPhoto ==NO) {
-        UIAlertView * al = [[UIAlertView alloc]initWithTitle:@"提示" message:@"请开启预览" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
-        [al show];
-        return;
+        [self preView];
     }
     int camera;//判定前后摄像头
     if (isBackCamera == YES) {
@@ -949,7 +947,7 @@
 //直播
 -(void)live {
     [self informationWithSte:@"开始直播"];
-    
+    [[CLSettingConfig sharedInstance] loadData];
     [XpaiInterface setVideoBitRate:(int)[CLSettingConfig sharedInstance].BitStream];//设置码流
     NSLog(@"码流%d",(int)[CLSettingConfig sharedInstance].BitStream);
     [XpaiInterface setNetWorkingAdaptive:[CLSettingConfig sharedInstance].NetDeption];//网络自适应

@@ -184,7 +184,7 @@
     [_backgroundView addSubview:TCPLB];
     _TCPWwitch = [[UISwitch alloc]initWithFrame:CGRectMake(TCPLB.maxX + 10, TCPLB.y, 0, 0)];
     [_TCPWwitch addTarget:self action:@selector(OnTcp:) forControlEvents:UIControlEventValueChanged];
-    _TCPWwitch.on =NO;
+    _TCPWwitch.on =[CLSettingConfig sharedInstance].isTcp;
     [_backgroundView addSubview:_TCPWwitch];
     
     UIImage * buttonImage = [UIImage imageNamed:@"7"];
@@ -231,6 +231,7 @@
     [CLSettingConfig sharedInstance].SPFWQServiceCode = _serviceCode.text;
     [CLSettingConfig sharedInstance].mainUrl = _mainUrl.text;
     [CLSettingConfig sharedInstance].mainPort = [_mainPort.text integerValue];
+    [CLSettingConfig sharedInstance].isTcp = _TCPWwitch.on;
     [[CLSettingConfig sharedInstance] WriteData];
     
 //            [XpaiInterface connectCloud:@"http://c.zhiboyun.com/api/20140928/get_vs" u:@"001" pd:@"001" svcd:@"ZBK_WEIXIN"];

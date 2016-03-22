@@ -10,6 +10,8 @@
 
 @interface transcribeView : UIView
 
+@property (nonatomic,assign)BOOL isVertical;
+
 
 
 @end

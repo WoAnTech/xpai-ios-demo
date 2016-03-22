@@ -503,7 +503,7 @@
 //分辨率
 -(void) resolutionView {
     _resolution = [[resolutionRatioView alloc]initWithFrame:CGRectMake(0, 15, settingViewW, settingViewH)];
-    
+    _resolution.isVertical = !_isAcross;
     _resolution.alpha = 0;
     [self.view addSubview:_resolution];
 }
@@ -534,6 +534,7 @@
 -(void)transcribeView {
     _transcribeView = [[transcribeView alloc]initWithFrame:CGRectMake(0, kScreenW / 2 - 30, settingViewW, 140)];
     _transcribeView.alpha = 0;
+    _transcribeView.isVertical = !_isAcross;
     [self.view addSubview:_transcribeView];
 }
 

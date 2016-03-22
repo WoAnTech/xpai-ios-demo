@@ -30,15 +30,25 @@
 -(instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
         self.backgroundColor = [UIColor colorWithRed:0 green:0.6 blue:1 alpha:1];
-        [self addDatasource];
-
-        [self addSubViews];
-    }
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeArray) name:@"TransribeOfResolution" object:nil];
+            }
     return self;
 }
 
+-(void)setIsVertical:(BOOL)isVertical {
+    _isVertical = isVertical;
+    [self addDatasource];
+    [self addSubViews];
+
+}
+
 -(void)addDatasource {
-    _dataSource = [[NSArray alloc]initWithObjects:@"192x144",@"480x360",@"640x480",@"1280x720", nil];
+    [[CLSettingConfig sharedInstance] loadData];
+    if (_isVertical == YES && [CLSettingConfig sharedInstance].transcribe == 0) {
+            _dataSource = [[NSArray alloc]initWithObjects:@"192x144",@"640x480", nil];
+    }else {
+            _dataSource = [[NSArray alloc]initWithObjects:@"192x144",@"480x360",@"640x480",@"1280x720", nil];
+    }
 }
 
 -(void)addSubViews {
@@ -64,6 +74,7 @@
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSLog(@"count%d",_dataSource.count);
     resolutionRatioCell * cell = [resolutionRatioCell cellWithTableView:tableView];
     cell.contentLB.text = _dataSource[indexPath.row];
     
@@ -72,17 +83,42 @@
 
 //选中行数
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSLog(@"%ld",(long)indexPath.row);
-    
+
     NSInteger num = indexPath.row;
-    
-    [CLSettingConfig sharedInstance].resolution = num;
+    NSLog(@"%d",num);
+    [[CLSettingConfig sharedInstance] loadData];
+    if (_isVertical == YES && [CLSettingConfig sharedInstance].transcribe == 0) {
+        if (num == 1) {
+            [CLSettingConfig sharedInstance].resolution = 2;
+        }else {
+            [CLSettingConfig sharedInstance].resolution = num;
+        }
+    }else {
+        [CLSettingConfig sharedInstance].resolution = num;
+    }
     [[CLSettingConfig sharedInstance] WriteData];
-    //创建通知传值
+
+        //创建通知传值
     NSNotification * notification = [NSNotification notificationWithName:@"resolution" object:_dataSource[num]];
-    NSLog(@"分辨率%d",num);
     [[NSNotificationCenter defaultCenter]postNotification:notification];
 //    [notification release];
+}
+
+//接收通知
+-(void)changeArray {
+    [[CLSettingConfig sharedInstance]loadData];
+    if (_isVertical == YES && [CLSettingConfig sharedInstance].transcribe == 0) {
+        _dataSource =  [[NSArray alloc]initWithObjects:@"192x144",@"640x480", nil];
+        if ([CLSettingConfig sharedInstance].resolution == 1 || [CLSettingConfig sharedInstance].resolution == 3) {
+            [CLSettingConfig sharedInstance].resolution = 2;
+            NSNotification * notification = [NSNotification notificationWithName:@"resolution" object:_dataSource[1]];
+            [[NSNotificationCenter defaultCenter]postNotification:notification];
+
+        }
+    }else {
+        _dataSource = [[NSArray alloc]initWithObjects:@"192x144",@"480x360",@"640x480",@"1280x720", nil];
+    }
+    [_resolutionRatioTV reloadData];
 }
 
 @end

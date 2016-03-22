@@ -29,10 +29,15 @@
 -(instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
         self.backgroundColor = KtitleColor;
-        [self addData];
-        [self addSubViews];
-    }
+            }
     return self;
+}
+
+-(void)setIsVertical:(BOOL)isVertical {
+    _isVertical = isVertical;
+    [self addData];
+    [self addSubViews];
+
 }
 
 -(void)addData {
@@ -85,10 +90,19 @@
             [alert show];
         }
     }
+    
+    
+    if (_isVertical == YES && indexPath.row == 0) {
+        [[CLSettingConfig sharedInstance]loadData];
+        if ([CLSettingConfig sharedInstance].resolution == 1 || [CLSettingConfig sharedInstance].resolution == 3) {
+            [CLSettingConfig sharedInstance].resolution = 2;
+        }
+    }
   
     [CLSettingConfig sharedInstance].transcribe = indexPath.row;
     [[CLSettingConfig sharedInstance] WriteData];
     
     kNSNotificationCenter;
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"TransribeOfResolution" object:nil];//通知分辨率 软编硬编在竖屏时候的不同选项
 }
 @end

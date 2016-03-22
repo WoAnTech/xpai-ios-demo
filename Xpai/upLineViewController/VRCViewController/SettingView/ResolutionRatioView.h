@@ -10,4 +10,6 @@
 
 @interface resolutionRatioView : UIView
 
+@property (nonatomic,assign)BOOL isVertical;//是否为竖屏
+
 @end

@@ -32,6 +32,7 @@
 #define KmainUrl @"mainUrl"
 #define KmainPort @"mainPort"
 #define KisTcp @"isTcp"
+#define ksegment @"segment"
 
 @interface CLSettingConfig : NSObject
 
@@ -62,6 +63,8 @@
 @property(nonatomic,retain)NSString * outPutTag;//输出格式标签
 @property(nonatomic,assign)BOOL  NetDeption;//网络自适应
 @property(nonatomic,assign)BOOL  SaveRedio;//保存视频文件
+@property (nonatomic,assign)NSInteger segment;
+
 
 //@property(nonatomic,retain)NSString * UserNames;//用户名
 //@property(nonatomic,retain)NSString * PassWords;//密码

@@ -36,12 +36,13 @@ static CLSettingConfig * _clSettingConfig;
         _BitStream = 480;
         _NetOverTime = 10;
         _reconnectOverTime = 30;
+        _segment = 0;
         if ([[[UIDevice currentDevice] systemVersion] integerValue] >= 8.0) {//判断系统版本号
             _transcribe = 1;
         }else {
             _transcribe = 0;//前三个废弃
         }
-        _audioParameter = 1;
+        _audioParameter = 2;
         _audioSampling = 8000;
         _audioBit = 12200;
         _outPutTag = nil;  //没有特别要求为nil 不能设置为空或其他
@@ -85,6 +86,7 @@ static CLSettingConfig * _clSettingConfig;
     _mainPort = [defaults integerForKey:KmainPort];
     _mainUrl = [defaults stringForKey:KmainUrl];
     _isTcp = [defaults boolForKey:KisTcp];
+    _segment  = [defaults integerForKey:ksegment];
     
     return YES;
 }
@@ -117,6 +119,7 @@ static CLSettingConfig * _clSettingConfig;
     [defaults setInteger:_mainPort forKey:KmainPort];
     [defaults setObject:_mainUrl forKey:KmainUrl];
     [defaults setBool:_isTcp forKey:KisTcp];
+    [defaults setInteger:_segment forKey:ksegment];
     
     [defaults setObject:_testing forKey:@"test"];
     

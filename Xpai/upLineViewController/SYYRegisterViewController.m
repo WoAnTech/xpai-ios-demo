@@ -69,6 +69,8 @@
     
     //搭建界面
     [self addSubView];
+    
+    [_explainLabel bringSubviewToFront:self.view];
 }
 
 #pragma mark --搭建界面
@@ -119,7 +121,6 @@
     NSArray * kindOfOrientation = @[@"横屏",@"竖屏"];
     _segment = [[UISegmentedControl alloc]initWithItems:kindOfOrientation];
     _segment.frame = CGRectMake(_PassWord.x, _PassWord.maxY + crack, textFieldW, 30);
-    _segment.selectedSegmentIndex = 0;
      _GetVCUrl = [[UITextView alloc]initWithFrame:CGRectMake(kScreenW * 0.13, _segment.maxY + crack+ 30, kScreenW - kScreenW * 0.13 *2 + 20, textFieldH)];
     _GetVCUrl.delegate = self;
     _GetVCUrl.keyboardType = UIKeyboardTypeURL;
@@ -130,6 +131,8 @@
     NSString * password = [[NSString alloc]initWithString:[CLSettingConfig sharedInstance].SYYPassWord];
     NSString * service = [[NSString alloc]initWithString:[CLSettingConfig sharedInstance].SYYServiceCode];
     NSString * getUrl = [[NSString alloc]initWithString:[CLSettingConfig sharedInstance].GetVCUrl];
+    
+    _segment.selectedSegmentIndex = [CLSettingConfig sharedInstance].segment;
     
     NSLog(@"SYY%@",username);
     _UserName.text = username;
@@ -191,6 +194,9 @@
     [CLSettingConfig sharedInstance].SYYUserName = _UserName.text;
     [CLSettingConfig sharedInstance].SYYPassWord = _PassWord.text;
     [CLSettingConfig sharedInstance].SYYServiceCode = _ServiceCode.text;
+    [CLSettingConfig sharedInstance].GetVCUrl = _GetVCUrl.text;
+    [CLSettingConfig sharedInstance].segment = _segment.selectedSegmentIndex;
+    
     [[CLSettingConfig sharedInstance] WriteData];
     [XpaiInterface connectCloud:_GetVCUrl.text u:_UserName.text pd:_PassWord.text svcd:_ServiceCode.text];
 }

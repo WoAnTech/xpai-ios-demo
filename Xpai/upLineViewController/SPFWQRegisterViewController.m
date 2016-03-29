@@ -225,12 +225,19 @@
 
 //登录
 -(void)login {
-    [XpaiInterface connectToServer:_mainUrl.text p:[_mainPort.text intValue] u:_UserName.text pd:_PassWord.text svcd:_serviceCode.text OnUDP:!_TCPWwitch.on];
-    [CLSettingConfig sharedInstance].SPFWQUserName = _UserName.text;
+    
+    NSString * userName = [_UserName.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+    NSString * serviceCode = [_serviceCode.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+    NSString * mainUrl = [_mainUrl.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+    mainUrl = [mainUrl stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+    NSString * mainPotr = [_mainPort.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+    
+    [XpaiInterface connectToServer:mainUrl p:[mainPotr intValue] u:userName pd:_PassWord.text svcd:serviceCode OnUDP:!_TCPWwitch.on];
+    [CLSettingConfig sharedInstance].SPFWQUserName = userName;
     [CLSettingConfig sharedInstance].SPFWQPassWord = _PassWord.text;
-    [CLSettingConfig sharedInstance].SPFWQServiceCode = _serviceCode.text;
-    [CLSettingConfig sharedInstance].mainUrl = _mainUrl.text;
-    [CLSettingConfig sharedInstance].mainPort = [_mainPort.text integerValue];
+    [CLSettingConfig sharedInstance].SPFWQServiceCode = serviceCode;
+    [CLSettingConfig sharedInstance].mainUrl = mainUrl;
+    [CLSettingConfig sharedInstance].mainPort = [mainPotr integerValue];
     [CLSettingConfig sharedInstance].isTcp = _TCPWwitch.on;
     [[CLSettingConfig sharedInstance] WriteData];
     

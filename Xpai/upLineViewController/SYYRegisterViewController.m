@@ -134,6 +134,7 @@
     
     _segment.selectedSegmentIndex = [CLSettingConfig sharedInstance].segment;
     
+    
     NSLog(@"SYY%@",username);
     _UserName.text = username;
     _PassWord.text = password;
@@ -191,14 +192,20 @@
 }
 //登录
 -(void)login {
-    [CLSettingConfig sharedInstance].SYYUserName = _UserName.text;
+    
+    NSString * userName = [_UserName.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+    NSString * serviceCode = [_ServiceCode.text stringByReplacingOccurrencesOfString:@" "  withString:@""];
+    NSString * GetUrl = [_GetVCUrl.text stringByReplacingOccurrencesOfString:@" "  withString:@""];
+    GetUrl = [GetUrl stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+    
+    [CLSettingConfig sharedInstance].SYYUserName = userName;
     [CLSettingConfig sharedInstance].SYYPassWord = _PassWord.text;
-    [CLSettingConfig sharedInstance].SYYServiceCode = _ServiceCode.text;
-    [CLSettingConfig sharedInstance].GetVCUrl = _GetVCUrl.text;
+    [CLSettingConfig sharedInstance].SYYServiceCode = serviceCode;
+    [CLSettingConfig sharedInstance].GetVCUrl = GetUrl;
     [CLSettingConfig sharedInstance].segment = _segment.selectedSegmentIndex;
     
     [[CLSettingConfig sharedInstance] WriteData];
-    [XpaiInterface connectCloud:_GetVCUrl.text u:_UserName.text pd:_PassWord.text svcd:_ServiceCode.text];
+    [XpaiInterface connectCloud:GetUrl u:userName pd:_PassWord.text svcd:serviceCode];
 }
 
 #pragma mark -- 代理方法
@@ -214,8 +221,8 @@
     }else if ([textField isEqual:_ServiceCode]) {
         _explainLabel.text = @"请输入服务码(服务码通常不为空)";
         [UIView animateWithDuration:0.3 animations:^{
-            self.view.y = -50;
-            _backGroundView.y = 46 + 50;
+//            self.view.y = -50;
+//            _backGroundView.y = 46 + 50;
         }];
     }else if ([textField isEqual:_UserName]) {
         _explainLabel.text = @"请输入私有云用户名";
@@ -231,7 +238,7 @@
 }
 
 -(void)textViewDidBeginEditing:(UITextView *)textView {
-    [self.view bringSubviewToFront:_explainLabel];
+    [self.view bringSubviewToFront:_backGroundView];
     _explainLabel.text = @"请输入私有云GetVs地址";
     [UIView animateWithDuration:0.3 animations:^{
         self.view.y = -70;

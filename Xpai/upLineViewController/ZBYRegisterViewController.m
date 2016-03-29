@@ -187,10 +187,16 @@
     }
     
     //登录方法
-    [XpaiInterface connectCloud:@"http://c.zhiboyun.com/api/20140928/get_vs" u:_UserName.text pd:_PassWord.text svcd:_ServiceCode.text];
-    [CLUploadConfig sharedInstance].UserName = _UserName.text;
+    
+    //去除多余空格
+    NSString * userName = [_UserName.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+    NSString * serviceCode = [_ServiceCode.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+    
+    
+    [XpaiInterface connectCloud:@"http://c.zhiboyun.com/api/20140928/get_vs" u:userName pd:_PassWord.text svcd:serviceCode];
+    [CLUploadConfig sharedInstance].UserName = userName;
     [CLUploadConfig sharedInstance].passWord = _PassWord.text;
-    [CLUploadConfig sharedInstance].serviceCode = _ServiceCode.text;
+    [CLUploadConfig sharedInstance].serviceCode = serviceCode;
     [CLUploadConfig sharedInstance].segment = _segment.selectedSegmentIndex;
     [[CLUploadConfig sharedInstance] WriteData];
     NSLog(@"testing:%@",_userNameText);

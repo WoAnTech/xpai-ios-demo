@@ -1271,7 +1271,7 @@
             NSLog(@"uploadvideoFileName : %@",_ViedoFileName);
             NSLog(@"uploadvideoFilePath : %@",_ViedoFilePath);
             
-            [XpaiInterface uploadVideoFile:_ViedoFileName mode:UPLOAD_FROM_RESUME_POINT sId:_ViedoStreamID sPath:_ViedoFilePath isRecordDone:YES];
+            [XpaiInterface uploadVideoFile:_ViedoFileName mode:UPLOAD_FROM_RESUME_POINT sId:_ViedoStreamID sPath:_ViedoFilePath isRecordDone:YES opaque:nil];
             
             NSLog(@"uploadVideoStreamID : %@",_ViedoStreamID);
             NSLog(@"uploadvideoFileName : %@",_ViedoFileName);
@@ -1298,7 +1298,7 @@
     //    NSLog(@"videoFilePath : %@",_ViedoFilePath);
     NSLog(@"filePath :%@",filePath);
     
-    [XpaiInterface uploadVideoFile:filePath mode:UPLOAD_FROM_FILE_BEGIN sId:nil sPath:nil isRecordDone:YES];
+    [XpaiInterface uploadVideoFile:filePath mode:UPLOAD_FROM_FILE_BEGIN sId:nil sPath:nil isRecordDone:YES opaque:nil];
     [UIView animateWithDuration:0.3 animations:^{
         _UploadingButton.alpha = 0;
         _makeVideoButton.alpha = 0;

@@ -181,6 +181,7 @@ typedef enum VideoMirroredMode {
 + (void)setAudioRecorderParams:(AudioEncoderType) aet channels:(int)channels sampleRate:(int)sampleRate audioBitRate:(int)bitRate;
 + (void)transVideoFile:(NSString*)inputFileName startTime:(CGFloat)startTime duration:(CGFloat)duration outputFileName:(NSString*)outputFileName;
 + (void)setNetWorkingAdaptive:(BOOL)isNWAdaptive;
++ (void)setVideoFpsRange:(int)min_fps maxFps:(int)max_fps;   //设置视频最大帧率和最小帧率，需在initRecorder前调用生效，默认值为20,20
 + (void)setVideoMirroredMode:(VideoMirroredMode)videoMirroredMode;
 
 + (SInt64)startRecord:(RecordMode)mode TransferMode:(TransferMode)transferMode forceReallyFile:(BOOL)forceReallyFile volume:(float)volume parameters:(NSDictionary *)paras;
@@ -191,7 +192,7 @@ typedef enum VideoMirroredMode {
 + (void)toggleMute:(BOOL)muteOn;
 + (BOOL)isMute;
 
-+ (SInt64)uploadVideoFile:(NSString *)url mode:(UploadMode)mode sId:(NSString *)sId sPath:(NSString *)sPath isRecordDone:(BOOL)isRecordDone;
++ (SInt64)uploadVideoFile:(NSString *)url mode:(UploadMode)mode sId:(NSString *)sId sPath:(NSString *)sPath isRecordDone:(BOOL)isRecordDone opaque:(NSString *)task_opaque;
 + (void)notifyRecordDone:(SInt64)ID;    // 如果uploadVideoFile的isRecordDone是NO，当视频录制完成后，需要通过本函数通知Lib
 
 + (void)takePhoto;

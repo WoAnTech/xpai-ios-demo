@@ -36,7 +36,7 @@ typedef void (^MJRefreshComponentRefreshingBlock)();
     /** 记录scrollView刚开始的inset */
     UIEdgeInsets _scrollViewOriginalInset;
     /** 父控件 */
-    __weak UIScrollView *_scrollView;
+     UIScrollView *_scrollView;
 }
 #pragma mark - 刷新回调
 /** 正在刷新的回调 */

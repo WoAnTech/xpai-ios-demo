@@ -29,13 +29,13 @@
 		9BA05F6C1935E79200BC8DC4 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BA05F6B1935E79200BC8DC4 /* MediaPlayer.framework */; };
 		9BA05F6E1935E7A900BC8DC4 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BA05F6D1935E7A900BC8DC4 /* QuartzCore.framework */; };
 		9BA05F711935ED2300BC8DC4 /* SuperViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BA05F701935ED2300BC8DC4 /* SuperViewController.m */; };
-		9BBB4D5E19076134007F2E3C /* libXpaiLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BBB4D5D19076134007F2E3C /* libXpaiLib.a */; };
 		BA731B8C1A71DF5400B9D391 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BA731B8B1A71DF5400B9D391 /* Images.xcassets */; };
 		BD09EAFF1C3CE793008399E0 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = BD09EAFE1C3CE793008399E0 /* libz.tbd */; };
 		BD09EB011C3CE79C008399E0 /* libbz2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = BD09EB001C3CE79C008399E0 /* libbz2.tbd */; };
 		BD09EB031C3CE7A5008399E0 /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = BD09EB021C3CE7A5008399E0 /* libiconv.tbd */; };
 		BD0A78F91C4F355E002EE8EC /* ViedoPlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD0A78F81C4F355E002EE8EC /* ViedoPlayViewController.m */; };
 		BD0AFEBB1C435360003F42B4 /* ZBYTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = BD0AFEBA1C435360003F42B4 /* ZBYTextField.m */; };
+		BD0CF05C1CB27C27009E29A6 /* libXpaiLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BD0CF0591CB27C27009E29A6 /* libXpaiLib.a */; };
 		BD1740B41C4DC792002E9EB9 /* PlayViedoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD1740B31C4DC792002E9EB9 /* PlayViedoViewController.m */; };
 		BD1740B71C4DDC08002E9EB9 /* PlayMoreView.m in Sources */ = {isa = PBXBuildFile; fileRef = BD1740B61C4DDC08002E9EB9 /* PlayMoreView.m */; };
 		BD1740B91C4DDD54002E9EB9 /* More.png in Resources */ = {isa = PBXBuildFile; fileRef = BD1740B81C4DDD54002E9EB9 /* More.png */; };
@@ -270,7 +270,6 @@
 		9B164E771810E5030073E650 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		9B2FEE5D1845A3F3004ECF55 /* libbz2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libbz2.dylib; path = usr/lib/libbz2.dylib; sourceTree = SDKROOT; };
 		9B2FEE5F1845A4E2004ECF55 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
-		9B4C6AD9178A777F0021E5CB /* XpaiInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XpaiInterface.h; sourceTree = "<group>"; };
 		9B9B7B1C180F9A23004E7A18 /* libiconv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiconv.dylib; path = usr/lib/libiconv.dylib; sourceTree = SDKROOT; };
 		9BA05F4A1935E1E700BC8DC4 /* backBtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backBtn.png; sourceTree = "<group>"; };
 		9BA05F4B1935E1E700BC8DC4 /* bottomView.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bottomView.png; sourceTree = "<group>"; };
@@ -279,13 +278,11 @@
 		9BA05F4E1935E1E700BC8DC4 /* playNextBtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playNextBtn.png; sourceTree = "<group>"; };
 		9BA05F4F1935E1E700BC8DC4 /* playPreBtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playPreBtn.png; sourceTree = "<group>"; };
 		9BA05F501935E1E700BC8DC4 /* topback.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = topback.png; sourceTree = "<group>"; };
-		9BA05F661935E26D00BC8DC4 /* WoanPlayerInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WoanPlayerInterface.h; sourceTree = "<group>"; };
 		9BA05F691935E77E00BC8DC4 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		9BA05F6B1935E79200BC8DC4 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		9BA05F6D1935E7A900BC8DC4 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		9BA05F6F1935ED2300BC8DC4 /* SuperViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SuperViewController.h; path = ../../../WoanPlayer/SuperViewController.h; sourceTree = "<group>"; };
 		9BA05F701935ED2300BC8DC4 /* SuperViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SuperViewController.m; path = ../../../WoanPlayer/SuperViewController.m; sourceTree = "<group>"; };
-		9BBB4D5D19076134007F2E3C /* libXpaiLib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libXpaiLib.a; sourceTree = "<group>"; };
 		BA731B8B1A71DF5400B9D391 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		BD09EAFE1C3CE793008399E0 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		BD09EB001C3CE79C008399E0 /* libbz2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libbz2.tbd; path = usr/lib/libbz2.tbd; sourceTree = SDKROOT; };
@@ -294,6 +291,9 @@
 		BD0A78F81C4F355E002EE8EC /* ViedoPlayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViedoPlayViewController.m; sourceTree = "<group>"; };
 		BD0AFEB91C435360003F42B4 /* ZBYTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZBYTextField.h; sourceTree = "<group>"; };
 		BD0AFEBA1C435360003F42B4 /* ZBYTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZBYTextField.m; sourceTree = "<group>"; };
+		BD0CF0591CB27C27009E29A6 /* libXpaiLib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libXpaiLib.a; sourceTree = "<group>"; };
+		BD0CF05A1CB27C27009E29A6 /* WoanPlayerInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WoanPlayerInterface.h; sourceTree = "<group>"; };
+		BD0CF05B1CB27C27009E29A6 /* XpaiInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XpaiInterface.h; sourceTree = "<group>"; };
 		BD1740B21C4DC792002E9EB9 /* PlayViedoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayViedoViewController.h; sourceTree = "<group>"; };
 		BD1740B31C4DC792002E9EB9 /* PlayViedoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayViedoViewController.m; sourceTree = "<group>"; };
 		BD1740B51C4DDC08002E9EB9 /* PlayMoreView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayMoreView.h; sourceTree = "<group>"; };
@@ -318,8 +318,8 @@
 		BD7929CA1C3F76070024E112 /* NewRecordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewRecordViewController.h; sourceTree = SOURCE_ROOT; };
 		BD7929CB1C3F76070024E112 /* NewRecordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewRecordViewController.m; sourceTree = SOURCE_ROOT; };
 		BD7929CD1C3F7D9C0024E112 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
-		BD7929CF1C3F85DC0024E112 /* UIView+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Extension.h"; sourceTree = "<group>"; };
-		BD7929D01C3F85DC0024E112 /* UIView+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Extension.m"; sourceTree = "<group>"; };
+		BD7929CF1C3F85DC0024E112 /* UIView+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+Extension.h"; path = "../../UIView+Extension.h"; sourceTree = "<group>"; };
+		BD7929D01C3F85DC0024E112 /* UIView+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+Extension.m"; path = "../../UIView+Extension.m"; sourceTree = "<group>"; };
 		BD7929D31C3F92770024E112 /* grayButtonHeightLight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = grayButtonHeightLight.png; sourceTree = "<group>"; };
 		BD7929D41C3F92770024E112 /* grayButtonNormal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = grayButtonNormal.png; sourceTree = "<group>"; };
 		BD7929DB1C3FA33A0024E112 /* ZBYRegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZBYRegisterViewController.h; sourceTree = "<group>"; };
@@ -583,6 +583,7 @@
 				BD09EB031C3CE7A5008399E0 /* libiconv.tbd in Frameworks */,
 				BD09EB011C3CE79C008399E0 /* libbz2.tbd in Frameworks */,
 				BD09EAFF1C3CE793008399E0 /* libz.tbd in Frameworks */,
+				BD0CF05C1CB27C27009E29A6 /* libXpaiLib.a in Frameworks */,
 				7F23574D1A355AF80010F6C7 /* VideoToolbox.framework in Frameworks */,
 				9BA05F6E1935E7A900BC8DC4 /* QuartzCore.framework in Frameworks */,
 				9BA05F6C1935E79200BC8DC4 /* MediaPlayer.framework in Frameworks */,
@@ -591,7 +592,6 @@
 				9B2FEE5E1845A3F3004ECF55 /* libbz2.dylib in Frameworks */,
 				9B164E781810E5030073E650 /* AVFoundation.framework in Frameworks */,
 				9B164E6E1810D20F0073E650 /* CoreVideo.framework in Frameworks */,
-				9BBB4D5E19076134007F2E3C /* libXpaiLib.a in Frameworks */,
 				9B164E6C1810D1F80073E650 /* CoreMedia.framework in Frameworks */,
 				9B164E6A1810D1E90073E650 /* AudioToolbox.framework in Frameworks */,
 				9B164E681810D1D90073E650 /* CFNetwork.framework in Frameworks */,
@@ -609,11 +609,7 @@
 		9B4C6AD7178A776B0021E5CB /* XpaiLib */ = {
 			isa = PBXGroup;
 			children = (
-				9BBB4D5D19076134007F2E3C /* libXpaiLib.a */,
-				9B4C6AD9178A777F0021E5CB /* XpaiInterface.h */,
-				9BA05F661935E26D00BC8DC4 /* WoanPlayerInterface.h */,
-				BD7929CF1C3F85DC0024E112 /* UIView+Extension.h */,
-				BD7929D01C3F85DC0024E112 /* UIView+Extension.m */,
+				BD0CF0581CB27BD9009E29A6 /* XpaiSDK */,
 			);
 			name = XpaiLib;
 			sourceTree = "<group>";
@@ -645,6 +641,8 @@
 		9BA05F511935E1E700BC8DC4 /* videos */ = {
 			isa = PBXGroup;
 			children = (
+				BD7929CF1C3F85DC0024E112 /* UIView+Extension.h */,
+				BD7929D01C3F85DC0024E112 /* UIView+Extension.m */,
 			);
 			path = videos;
 			sourceTree = "<group>";
@@ -665,6 +663,16 @@
 				BDBBEF0B1C44C9A3009B4A7B /* UILabel+VRCLabel.m */,
 			);
 			path = tools;
+			sourceTree = "<group>";
+		};
+		BD0CF0581CB27BD9009E29A6 /* XpaiSDK */ = {
+			isa = PBXGroup;
+			children = (
+				BD0CF0591CB27C27009E29A6 /* libXpaiLib.a */,
+				BD0CF05A1CB27C27009E29A6 /* WoanPlayerInterface.h */,
+				BD0CF05B1CB27C27009E29A6 /* XpaiInterface.h */,
+			);
+			path = XpaiSDK;
 			sourceTree = "<group>";
 		};
 		BD2489681C59EA220099DF13 /* 按钮 */ = {
@@ -1642,6 +1650,11 @@
 			attributes = {
 				LastUpgradeCheck = 0610;
 				ORGANIZATIONNAME = "B-Star";
+				TargetAttributes = {
+					DC84719F1328B57D00CE167E = {
+						DevelopmentTeam = 6BWXZ84974;
+					};
+				};
 			};
 			buildConfigurationList = DC84719A1328B57D00CE167E /* Build configuration list for PBXProject "Xpai" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -1932,8 +1945,8 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: 782231328@qq.com (A2WNRU342H)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: 782231328@qq.com (A2WNRU342H)";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -1962,8 +1975,8 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: 782231328@qq.com (A2WNRU342H)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: 782231328@qq.com (A2WNRU342H)";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
@@ -1986,7 +1999,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: 782231328@qq.com (A2WNRU342H)";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_BITCODE = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -2000,9 +2013,10 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",
+					"$(PROJECT_DIR)/XpaiSDK",
 				);
 				ONLY_ACTIVE_ARCH = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = "----------.Xpai";
+				PRODUCT_BUNDLE_IDENTIFIER = com.woan.zhiboke;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
@@ -2019,7 +2033,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: 782231328@qq.com (A2WNRU342H)";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_BITCODE = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -2032,9 +2046,10 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",
+					"$(PROJECT_DIR)/XpaiSDK",
 				);
 				ONLY_ACTIVE_ARCH = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = "----------.Xpai";
+				PRODUCT_BUNDLE_IDENTIFIER = com.woan.zhiboke;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";

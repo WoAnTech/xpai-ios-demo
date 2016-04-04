@@ -197,10 +197,10 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hiddenSamplingView) name:@"audioSampling" object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationWillResignActive:)
-                                                 name:UIApplicationWillResignActiveNotification object:nil]; //监听是否触发home键挂起程序.
+                                                 name:UIApplicationDidEnterBackgroundNotification object:nil]; //监听是否触发home键挂起程序.
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidBecomeActive:)
-                                                 name:UIApplicationDidBecomeActiveNotification object:nil]; //监听是否重新进入程序.
+                                                 name:UIApplicationWillEnterForegroundNotification object:nil]; //监听是否重新进入程序.
     
 //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(finishVudioMessage) name:WoanPlayerPlaybackDidFinishNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(finishVudioMessage) name:WoanPlayerLoadDidPreparedNotification object:nil];

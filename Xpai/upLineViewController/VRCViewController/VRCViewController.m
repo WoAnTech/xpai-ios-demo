@@ -225,7 +225,8 @@
         }else {
             camera = AVCaptureDevicePositionFront;
         }
-        [XpaiInterface resetRecorder:camera workMode:PHOTO_MODE resolution:(int)[CLSettingConfig sharedInstance].resolution audioSampleRate:22050 focusMode:AVCaptureFocusModeContinuousAutoFocus torchMode:AVCaptureTorchModeOff captureVideoOrientation:AVCaptureVideoOrientationLandscapeRight];
+        [XpaiInterface setVideoResolution:(int)[CLSettingConfig sharedInstance].resolution width:0 height:0];
+        [XpaiInterface resetRecorder:camera workMode:PHOTO_MODE audioSampleRate:22050 focusMode:AVCaptureFocusModeContinuousAutoFocus torchMode:AVCaptureTorchModeOff captureVideoOrientation:AVCaptureVideoOrientationLandscapeRight];
     }
 }
 
@@ -686,7 +687,8 @@
             playerOrientation = AVCaptureVideoOrientationPortrait;
         }
 
-        [XpaiInterface initRecorder:camera workMode:VIDEO_MODE resolution:(int)[CLSettingConfig sharedInstance].resolution audioSampleRate:22050 focusMode:AVCaptureFocusModeContinuousAutoFocus  torchMode:AVCaptureTorchModeOff  glView:nil prevRect:self.view.frame captureVideoOrientation:orientation];
+        [XpaiInterface setVideoResolution:(int)[CLSettingConfig sharedInstance].resolution width:0 height:0];
+        [XpaiInterface initRecorder:camera workMode:VIDEO_MODE audioSampleRate:22050 focusMode:AVCaptureFocusModeContinuousAutoFocus  torchMode:AVCaptureTorchModeOff  glView:nil prevRect:self.view.frame captureVideoOrientation:orientation];
         _PlayLayer = [AVCaptureVideoPreviewLayer layerWithSession:[XpaiInterface getVideoCaptureSession] ];
         NSLog(@"分辨率%ld",(long)[CLSettingConfig sharedInstance].resolution);
 
@@ -726,10 +728,10 @@
         workMode = PHOTO_MODE;
     }
     if (isBackCamera == YES) {
-        [XpaiInterface resetRecorder:AVCaptureDevicePositionFront workMode:workMode resolution:RESOLUTION_MEDIUM audioSampleRate:22050 focusMode:AVCaptureFocusModeContinuousAutoFocus torchMode:AVCaptureTorchModeOff captureVideoOrientation:orientation];
+        [XpaiInterface resetRecorder:AVCaptureDevicePositionFront workMode:workMode audioSampleRate:22050 focusMode:AVCaptureFocusModeContinuousAutoFocus torchMode:AVCaptureTorchModeOff captureVideoOrientation:orientation];
         isBackCamera = NO;
     }else {
-        [XpaiInterface resetRecorder:AVCaptureDevicePositionBack workMode:workMode resolution:RESOLUTION_MEDIUM audioSampleRate:22050 focusMode:AVCaptureFocusModeContinuousAutoFocus torchMode:AVCaptureTorchModeOff captureVideoOrientation:orientation];
+        [XpaiInterface resetRecorder:AVCaptureDevicePositionBack workMode:workMode audioSampleRate:22050 focusMode:AVCaptureFocusModeContinuousAutoFocus torchMode:AVCaptureTorchModeOff captureVideoOrientation:orientation];
         isBackCamera = YES;
     }
     
@@ -789,7 +791,7 @@
     }
     
     if (isMKViedo == NO) {//判定是否为视频模式
-        [XpaiInterface resetRecorder:camera workMode:VIDEO_MODE resolution:(int)[CLSettingConfig sharedInstance].resolution audioSampleRate:22050 focusMode:AVCaptureFocusModeContinuousAutoFocus torchMode:AVCaptureTorchModeOff captureVideoOrientation:orientation];
+        [XpaiInterface resetRecorder:camera workMode:VIDEO_MODE audioSampleRate:22050 focusMode:AVCaptureFocusModeContinuousAutoFocus torchMode:AVCaptureTorchModeOff captureVideoOrientation:orientation];
         NSLog(@"%ld",(long)[CLSettingConfig sharedInstance].resolution);
         
         [self WhetherLogin];//判定是否连上服务器
@@ -812,7 +814,8 @@
         NSLog(@"getVideoFileName 626行%@",[XpaiInterface getVideoFileName:VideoID]);
         [self informationWithSte:[NSString stringWithFormat:@"视频存放地址：%@",[XpaiInterface getVideoFileName:VideoID]]];
         [XpaiInterface stopRecord];
-         [XpaiInterface resetRecorder:camera workMode:PHOTO_MODE resolution:(int)[CLSettingConfig sharedInstance].resolution audioSampleRate:22050 focusMode:AVCaptureFocusModeContinuousAutoFocus torchMode:AVCaptureTorchModeOff captureVideoOrientation:orientation];
+        [XpaiInterface setVideoResolution:RESOLUTION_PHOTO width:0 height:0];
+         [XpaiInterface resetRecorder:camera workMode:PHOTO_MODE audioSampleRate:22050 focusMode:AVCaptureFocusModeContinuousAutoFocus torchMode:AVCaptureTorchModeOff captureVideoOrientation:orientation];
         
         [_timer setFireDate:[NSDate distantFuture]];
         [_makeVideoButton setBackgroundImage:[UIImage imageNamed:@"record"] forState:UIControlStateNormal];

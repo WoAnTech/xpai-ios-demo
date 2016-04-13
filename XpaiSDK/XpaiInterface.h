@@ -52,17 +52,19 @@
  *            Apple Lossless      128 kbps            128 kbps              128 kbps
  */
 typedef enum ResolutionValue {
-    RESOLUTION_LOW    = 0,
-    RESOLUTION_MEDIUM ,
-    RESOLUTION_VGA    ,
-    RESOLUTION_HIGH   ,
-    RESOLUTION_PHOTO  ,
-    RESOLUTION_352x288,
-    RESOLUTION_1280x720,
-    RESOLUTION_1920x1080
+    RESOLUTION_LOW    = 0,//192x144
+    RESOLUTION_MEDIUM ,//480x360
+    RESOLUTION_VGA    ,//640x480
+    RESOLUTION_HIGH   ,//1280x720
+    RESOLUTION_PHOTO  ,//1280x720
+    RESOLUTION_352x288,//352x288
+    RESOLUTION_1280x720,//1280x720
+    RESOLUTION_1920x1080,//1920x1080
+    RESOLUTION_960x540,//960x540
+    RESOLUTION_CUSTOM //用户可以设置除以上分辨率之外的自定义分辨率，例如640 * 360等
 } ResolutionValue;
 
-//int resArray[8][7];//当客户端集成了cocopads时再集成我们的SDK会报重复定义的错误，客户端在使用时将该定义注释掉即可通过编译
+int resArray[8][7];//当客户端集成了cocopads时再集成我们的SDK会报重复定义的错误，客户端在使用时将该定义注释掉即可通过编译
 
 /**
  * 当摄像头工作在不同模式下时，takePhoto函数取得的视频质量完全不同，如果摄像头工作在视频录制模式，即使把分辨
@@ -159,9 +161,9 @@ typedef enum VideoMirroredMode {
  * audioSampleRate: 8000 22050 44100
  * focusMode: AVCaptureFocusModeContinuousAutoFocus  AVCaptureFocusModeAutoFocus
  */
-+ (void)initRecorder:(AVCaptureDevicePosition)cameraPosition workMode:(WorkMode)workMode resolution:(ResolutionValue)resolution audioSampleRate:(UInt32)audioSampleRate focusMode:(AVCaptureFocusMode)focusMode torchMode:(AVCaptureTorchMode)torchMode glView:(UIView *)glView prevRect:(CGRect)prevRect captureVideoOrientation:(AVCaptureVideoOrientation)captureVideoOrientation;
++ (BOOL)initRecorder:(AVCaptureDevicePosition)cameraPosition workMode:(WorkMode)workMode audioSampleRate:(UInt32)audioSampleRate focusMode:(AVCaptureFocusMode)focusMode torchMode:(AVCaptureTorchMode)torchMode glView:(UIView *)glView prevRect:(CGRect)prevRect captureVideoOrientation:(AVCaptureVideoOrientation)captureVideoOrientation;
 
-+ (void)resetRecorder:(AVCaptureDevicePosition)cameraPosition workMode:(WorkMode)workMode resolution:(ResolutionValue)resolution audioSampleRate:(UInt32)audioSampleRate focusMode:(AVCaptureFocusMode)focusMode torchMode:(AVCaptureTorchMode)torchMode captureVideoOrientation:(AVCaptureVideoOrientation)captureVideoOrientation;;
++ (BOOL)resetRecorder:(AVCaptureDevicePosition)cameraPosition workMode:(WorkMode)workMode audioSampleRate:(UInt32)audioSampleRate focusMode:(AVCaptureFocusMode)focusMode torchMode:(AVCaptureTorchMode)torchMode captureVideoOrientation:(AVCaptureVideoOrientation)captureVideoOrientation;;
     
 + (AVCaptureSession *)getVideoCaptureSession;
 + (void)startVideoCapture;
@@ -182,6 +184,7 @@ typedef enum VideoMirroredMode {
 + (void)transVideoFile:(NSString*)inputFileName startTime:(CGFloat)startTime duration:(CGFloat)duration outputFileName:(NSString*)outputFileName;
 + (void)setNetWorkingAdaptive:(BOOL)isNWAdaptive;
 + (void)setVideoFpsRange:(int)min_fps maxFps:(int)max_fps;   //设置视频最大帧率和最小帧率，需在initRecorder前调用生效，默认值为20,20
++ (void)setVideoResolution:(ResolutionValue)resolutionValue width:(int)width height:(int)height;
 + (void)setVideoMirroredMode:(VideoMirroredMode)videoMirroredMode;
 
 + (SInt64)startRecord:(RecordMode)mode TransferMode:(TransferMode)transferMode forceReallyFile:(BOOL)forceReallyFile volume:(float)volume parameters:(NSDictionary *)paras;

@@ -47,7 +47,7 @@
     if (_isVertical == YES && [CLSettingConfig sharedInstance].transcribe == 0) {
             _dataSource = [[NSArray alloc]initWithObjects:@"192x144",@"640x480", nil];
     }else {
-            _dataSource = [[NSArray alloc]initWithObjects:@"192x144",@"480x360",@"640x480",@"1280x720", nil];
+        _dataSource = [[NSArray alloc]initWithObjects:@"192x144",@"480x360",@"640x480",@"1280x720",@"640x360", nil];
     }
 }
 
@@ -85,7 +85,6 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 
     NSInteger num = indexPath.row;
-    NSLog(@"%d",num);
     [[CLSettingConfig sharedInstance] loadData];
     if (_isVertical == YES && [CLSettingConfig sharedInstance].transcribe == 0) {
         if (num == 1) {
@@ -95,10 +94,13 @@
         }
     }else {
         [CLSettingConfig sharedInstance].resolution = num;
+        if (num == 4) {
+            [CLSettingConfig sharedInstance].resolution = 9;
+        }
     }
     [[CLSettingConfig sharedInstance] WriteData];
 
-        //创建通知传值
+    //创建通知传值
     NSNotification * notification = [NSNotification notificationWithName:@"resolution" object:_dataSource[num]];
     [[NSNotificationCenter defaultCenter]postNotification:notification];
 //    [notification release];
@@ -116,7 +118,7 @@
 
         }
     }else {
-        _dataSource = [[NSArray alloc]initWithObjects:@"192x144",@"480x360",@"640x480",@"1280x720", nil];
+        _dataSource = [[NSArray alloc]initWithObjects:@"192x144",@"480x360",@"640x480",@"1280x720",@"640x360", nil];
     }
     [_resolutionRatioTV reloadData];
 }

@@ -45,7 +45,7 @@
 
 //初始化需要的数组
 -(void)initArray {
-    _resolutionArr = [[NSArray alloc]initWithObjects:@"192x144",@"480x360",@"640x480",@"1280x720", nil];
+    _resolutionArr = [[NSArray alloc]initWithObjects:@"192x144",@"480x360",@"640x480",@"1280x720",@"640x360", nil];
     
     _transcribeViewArr = [[NSArray alloc]initWithObjects:@"软编码",@"硬编码", nil];
     
@@ -122,7 +122,12 @@
     switch (indexPath.row) {
         case 0:
         {
-            cell.parameterLB.text = _resolutionArr[[CLSettingConfig sharedInstance].resolution];
+            int num = (int)[CLSettingConfig sharedInstance].resolution;
+            if (num == 9) {
+                num = 4;
+            }
+            
+            cell.parameterLB.text = _resolutionArr[num];
         }
             break;
         case 1:

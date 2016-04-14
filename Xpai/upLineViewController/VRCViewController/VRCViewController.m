@@ -7,6 +7,7 @@
 //
 
 #import <AVFoundation/AVAudioPlayer.h>
+#import <CoreMotion/CoreMotion.h>
 #import "VRCViewController.h"
 #import "UIButton+VRCButton.h"
 #import "UILabel+VRCLabel.h"
@@ -26,7 +27,7 @@
 #import "outPutLabel.h"
 #import "WoanPlayerInterface.h"
 
-
+@import CoreTelephony;
 
 @interface VRCViewController ()<uploadChooseVideoDelegate,upLoadVideoDelegate,SubViewName,chooseAudioSampling,UITableViewDelegate,UITableViewDataSource,UIAlertViewDelegate>
 {
@@ -52,6 +53,7 @@
     UILabel * _informationLabel;//显示消息
     
     UIView * _settingBackgroundView;//设置页面背景
+    UIImageView * logoImage;//LOGO图片
     SwttingView * _settingView;//设置页面
     resolutionRatioView * _resolution;//分辨率页面
     BitStreamView * _bitStreamView;//码流页面
@@ -103,6 +105,7 @@
     CGFloat screenW;
     CGFloat screenH;
     
+    CTCallCenter * Callcenter;
 }
 
 @end
@@ -149,6 +152,7 @@
     [_outPutView release];
     [_loginAlert release];
     [_backAlert release];
+    [Callcenter release];
     
     [super dealloc];
 }
@@ -165,21 +169,13 @@
     
     [XpaiInterface setDelegate:self];
     
-    
     [self NotificationCenter];
+    [self CallPhone];
     [self addLogoView];//创建Logo标志
     [self addLabel];//创建实时提示Label
     [self addButton];//创建各类按钮
     [self addSettingView];//创建设置页面
     [self adduploadVideoView];//上传视频页面
-    
-    
-    
-//    UIButton * button = [[UIButton alloc]initWithFrame:CGRectMake(20, 20, 60, 60)];
-//    [button setTitle:@"change" forState:UIControlStateNormal];
-//    [button addTarget:self action:@selector( changeSize) forControlEvents:UIControlEventTouchUpInside];
-//    
-//    [self.view addSubview:button];
 }
 
 //-(void)changeSize {
@@ -190,16 +186,40 @@
 //    }
 //}
 
+#pragma mark ---callPhone
+-(void)CallPhone {
+    __block typeof(_timer) weakTimer = _timer;
+    
+    Callcenter = [[CTCallCenter alloc] init];
+    Callcenter.callEventHandler = ^(CTCall * call)
+    {
+        static BOOL callPhone;
+        //TODO:检测到来电后的处理
+        if ([XpaiInterface isRecording]) {
+            if (callPhone) {
+                [XpaiInterface resumeRecord];
+                callPhone = NO;
+                [weakTimer setFireDate:[NSDate distantPast]];
+                NSLog(@"CURRENTVIDEO%lld",[XpaiInterface getCurrentRecordVideoID]);
+            }else {
+                [XpaiInterface interruptLive];
+                callPhone = YES;
+                [weakTimer setFireDate:[NSDate distantFuture]];
+                }
+        }
+    };
+}
+
+
 #pragma 搭建通知中心
 -(void)NotificationCenter {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeResolution) name:@"resolution" object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hiddenSamplingView) name:@"audioSampling" object:nil];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationWillResignActive:)
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidEnterBackground:)
                                                  name:UIApplicationDidEnterBackgroundNotification object:nil]; //监听是否触发home键挂起程序.
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidBecomeActive:)
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationWillEnterForeground:)
                                                  name:UIApplicationWillEnterForegroundNotification object:nil]; //监听是否重新进入程序.
     
 //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(finishVudioMessage) name:WoanPlayerPlaybackDidFinishNotification object:nil];
@@ -225,7 +245,12 @@
         }else {
             camera = AVCaptureDevicePositionFront;
         }
-        [XpaiInterface setVideoResolution:(int)[CLSettingConfig sharedInstance].resolution width:0 height:0];
+        [XpaiInterface setVideoResolution:(int)[CLSettingConfig sharedInstance].resolution width:640 height:360];
+        if ([CLSettingConfig sharedInstance].resolution == 9) {
+            _PlayLayer.videoGravity = AVLayerVideoGravityResize;
+        }else {
+            _PlayLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;//设置预览页全屏
+        }
         [XpaiInterface resetRecorder:camera workMode:PHOTO_MODE audioSampleRate:22050 focusMode:AVCaptureFocusModeContinuousAutoFocus torchMode:AVCaptureTorchModeOff captureVideoOrientation:AVCaptureVideoOrientationLandscapeRight];
     }
 }
@@ -271,9 +296,6 @@
     _backAlert = [[UIAlertView alloc]initWithTitle:@"是否返回登录界面" message:@"您将要退出" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
     _backAlert.delegate = self;
     
-
-    
-    
 }
 
 -(void)WhetherLogin {//判断网络状态
@@ -305,7 +327,7 @@
     CGFloat imageW = kScreenH / 3;
     CGFloat imageH = kScreenW / 4;
     
-    UIImageView * logoImage = [[UIImageView alloc]initWithFrame:CGRectMake(kScreenH / 3, kScreenW / 4 * 2 - imageH / 2, imageW, imageH)];
+    logoImage = [[UIImageView alloc]initWithFrame:CGRectMake(kScreenH / 3, kScreenW / 4 * 2 - imageH / 2, imageW, imageH)];
     logoImage.backgroundColor = [UIColor clearColor];
     logoImage.image = [UIImage imageNamed:@"logo-505-200"];
     logoImage.contentMode = UIViewContentModeScaleAspectFill;
@@ -667,7 +689,7 @@
 }
 //预览
 -(void)preView {
-    
+
     if (isMKPhoto == NO) {
         [XpaiInterface setAudioRecorderParams:(int)[CLSettingConfig  sharedInstance].audioParameter channels:1 sampleRate:(int)[CLSettingConfig sharedInstance].audioSampling  audioBitRate:(int)[CLSettingConfig sharedInstance].audioBit];//音频
         
@@ -687,7 +709,7 @@
             playerOrientation = AVCaptureVideoOrientationPortrait;
         }
 
-        [XpaiInterface setVideoResolution:(int)[CLSettingConfig sharedInstance].resolution width:0 height:0];
+        [XpaiInterface setVideoResolution:(int)[CLSettingConfig sharedInstance].resolution width:640 height:360];
         [XpaiInterface initRecorder:camera workMode:VIDEO_MODE audioSampleRate:22050 focusMode:AVCaptureFocusModeContinuousAutoFocus  torchMode:AVCaptureTorchModeOff  glView:nil prevRect:self.view.frame captureVideoOrientation:orientation];
         _PlayLayer = [AVCaptureVideoPreviewLayer layerWithSession:[XpaiInterface getVideoCaptureSession] ];
         NSLog(@"分辨率%ld",(long)[CLSettingConfig sharedInstance].resolution);
@@ -697,15 +719,20 @@
             _PlayLayer.frame = self.view.frame;
         
             _PlayLayer.connection.videoOrientation =playerOrientation;//设置预览方向向右边
+        [[CLSettingConfig sharedInstance]loadData];
+        if ([CLSettingConfig sharedInstance].resolution == 9) {
+            _PlayLayer.videoGravity = AVLayerVideoGravityResize;
+        }else {
             _PlayLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;//设置预览页全屏
+        }
         [XpaiInterface startVideoCapture];
         
+
         [_preViewButton setBackgroundImage:[UIImage imageNamed:@"preview"] forState:UIControlStateNormal];
         _changeCameraButton.hidden = NO;
         isMKPhoto = YES;
     }else {
         [_preViewButton setBackgroundImage:[UIImage imageNamed:@"preview_inactive"] forState:UIControlStateNormal];
-        
         if (_PlayLayer) {
         [_PlayLayer removeFromSuperlayer];
         [XpaiInterface stopVideoCapture];
@@ -719,6 +746,7 @@
         }
     }
 }
+
 //切换摄像头
 -(void)changeCamera {
     int workMode;
@@ -791,8 +819,14 @@
     }
     
     if (isMKViedo == NO) {//判定是否为视频模式
+        [XpaiInterface setVideoResolution:(int)[CLSettingConfig sharedInstance].resolution width:640 height:360];
+        if ([CLSettingConfig sharedInstance].resolution == 9) {
+            _PlayLayer.videoGravity = AVLayerVideoGravityResize;
+        }else {
+            _PlayLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;//设置预览页全屏
+        }
+        
         [XpaiInterface resetRecorder:camera workMode:VIDEO_MODE audioSampleRate:22050 focusMode:AVCaptureFocusModeContinuousAutoFocus torchMode:AVCaptureTorchModeOff captureVideoOrientation:orientation];
-        NSLog(@"%ld",(long)[CLSettingConfig sharedInstance].resolution);
         
         [self WhetherLogin];//判定是否连上服务器
         if (_isLogin == YES) {
@@ -806,6 +840,7 @@
         _suspendButton.hidden = NO;
         _soundButton.hidden = NO;
         _preViewButton.hidden = YES;
+        _PlayVideoButton.hidden = YES;
         isMKViedo = YES;
         _settingButton.hidden = YES;
         _UploadingButton.hidden = YES;
@@ -816,6 +851,7 @@
         [XpaiInterface stopRecord];
         [XpaiInterface setVideoResolution:RESOLUTION_PHOTO width:0 height:0];
          [XpaiInterface resetRecorder:camera workMode:PHOTO_MODE audioSampleRate:22050 focusMode:AVCaptureFocusModeContinuousAutoFocus torchMode:AVCaptureTorchModeOff captureVideoOrientation:orientation];
+        _PlayLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
         
         [_timer setFireDate:[NSDate distantFuture]];
         [_makeVideoButton setBackgroundImage:[UIImage imageNamed:@"record"] forState:UIControlStateNormal];
@@ -824,6 +860,7 @@
         _soundButton.hidden = YES;
         _settingButton.hidden = NO;
         _preViewButton.hidden = NO;
+        _PlayVideoButton.hidden = NO;
         _durationTime = 0;
         _UploadingButton.hidden = NO;
         isMKViedo = NO;
@@ -972,12 +1009,6 @@
 -(void)record {
     NSLog(@"录制视频");
     [self informationWithSte:@"开始录制本地视频"];
-//    int transcribe;
-//    if ([CLSettingConfig sharedInstance].transcribe == 0) {
-//        transcribe = HARDWARE_SOFTWARE_ENCODER_LOW_DELAY;
-//    }else {
-//        transcribe = HARDWARE_ENCODER_STREAM;
-//    }
 
     VideoID = [XpaiInterface startRecord:HARDWARE_ENCODER_LOCAL_STORAGE_ONLY TransferMode:VIDEO_AND_AUDIO forceReallyFile:TRUE volume:0 parameters:nil];
 }
@@ -1017,7 +1048,6 @@
 - (void)didSendToServer:(SInt64)ID sentLen:(UInt64)sentLen currentPoint:(UInt32)currentPoint videoLen:(UInt32)videoLen {
     NSLog(@"631行 服务器接收数据回调%d",(unsigned int)sentLen);
     int num =(unsigned int) sentLen / 1024;
-    NSLog(@"%d",num);
     _sentLabel.text = [NSString stringWithFormat:@"Sent: %02d KByte",num];
 }
 
@@ -1368,16 +1398,18 @@
 
 #pragma mark --监听Home按钮
 //按下Home键及电话
-- (void)applicationWillResignActive:(UIApplication *)application
+- (void)applicationDidEnterBackground:(UIApplication *)application
 //当应用程序将要入非活动状态执行，在此期间，应用程序不接收消息或事件，比如来电话了
 {
     [XpaiInterface interruptLive];
+    [_timer setFireDate:[NSDate distantFuture]];
 }
 //重新进入程序
-- (void)applicationDidBecomeActive:(UIApplication *)application
+- (void)applicationWillEnterForeground:(UIApplication *)application
 //当应用程序入活动状态执行，这个刚好跟上面那个方法相反
 {
     [XpaiInterface resumeRecord];
+    [_timer setFireDate:[NSDate distantPast]];
 }
 
 

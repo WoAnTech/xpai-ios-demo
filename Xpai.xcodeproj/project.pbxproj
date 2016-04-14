@@ -50,6 +50,7 @@
 		BD2489741C59EA220099DF13 /* 6.png in Resources */ = {isa = PBXBuildFile; fileRef = BD24896D1C59EA220099DF13 /* 6.png */; };
 		BD2489751C59EA220099DF13 /* 7.png in Resources */ = {isa = PBXBuildFile; fileRef = BD24896E1C59EA220099DF13 /* 7.png */; };
 		BD2489761C59EA220099DF13 /* 赛包包素材(roador.taobao.png in Resources */ = {isa = PBXBuildFile; fileRef = BD24896F1C59EA220099DF13 /* 赛包包素材(roador.taobao.png */; };
+		BD3E3C861CBF8353009C0C65 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD3E3C851CBF8353009C0C65 /* CoreTelephony.framework */; };
 		BD53ECE41C71C508004A364E /* UIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = BD53ECE31C71C508004A364E /* UIView+Extension.m */; };
 		BD7929CC1C3F76070024E112 /* NewRecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD7929CB1C3F76070024E112 /* NewRecordViewController.m */; };
 		BD7929CE1C3F7D9D0024E112 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = BD7929CD1C3F7D9C0024E112 /* logo.png */; };
@@ -313,6 +314,7 @@
 		BD24896D1C59EA220099DF13 /* 6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 6.png; sourceTree = "<group>"; };
 		BD24896E1C59EA220099DF13 /* 7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 7.png; sourceTree = "<group>"; };
 		BD24896F1C59EA220099DF13 /* 赛包包素材(roador.taobao.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "赛包包素材(roador.taobao.png"; sourceTree = "<group>"; };
+		BD3E3C851CBF8353009C0C65 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		BD53ECE21C71C508004A364E /* UIView+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Extension.h"; sourceTree = "<group>"; };
 		BD53ECE31C71C508004A364E /* UIView+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Extension.m"; sourceTree = "<group>"; };
 		BD7929CA1C3F76070024E112 /* NewRecordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewRecordViewController.h; sourceTree = SOURCE_ROOT; };
@@ -580,6 +582,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BD3E3C861CBF8353009C0C65 /* CoreTelephony.framework in Frameworks */,
 				BD09EB031C3CE7A5008399E0 /* libiconv.tbd in Frameworks */,
 				BD09EB011C3CE79C008399E0 /* libbz2.tbd in Frameworks */,
 				BD09EAFF1C3CE793008399E0 /* libz.tbd in Frameworks */,
@@ -1570,6 +1573,7 @@
 		DC8471A31328B57D00CE167E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BD3E3C851CBF8353009C0C65 /* CoreTelephony.framework */,
 				BD09EB021C3CE7A5008399E0 /* libiconv.tbd */,
 				BD09EB001C3CE79C008399E0 /* libbz2.tbd */,
 				BD09EAFE1C3CE793008399E0 /* libz.tbd */,
@@ -1652,7 +1656,7 @@
 				ORGANIZATIONNAME = "B-Star";
 				TargetAttributes = {
 					DC84719F1328B57D00CE167E = {
-						DevelopmentTeam = 6BWXZ84974;
+						DevelopmentTeam = 2JDKXFZ285;
 					};
 				};
 			};
@@ -1998,8 +2002,9 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: 782231328@qq.com (A2WNRU342H)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_BITCODE = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -2016,7 +2021,7 @@
 					"$(PROJECT_DIR)/XpaiSDK",
 				);
 				ONLY_ACTIVE_ARCH = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = com.woan.zhiboke;
+				PRODUCT_BUNDLE_IDENTIFIER = com.woan.liqing;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
@@ -2032,8 +2037,9 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: 782231328@qq.com (A2WNRU342H)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_BITCODE = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -2049,7 +2055,7 @@
 					"$(PROJECT_DIR)/XpaiSDK",
 				);
 				ONLY_ACTIVE_ARCH = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = com.woan.zhiboke;
+				PRODUCT_BUNDLE_IDENTIFIER = com.woan.liqing;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";

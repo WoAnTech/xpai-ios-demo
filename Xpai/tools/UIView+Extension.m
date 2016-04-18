@@ -3,7 +3,7 @@
 //  01-黑酷
 //
 //  Created by apple on 14-6-27.
-//  Copyright (c) 2014年 heima. All rights reserved.
+//  Copyright (c) 2014年  沃安科技. All rights reserved.
 //
 
 #import "UIView+Extension.h"

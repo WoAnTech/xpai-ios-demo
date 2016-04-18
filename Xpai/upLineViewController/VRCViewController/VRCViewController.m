@@ -3,7 +3,7 @@
 //  Xpai
 //
 //  Created by  cLong on 16/1/12.
-//  Copyright © 2016年 B-Star. All rights reserved.
+//  Copyright © 2016年  沃安科技. All rights reserved.
 //
 
 #import <AVFoundation/AVAudioPlayer.h>
@@ -26,10 +26,11 @@
 #import "UploadVideoView.h"
 #import "outPutLabel.h"
 #import "WoanPlayerInterface.h"
+#import "SetFPSView.h"
 
 @import CoreTelephony;
 
-@interface VRCViewController ()<uploadChooseVideoDelegate,upLoadVideoDelegate,SubViewName,chooseAudioSampling,UITableViewDelegate,UITableViewDataSource,UIAlertViewDelegate>
+@interface VRCViewController ()<uploadChooseVideoDelegate,upLoadVideoDelegate,SubViewName,chooseAudioSampling,UITableViewDelegate,UITableViewDataSource,UIAlertViewDelegate,SetFPSViewDelegate,UIGestureRecognizerDelegate>
 {
     UIButton * _loginButton;//连接状态
     UIButton * _backButton;//返回按钮
@@ -64,8 +65,11 @@
     outPutLabel * _outPutView;//输出格式标签页面
     NetDeptionView * _deptionView;//网络自适应页面
     SaveRedioView * _saveRedioView;//是否自动保存视频页面
+    SetFPSView * _setFPSView;//修改帧率页面
     PlayViedoViewController * _playViedoView;//播放本地视频视频控制器
     UploadVideoView * _uploadVideoView;//上传页面
+    UIImageView * _touchsImageView;//触摸图框
+
     
     UITableView * _audioSamplingTableView;//音频采样率参数选择页面
     NSArray * _audioSamplingDataSource;//音频采样率参数数组
@@ -96,8 +100,11 @@
     BOOL isReconnect;//是否重连
     
     int _durationTime;//录制时长
+    CGFloat pinchScale;//缩放比例对照
+    CGFloat zoomNum;//当前焦距
     
     NSInteger orientation;//选择竖屏或者横屏
+    int workMord;
     
     CGFloat settingViewW;//普通子页面宽度
     CGFloat settingViewH;//普通子页面高度
@@ -153,6 +160,7 @@
     [_loginAlert release];
     [_backAlert release];
     [Callcenter release];
+    [_setFPSView release];
     
     [super dealloc];
 }
@@ -296,6 +304,8 @@
     _backAlert = [[UIAlertView alloc]initWithTitle:@"是否返回登录界面" message:@"您将要退出" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
     _backAlert.delegate = self;
     
+    workMord = 1;
+    
 }
 
 -(void)WhetherLogin {//判断网络状态
@@ -336,12 +346,54 @@
     }
     [self.view addSubview:logoImage];
     UIPinchGestureRecognizer * pinch = [[UIPinchGestureRecognizer alloc]initWithTarget:self action:@selector(zoomSize:)];
+    pinch.delegate = self;
     [self.view addGestureRecognizer:pinch];//添加捏合手势
 }
 
 //改变焦距
 -(void)zoomSize:(UIPinchGestureRecognizer *)pinch {
-    [XpaiInterface zoom:pinch.scale];
+    
+    if (pinch.scale > 1 && pinch.scale > pinchScale ) {
+        zoomNum = zoomNum + 0.04;
+    }else if (pinch.scale > 1 && pinch.scale < pinchScale){
+        zoomNum = zoomNum - 0.04;
+    }else if (pinch.scale < 1 && pinch.scale > pinchScale) {
+        zoomNum = zoomNum + 0.04;
+    }else if (pinch.scale < 1 && pinch.scale < pinchScale){
+        zoomNum = zoomNum - 0.04;
+    }
+    
+    if (zoomNum  > 4) {
+        zoomNum = 4;
+    }else if( zoomNum  < 1){
+        zoomNum = 1;
+    }
+    pinchScale = pinch.scale;
+    NSLog(@"zoom:%f",zoomNum);
+    NSLog(@"pinch:%f",pinch.scale);
+    
+    AVCaptureDevice *device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
+    [device lockForConfiguration:nil];
+    [device setVideoZoomFactor:zoomNum];
+    [device unlockForConfiguration];
+    
+    CGFloat W ;
+    CGFloat H ;
+    if (_isAcross) {
+        W = screenH;
+        H = screenW;
+    }else {
+        W = screenW;
+        H = screenH;
+    }
+    if ([pinch state] == UIGestureRecognizerStateEnded) {
+        [XpaiInterface tapToFocus:CGPointMake(W / 2, H / 2)];
+        if ([XpaiInterface isRecording] == YES) {
+            [XpaiInterface setFocusMode:AVCaptureFocusModeAutoFocus];
+            [self ViewAnimtion:CGPointMake(W/2 , H / 2 )];
+        }
+        
+    }
 }
 
 //创建实时提示
@@ -360,25 +412,14 @@
     //持续时间
     _DurationLabel = [UILabel labelWithFrame:CGRectMake(_SDKVerLabel.x, _SDKVerLabel.maxY + 5, labelW, labelH) text:@"Duration:"];
     [self.view addSubview:_DurationLabel];
-    //fps
-//    _FPSLabel = [UILabel labelWithFrame:CGRectMake(_SDKVerLabel.x, _DurationLabel.maxY + 5, labelW, labelH) text:@"FPS:"];
-//    [self.view addSubview:_FPSLabel];
-//    //NET
-//    _NetLabel = [UILabel labelWithFrame:CGRectMake(_SDKVerLabel.x, _FPSLabel.maxY + 5, labelW, labelH) text:@"Net:0.00 KBps"];
-//    [self.view addSubview:_NetLabel];
-    //sent
+
     _sentLabel = [UILabel labelWithFrame:CGRectMake(_SDKVerLabel.x, _DurationLabel.maxY + 5, labelW, labelH) text:@"Sent:0.00 KByte"];
     [self.view addSubview:_sentLabel];
-    //Cache
-//    _Chche = [UILabel labelWithFrame:CGRectMake(_SDKVerLabel.x, _sentLabel.maxY + 5, labelW, labelH) text:@"Cache:0.00 KByet"];
-//    [self.view addSubview:_Chche];
     
         CGFloat lbW = kScreenH - 120;
     if (_isAcross == NO) {
         lbW = kScreenW - 50;
     }
-    
-
     
     _informationLabel = [[UILabel alloc]initWithFrame:CGRectMake(kScreenH / 2 - lbW / 2, kScreenW - 70, lbW, 60)];
     if (_isAcross == NO) {
@@ -510,6 +551,7 @@
     [self outPutView];//输出格式标签
     [self netDeptionView];//网络自适应页面
     [self saveRedioView];//视频自动保存页面
+    [self setFPSView];//设置FPS页面
 }
 
 //上传页面
@@ -605,6 +647,13 @@
     [self.view addSubview:_saveRedioView];
 }
 
+-(void)setFPSView {
+    _setFPSView = [[SetFPSView alloc]initWithFrame:CGRectMake(0, kScreenW / 2 - 30, settingViewW, 180)];
+    _setFPSView.delegate = self;
+    _setFPSView.alpha = 0;
+    [self.view addSubview:_setFPSView];
+}
+
 #pragma mark -- 手势方法
 //设置页面向左轻扫
 -(void)swipeGesture {
@@ -630,6 +679,8 @@
         _saveRedioView.alpha = 0;
         _outPutView.x = 0;
         _outPutView.alpha = 0;
+        _setFPSView.x = 0;
+        _setFPSView.alpha = 0;
 
     }];
 }
@@ -708,18 +759,18 @@
             orientation = AVCaptureVideoOrientationPortrait;
             playerOrientation = AVCaptureVideoOrientationPortrait;
         }
-
+        
+        [[CLSettingConfig sharedInstance]loadData];
         [XpaiInterface setVideoResolution:(int)[CLSettingConfig sharedInstance].resolution width:640 height:360];
-        [XpaiInterface initRecorder:camera workMode:VIDEO_MODE audioSampleRate:22050 focusMode:AVCaptureFocusModeContinuousAutoFocus  torchMode:AVCaptureTorchModeOff  glView:nil prevRect:self.view.frame captureVideoOrientation:orientation];
+        [XpaiInterface initRecorder:camera workMode:workMord audioSampleRate:22050 focusMode:AVCaptureFocusModeContinuousAutoFocus  torchMode:AVCaptureTorchModeOff  glView:nil prevRect:self.view.frame captureVideoOrientation:orientation];
         _PlayLayer = [AVCaptureVideoPreviewLayer layerWithSession:[XpaiInterface getVideoCaptureSession] ];
         NSLog(@"分辨率%ld",(long)[CLSettingConfig sharedInstance].resolution);
 
         [self.view.layer insertSublayer:_PlayLayer atIndex:1];
 
             _PlayLayer.frame = self.view.frame;
-        
             _PlayLayer.connection.videoOrientation =playerOrientation;//设置预览方向向右边
-        [[CLSettingConfig sharedInstance]loadData];
+        
         if ([CLSettingConfig sharedInstance].resolution == 9) {
             _PlayLayer.videoGravity = AVLayerVideoGravityResize;
         }else {
@@ -727,7 +778,6 @@
         }
         [XpaiInterface startVideoCapture];
         
-
         [_preViewButton setBackgroundImage:[UIImage imageNamed:@"preview"] forState:UIControlStateNormal];
         _changeCameraButton.hidden = NO;
         isMKPhoto = YES;
@@ -756,13 +806,12 @@
         workMode = PHOTO_MODE;
     }
     if (isBackCamera == YES) {
-        [XpaiInterface resetRecorder:AVCaptureDevicePositionFront workMode:workMode audioSampleRate:22050 focusMode:AVCaptureFocusModeContinuousAutoFocus torchMode:AVCaptureTorchModeOff captureVideoOrientation:orientation];
         isBackCamera = NO;
+        [self RePreviewWithCameraModel:workMode];//重置预览
     }else {
-        [XpaiInterface resetRecorder:AVCaptureDevicePositionBack workMode:workMode audioSampleRate:22050 focusMode:AVCaptureFocusModeContinuousAutoFocus torchMode:AVCaptureTorchModeOff captureVideoOrientation:orientation];
         isBackCamera = YES;
+        [self RePreviewWithCameraModel:workMode];
     }
-    
 }
 
 //设置
@@ -779,7 +828,6 @@
             _settingBackgroundView.x = kScreenW * -1;
         }];
     }
-    
 }
 
 //播放本地视频
@@ -788,7 +836,6 @@
     _playViedoView.screenW = screenW;
     _playViedoView.screenH = screenH;
     _playViedoView.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-
     [self presentViewController:_playViedoView animated:YES completion:^{
         
     }];
@@ -809,24 +856,12 @@
 //录制视频
 -(void)makeVideo {
     if (isMKPhoto ==NO) {
+        workMord = 1;
         [self preView];
     }
-    int camera;//判定前后摄像头
-    if (isBackCamera == YES) {
-        camera = AVCaptureDevicePositionBack;
-    }else {
-        camera = AVCaptureDevicePositionFront;
-    }
-    
     if (isMKViedo == NO) {//判定是否为视频模式
-        [XpaiInterface setVideoResolution:(int)[CLSettingConfig sharedInstance].resolution width:640 height:360];
-        if ([CLSettingConfig sharedInstance].resolution == 9) {
-            _PlayLayer.videoGravity = AVLayerVideoGravityResize;
-        }else {
-            _PlayLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;//设置预览页全屏
-        }
-        
-        [XpaiInterface resetRecorder:camera workMode:VIDEO_MODE audioSampleRate:22050 focusMode:AVCaptureFocusModeContinuousAutoFocus torchMode:AVCaptureTorchModeOff captureVideoOrientation:orientation];
+        [self RePreviewWithCameraModel:VIDEO_MODE];
+        [XpaiInterface setFocusMode:AVCaptureFocusModeAutoFocus];//设置为 手动对焦
         
         [self WhetherLogin];//判定是否连上服务器
         if (_isLogin == YES) {
@@ -846,13 +881,13 @@
         _UploadingButton.hidden = YES;
         [_timer setFireDate:[NSDate distantPast]];
     }else {
-        NSLog(@"getVideoFileName 626行%@",[XpaiInterface getVideoFileName:VideoID]);
+        NSLog(@"getVideoFileName 842行%@",[XpaiInterface getVideoFileName:VideoID]);
         [self informationWithSte:[NSString stringWithFormat:@"视频存放地址：%@",[XpaiInterface getVideoFileName:VideoID]]];
         [XpaiInterface stopRecord];
-        [XpaiInterface setVideoResolution:RESOLUTION_PHOTO width:0 height:0];
-         [XpaiInterface resetRecorder:camera workMode:PHOTO_MODE audioSampleRate:22050 focusMode:AVCaptureFocusModeContinuousAutoFocus torchMode:AVCaptureTorchModeOff captureVideoOrientation:orientation];
-        _PlayLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
         
+        [XpaiInterface setVideoResolution:RESOLUTION_PHOTO width:0 height:0];
+        [self RePreviewWithCameraModel:PHOTO_MODE];
+        _PlayLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
         [_timer setFireDate:[NSDate distantFuture]];
         [_makeVideoButton setBackgroundImage:[UIImage imageNamed:@"record"] forState:UIControlStateNormal];
         _photographButton.hidden = NO;
@@ -865,8 +900,6 @@
         _UploadingButton.hidden = NO;
         isMKViedo = NO;
     }
-    
-//    _PlayLayer.frame = CGRectMake(0, 0, 200, 200);
 }
 
 //暂停视频录制
@@ -895,8 +928,6 @@
             [self informationWithSte:@"继续录制"];
         }
     }else {
-        
-        
         if (isSuspend == NO) {
             [XpaiInterface pauseRecord];
             CABasicAnimation * basic = [CABasicAnimation animationWithKeyPath:@"opacity"];
@@ -1012,6 +1043,24 @@
 
     VideoID = [XpaiInterface startRecord:HARDWARE_ENCODER_LOCAL_STORAGE_ONLY TransferMode:VIDEO_AND_AUDIO forceReallyFile:TRUE volume:0 parameters:nil];
 }
+
+#pragma mark ---常用方法调用
+//重置预览
+-(void)RePreviewWithCameraModel:(int)Model  {
+    workMord = Model;
+    int camera;//判定前后摄像头
+    if (isBackCamera == YES) {
+        camera = AVCaptureDevicePositionBack;
+    }else {
+        camera = AVCaptureDevicePositionFront;
+    }
+    if ([XpaiInterface isRecording]) {
+        [XpaiInterface resetRecorder:camera workMode:Model audioSampleRate:22050 focusMode:AVCaptureFocusModeAutoFocus torchMode:AVCaptureTorchModeOff captureVideoOrientation:orientation];
+    }else {
+     [XpaiInterface resetRecorder:camera workMode:Model audioSampleRate:22050 focusMode:AVCaptureFocusModeContinuousAutoFocus torchMode:AVCaptureTorchModeOff captureVideoOrientation:orientation];
+    }
+}
+
 #pragma mark -- xpaiInterface回调
 //语音消息
 -(void)doReceiveAudioMessage:(NSString *)userName msgFile:(NSString *)url {
@@ -1046,7 +1095,7 @@
 
 //服务器收到发送数据后回调
 - (void)didSendToServer:(SInt64)ID sentLen:(UInt64)sentLen currentPoint:(UInt32)currentPoint videoLen:(UInt32)videoLen {
-    NSLog(@"631行 服务器接收数据回调%d",(unsigned int)sentLen);
+//    NSLog(@"631行 服务器接收数据回调%d",(unsigned int)sentLen);
     int num =(unsigned int) sentLen / 1024;
     _sentLabel.text = [NSString stringWithFormat:@"Sent: %02d KByte",num];
 }
@@ -1127,7 +1176,7 @@
 //设置页面的代理方法
 -(void)subViewAppearWithNum:(NSInteger)num {
     for (UIView * view in self.view.subviews) {
-        if ([view isKindOfClass:[resolutionRatioView class]] || [view isKindOfClass:[BitStreamView class]] || [view isKindOfClass:[NetOverTimeView class]] ||[view isKindOfClass:[transcribeView class]] || [view isKindOfClass:[AudioParameterView class]] || [view isKindOfClass:[NetDeptionView class]]|| [view isKindOfClass:[SaveRedioView class]] || [view isKindOfClass:[outPutLabel class]] || [view isKindOfClass:[reconnectTimeView class]]) {
+        if ([view isKindOfClass:[resolutionRatioView class]] || [view isKindOfClass:[BitStreamView class]] || [view isKindOfClass:[NetOverTimeView class]] ||[view isKindOfClass:[transcribeView class]] || [view isKindOfClass:[AudioParameterView class]] || [view isKindOfClass:[NetDeptionView class]]|| [view isKindOfClass:[SaveRedioView class]] || [view isKindOfClass:[outPutLabel class]] || [view isKindOfClass:[reconnectTimeView class]] || [view isKindOfClass:[SetFPSView class]]) {
             view.alpha = 0 ;
             view.x = 0;
         }
@@ -1251,6 +1300,23 @@
         }
             break;
             
+            
+        case 9://设置帧率
+        {
+            [UIView animateWithDuration:0.3 animations:^{
+                _setFPSView.alpha = 1;
+                if (_isAcross == YES) {
+                    _setFPSView.x = _settingView.maxX;
+                }else {
+                    _setFPSView.y = _settingView.maxY + 2;
+                }
+                
+            }];
+
+            
+        }
+            break;
+            
         default:
             break;
     }
@@ -1365,10 +1431,68 @@
         _saveRedioView.alpha = 0;
         _outPutView.x = 0;
         _outPutView.alpha = 0;
+        _setFPSView.x = 0;
+        _setFPSView.alpha = 0;
         _uploadVideoView.y = screenW + 50;
     }];
     
     [self.view endEditing:YES]; //所有放弃第一响应
+}
+
+-(void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    if (isMKPhoto == NO) {
+        return;
+    }
+    
+    UITouch *touch = [touches anyObject];
+    CGPoint touchPoint = [touch locationInView:self.view];
+    //touchPoint.x ，touchPoint.y
+    [XpaiInterface tapToFocus:touchPoint];
+    [self ViewAnimtion:touchPoint];
+    
+    if ([XpaiInterface isRecording] == YES) {
+        [XpaiInterface setFocusMode:AVCaptureFocusModeAutoFocus];
+    }
+}
+
+-(void)ViewAnimtion:(CGPoint)point {
+    
+    if (!_touchsImageView) {
+        _touchsImageView = [[UIImageView alloc]init];
+        _touchsImageView.backgroundColor = [UIColor clearColor];
+        _touchsImageView.layer.masksToBounds = YES;
+        _touchsImageView.layer.borderColor = [[UIColor greenColor] CGColor];
+        _touchsImageView.layer.borderWidth = 2;
+        [self.view addSubview:_touchsImageView];
+    }
+    _touchsImageView.alpha = 0;
+    _touchsImageView.transform = CGAffineTransformIdentity;
+    _touchsImageView.frame = CGRectMake(point.x , point.y , 140, 140);
+    _touchsImageView.center = CGPointMake(point.x, point.y);
+    [UIView animateWithDuration:0.3 animations:^{
+        _touchsImageView.alpha = 1;
+        _touchsImageView.transform = CGAffineTransformScale(_touchsImageView.transform, 0.6, 0.6);
+    } completion:^(BOOL finished) {
+        [UIView animateWithDuration:2.5  //动画持续时间
+                                       delay:0.0  //动画延时
+                                     options: UIViewAnimationOptionCurveEaseInOut//设置动画曲线
+                                  animations:^{
+                                      if ([XpaiInterface isRecording]) {
+                                          _touchsImageView.alpha = 0.3;//变换透明度
+                                      }else {
+                                          _touchsImageView.alpha = 0;
+                                      }
+                                  }
+                                  completion:^(BOOL finished){//动画结束时，调用如下方法
+                                  }];
+    }];
+}
+
+
+#pragma mark ---代理
+-(void)SetFPSWithMax:(int)MaxFPS Min:(int)MinFPS {
+    [XpaiInterface setVideoFpsRange:MinFPS maxFps:MaxFPS];
+    [self RePreviewWithCameraModel:PHOTO_MODE];
 }
 
 

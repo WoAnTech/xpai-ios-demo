@@ -3,7 +3,7 @@
 //  Xpai
 //
 //  Created by  cLong on 16/1/14.
-//  Copyright © 2016年 B-Star. All rights reserved.
+//  Copyright © 2016年  沃安科技. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -19,6 +19,8 @@
 #define KOutPutTag @"outPutTag"
 #define KNetDeption @"netDeption"
 #define KsaveRedio @"saveRedio"
+#define KMaxFPS @"MaxFPS"
+#define kMinFPS @"MinFPS"
 //#define KUserName @"UserName"
 //#define KPassWord @"passWord"
 //#define KserviceCode @"serviceCode"
@@ -63,6 +65,9 @@
 @property(nonatomic,retain)NSString * outPutTag;//输出格式标签
 @property(nonatomic,assign)BOOL  NetDeption;//网络自适应
 @property(nonatomic,assign)BOOL  SaveRedio;//保存视频文件
+@property(nonatomic,assign)int MaxFPS;//最大帧率
+@property(nonatomic,assign)int MinFPS;//最小帧率
+
 @property (nonatomic,assign)NSInteger segment;
 
 

@@ -3,7 +3,7 @@
 //  Xpai
 //
 //  Created by  cLong on 16/2/3.
-//  Copyright © 2016年 B-Star. All rights reserved.
+//  Copyright © 2016年  沃安科技. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>

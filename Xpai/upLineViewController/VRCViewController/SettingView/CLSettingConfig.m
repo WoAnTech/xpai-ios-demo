@@ -3,7 +3,7 @@
 //  Xpai
 //
 //  Created by  cLong on 16/1/14.
-//  Copyright © 2016年 B-Star. All rights reserved.
+//  Copyright © 2016年  沃安科技. All rights reserved.
 //
 
 #import "CLSettingConfig.h"
@@ -59,6 +59,8 @@ static CLSettingConfig * _clSettingConfig;
         _mainPort = [@"" integerValue];
         _mainUrl = @"";
         _isTcp = NO;
+        _MaxFPS = 22;
+        _MinFPS = 20;
         
         [self WriteData];
         return YES;
@@ -74,6 +76,8 @@ static CLSettingConfig * _clSettingConfig;
     _outPutTag = [defaults stringForKey:KOutPutTag];
     _NetDeption = [defaults boolForKey:KNetDeption];
     _SaveRedio = [defaults boolForKey:KsaveRedio];
+    _MaxFPS = (int)[defaults integerForKey:KMaxFPS];
+    _MinFPS = (int)[defaults integerForKey:kMinFPS];
     isNotFirst = [defaults boolForKey:@"first"];
 
     _SYYUserName = [defaults stringForKey:KSYYUserName];
@@ -105,6 +109,8 @@ static CLSettingConfig * _clSettingConfig;
     [defaults setObject:_outPutTag forKey:KOutPutTag];
     [defaults setBool:_NetDeption forKey:KNetDeption];
     [defaults setBool:_SaveRedio forKey:KsaveRedio];
+    [defaults setInteger:_MaxFPS forKey:KMaxFPS];
+    [defaults setInteger:_MinFPS forKey:kMinFPS];
     [defaults setBool:isNotFirst forKey:@"first"];
 //    [defaults setObject:_UserNames forKey:KUserName];
 //    [defaults setObject:_PassWords forKey:KPassWord];

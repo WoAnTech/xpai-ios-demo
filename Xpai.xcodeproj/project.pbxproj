@@ -250,6 +250,7 @@
 		BDE3CC081C730DFB00161539 /* logo-505-200.png in Resources */ = {isa = PBXBuildFile; fileRef = BDE3CC071C730DFB00161539 /* logo-505-200.png */; };
 		BDE6200C1C6196250079587B /* reconnectTimeView.m in Sources */ = {isa = PBXBuildFile; fileRef = BDE6200B1C6196250079587B /* reconnectTimeView.m */; };
 		BDE6200F1C61A8ED0079587B /* CLUploadConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = BDE6200E1C61A8ED0079587B /* CLUploadConfig.m */; };
+		BDF331C31CC49FA900145F10 /* SetFPSView.m in Sources */ = {isa = PBXBuildFile; fileRef = BDF331C21CC49FA900145F10 /* SetFPSView.m */; };
 		DC77B4D6165F678C0095EEEB /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DC77B4D5165F678C0095EEEB /* Default-568h@2x.png */; };
 		DC81AF951453056700109399 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC81AF941453056700109399 /* AssetsLibrary.framework */; };
 		DC8471A51328B57D00CE167E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC8471A41328B57D00CE167E /* UIKit.framework */; };
@@ -563,6 +564,8 @@
 		BDE6200B1C6196250079587B /* reconnectTimeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = reconnectTimeView.m; sourceTree = "<group>"; };
 		BDE6200D1C61A8ED0079587B /* CLUploadConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLUploadConfig.h; sourceTree = "<group>"; };
 		BDE6200E1C61A8ED0079587B /* CLUploadConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLUploadConfig.m; sourceTree = "<group>"; };
+		BDF331C11CC49FA900145F10 /* SetFPSView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetFPSView.h; sourceTree = "<group>"; };
+		BDF331C21CC49FA900145F10 /* SetFPSView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetFPSView.m; sourceTree = "<group>"; };
 		DC48C31A135748C700D2C16E /* Xpai.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Xpai.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC77B4D5165F678C0095EEEB /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		DC81AF941453056700109399 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
@@ -734,6 +737,8 @@
 				BDBF879E1C51EE9A00CAE411 /* UploadVideoView.m */,
 				BD1F10A71C5B4A4F00095E25 /* outPutLabel.h */,
 				BD1F10A81C5B4A4F00095E25 /* outPutLabel.m */,
+				BDF331C11CC49FA900145F10 /* SetFPSView.h */,
+				BDF331C21CC49FA900145F10 /* SetFPSView.m */,
 			);
 			path = SubViews;
 			sourceTree = "<group>";
@@ -1656,7 +1661,7 @@
 				ORGANIZATIONNAME = "B-Star";
 				TargetAttributes = {
 					DC84719F1328B57D00CE167E = {
-						DevelopmentTeam = 2JDKXFZ285;
+						DevelopmentTeam = 6BWXZ84974;
 					};
 				};
 			};
@@ -1916,6 +1921,7 @@
 				BDE6200C1C6196250079587B /* reconnectTimeView.m in Sources */,
 				BD0A78F91C4F355E002EE8EC /* ViedoPlayViewController.m in Sources */,
 				BD7929E31C3FA36D0024E112 /* SPFWQRegisterViewController.m in Sources */,
+				BDF331C31CC49FA900145F10 /* SetFPSView.m in Sources */,
 				BDE3CB721C72FA6A00161539 /* MJRefreshHeader.m in Sources */,
 				BD9DE63E1C49018900EE4130 /* transcribeView.m in Sources */,
 				BD9DE6371C48D63600EE4130 /* BitStreamView.m in Sources */,
@@ -2021,7 +2027,7 @@
 					"$(PROJECT_DIR)/XpaiSDK",
 				);
 				ONLY_ACTIVE_ARCH = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = com.woan.liqing;
+				PRODUCT_BUNDLE_IDENTIFIER = com.woan.cl;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
@@ -2055,7 +2061,7 @@
 					"$(PROJECT_DIR)/XpaiSDK",
 				);
 				ONLY_ACTIVE_ARCH = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = com.woan.liqing;
+				PRODUCT_BUNDLE_IDENTIFIER = com.woan.cl;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";

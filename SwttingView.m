@@ -69,7 +69,7 @@
 
 //设置分类内容
 -(void)addData {
-    _dataSource = [[NSArray alloc]initWithObjects:@"分辨率",@"码流",@"网络超时",@"重连超时",@"录制类型",@"音频编码参数",@"输出格式标签",@"网络自适应",@"保存视频文件", nil];
+    _dataSource = [[NSArray alloc]initWithObjects:@"分辨率",@"码流",@"网络超时",@"重连超时",@"录制类型",@"音频编码参数",@"输出格式标签",@"网络自适应",@"保存视频文件",@"帧率", nil];
     
     SubViewW = kScreenH / 3;
     SubViewH = kScreenW - 20;
@@ -183,6 +183,12 @@
             }else {
                 cell.parameterLB.text = @"不保存";
             }
+        }
+            break;
+            
+            case 9:
+        {
+            cell.parameterLB.text = [NSString stringWithFormat:@"Max:%02d Min:%02d",[CLSettingConfig sharedInstance].MaxFPS,[CLSettingConfig sharedInstance].MinFPS];
         }
             break;
             

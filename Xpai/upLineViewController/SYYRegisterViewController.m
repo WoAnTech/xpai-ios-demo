@@ -119,6 +119,7 @@
     _PassWord.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
     _PassWord.delegate = self;
     NSArray * kindOfOrientation = @[@"横屏",@"竖屏"];
+    [[CLSettingConfig sharedInstance]loadData];
     _segment = [[UISegmentedControl alloc]initWithItems:kindOfOrientation];
     _segment.frame = CGRectMake(_PassWord.x, _PassWord.maxY + crack, textFieldW, 30);
      _GetVCUrl = [[UITextView alloc]initWithFrame:CGRectMake(kScreenW * 0.13, _segment.maxY + crack+ 30, kScreenW - kScreenW * 0.13 *2 + 20, textFieldH)];

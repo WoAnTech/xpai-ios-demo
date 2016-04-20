@@ -97,6 +97,13 @@
         if (num == 4) {
             [CLSettingConfig sharedInstance].resolution = 9;
         }
+        
+        NSArray * BitSource = [[NSArray alloc]initWithObjects:@"192",@"480",@"640",@"1280",@"640", nil];
+        int bit = [BitSource[num] intValue] * 1.25;
+        [CLSettingConfig sharedInstance].BitStream = bit;
+        
+        [BitSource release];
+
     }
     [[CLSettingConfig sharedInstance] WriteData];
 

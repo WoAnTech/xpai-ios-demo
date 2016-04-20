@@ -59,7 +59,6 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
 
-    [[CLUploadConfig sharedInstance] loadData];
     self.view.backgroundColor = [UIColor whiteColor];
     self.title = @"直播云登录";
     UIBarButtonItem * leftItem = [[UIBarButtonItem alloc]initWithTitle:@"返回" style:UIBarButtonItemStylePlain target:self action:@selector(back)];
@@ -98,6 +97,8 @@
 
 //用户登录界面
 -(void)addUserInformationView {
+    [[CLUploadConfig sharedInstance]loadData];
+    [[CLSettingConfig sharedInstance]loadData];
     NSArray * labelName = [[NSArray alloc]initWithObjects:@"服务码",@"账号",@"密码",@"手持方向", nil];
     
     CGFloat labelW = 80; //提示板 宽度
@@ -148,8 +149,9 @@
     NSArray * kindOfOrientation = @[@"横屏",@"竖屏"];
     _segment = [[UISegmentedControl alloc]initWithItems:kindOfOrientation];
     _segment.frame = CGRectMake(_ServiceCode.x, _PassWord.maxY + crack, textFieldW, 30);
-    [_segment addTarget:self action:@selector(chooseOrientation:) forControlEvents:UIControlEventValueChanged];
-    _segment.selectedSegmentIndex = [CLUploadConfig sharedInstance].segment;
+//    [_segment addTarget:self action:@selector(chooseOrientation:) forControlEvents:UIControlEventValueChanged];
+    [[CLSettingConfig sharedInstance]loadData];
+    _segment.selectedSegmentIndex = [CLSettingConfig sharedInstance].segment;
     [self.view addSubview:_segment];
     
     
@@ -185,22 +187,22 @@
     if (isClick == YES) {
         return;
     }
-    
     //登录方法
-    
     //去除多余空格
     NSString * userName = [_UserName.text stringByReplacingOccurrencesOfString:@" " withString:@""];
     NSString * serviceCode = [_ServiceCode.text stringByReplacingOccurrencesOfString:@" " withString:@""];
     
-    
-    [XpaiInterface connectCloud:@"http://c.zhiboyun.com/api/20140928/get_vs" u:userName pd:_PassWord.text svcd:serviceCode];
     [CLUploadConfig sharedInstance].UserName = userName;
     [CLUploadConfig sharedInstance].passWord = _PassWord.text;
     [CLUploadConfig sharedInstance].serviceCode = serviceCode;
-    [CLUploadConfig sharedInstance].segment = _segment.selectedSegmentIndex;
-    [[CLUploadConfig sharedInstance] WriteData];
-    NSLog(@"testing:%@",_userNameText);
+    [CLSettingConfig sharedInstance].segment = _segment.selectedSegmentIndex;
+    NSLog(@"%ld",(long)_segment.selectedSegmentIndex);
     
+    [[CLUploadConfig sharedInstance] WriteData];
+    [[CLSettingConfig sharedInstance]WriteData];
+    
+    [XpaiInterface connectCloud:@"http://c.zhiboyun.com/api/20140928/get_vs" u:userName pd:_PassWord.text svcd:serviceCode];
+    NSLog(@"testing:%@",_userNameText);
     isClick = YES;
 
 }

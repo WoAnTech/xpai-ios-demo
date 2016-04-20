@@ -45,7 +45,9 @@
     UIButton * _soundButton;//静音按钮
     UIButton * _photographButton;//拍照
     
-    UILabel * _SDKVerLabel; //版本
+    UILabel * _SDKVerLabel; //SDK版本
+    UILabel * _DemoVerLabel; //Demo版本
+    
     UILabel * _DurationLabel;//持续时间
     UILabel * _FPSLabel; //帧数
     UILabel * _NetLabel;//网络传输速度
@@ -121,6 +123,7 @@
 
 -(void)dealloc {
     [_loginButton release];
+    [_DemoVerLabel release];
     [_changeCameraButton release];
     [_preViewButton release];
     [_settingButton release];
@@ -401,7 +404,7 @@
     CGFloat labelW = 150;
     CGFloat labelH = 15;
     
-    //版本
+    //SDK版本
     NSString * str = [XpaiInterface getXpaiLibVersion];
     _SDKVerLabel = [UILabel labelWithFrame:CGRectMake(kScreenH - labelW - 10, 10, labelW, labelH) text:[NSString stringWithFormat:@"Sdk Ver:%@",str]];
     _SDKVerLabel.textColor = [UIColor greenColor];
@@ -409,8 +412,17 @@
         _SDKVerLabel.frame = CGRectMake(kScreenW  - labelW  - 10, 16, labelW, labelH);
     }
     [self.view addSubview:_SDKVerLabel];
+    
+    //Demo版本
+    NSDictionary *dict = [NSBundle mainBundle].infoDictionary;
+    NSString *currentVersion = dict[(NSString *)kCFBundleVersionKey];
+    _DemoVerLabel = [UILabel labelWithFrame:CGRectMake(_SDKVerLabel.x, _SDKVerLabel.maxY + 5, labelW, labelH) text:[NSString stringWithFormat:@"Demo Ver:%@",currentVersion]];
+    _DemoVerLabel.textColor = [UIColor greenColor];
+    [self.view addSubview:_DemoVerLabel];
+//    [dict release];
+//    [currentVersion release];
     //持续时间
-    _DurationLabel = [UILabel labelWithFrame:CGRectMake(_SDKVerLabel.x, _SDKVerLabel.maxY + 5, labelW, labelH) text:@"Duration:"];
+    _DurationLabel = [UILabel labelWithFrame:CGRectMake(_SDKVerLabel.x, _DemoVerLabel.maxY + 5, labelW, labelH) text:@"Duration:"];
     [self.view addSubview:_DurationLabel];
 
     _sentLabel = [UILabel labelWithFrame:CGRectMake(_SDKVerLabel.x, _DurationLabel.maxY + 5, labelW, labelH) text:@"Sent:0.00 KByte"];

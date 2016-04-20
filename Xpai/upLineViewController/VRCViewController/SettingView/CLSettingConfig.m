@@ -32,9 +32,9 @@ static CLSettingConfig * _clSettingConfig;
     NSLog(@"%@",defaults);
     NSLog(@"%d",[defaults boolForKey:@"first"]);
     if (![defaults boolForKey:@"first"]) {
-        _resolution = 2;
-        _BitStream = 480;
-        _NetOverTime = 10;
+        _resolution = 9;
+        _BitStream = 800;
+        _NetOverTime = 30;
         _reconnectOverTime = 30;
         _segment = 0;
         if ([[[UIDevice currentDevice] systemVersion] integerValue] >= 8.0) {//判断系统版本号

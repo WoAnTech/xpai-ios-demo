@@ -33,8 +33,10 @@ static CLUploadConfig * _cluploadConfig;
         _passWord = @"";
         _serviceCode = @"";
         isNotFirst = YES;
+        _segment = 0;
         [self WriteData];
-
+        
+        return;
     }
     
     _UserName = [defaults stringForKey:KUserName];
@@ -43,7 +45,6 @@ static CLUploadConfig * _cluploadConfig;
     _segment = [defaults integerForKey:ksegment];
     isNotFirst = [defaults boolForKey:@"isnotfirst"];
     
-    [defaults synchronize];
 }
 
 -(void)WriteData {

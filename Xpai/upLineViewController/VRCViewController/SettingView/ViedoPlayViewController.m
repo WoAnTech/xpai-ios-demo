@@ -49,10 +49,6 @@
 -(void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
-    
-    
-    
-    
     [self initView];//创建控制页面
     [self createNotificationCentre];//通知中心
 
@@ -192,6 +188,15 @@
 #pragma mark --按钮点击实现
 //旋转
 -(void)RotateView {
+//    
+//    _PlayFileURL = @"rtmp://rtmp-out.zhiboyun.com/live/aws-cn_north_1-5-60bfae9e117bf61f";
+//    [_player pause];
+//    [_player stop];
+//    
+//    [_playView removeFromSuperview];
+//    
+//    [self CreatePlayView];
+    
     if (_playView.contentMode == UIViewContentModeScaleAspectFit) {
         if ([[UIDevice currentDevice] respondsToSelector:@selector(setOrientation:)]) {
             [[UIDevice currentDevice] performSelector:@selector(setOrientation:) withObject:(id)UIInterfaceOrientationLandscapeRight];

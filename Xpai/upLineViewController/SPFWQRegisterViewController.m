@@ -140,6 +140,7 @@
     NSArray * kindOfOrientation = @[@"横屏",@"竖屏"];
     _segment = [[UISegmentedControl alloc]initWithItems:kindOfOrientation];
     _segment.frame = CGRectMake(kScreenW * 0.47, _mainPort.maxY + crack, textFieldW, 30);
+    [[CLSettingConfig sharedInstance]loadData];
     _segment.selectedSegmentIndex = [CLSettingConfig sharedInstance].segment;
     [_backgroundView addSubview:_segment];
     
@@ -239,10 +240,11 @@
     [CLSettingConfig sharedInstance].mainUrl = mainUrl;
     [CLSettingConfig sharedInstance].mainPort = [mainPotr integerValue];
     [CLSettingConfig sharedInstance].isTcp = _TCPWwitch.on;
-    [CLSettingConfig sharedInstance].segment = _segment.selected;
+    [CLSettingConfig sharedInstance].segment = _segment.selectedSegmentIndex;
     [[CLSettingConfig sharedInstance] WriteData];
     
 //            [XpaiInterface connectCloud:@"http://c.zhiboyun.com/api/20140928/get_vs" u:@"001" pd:@"001" svcd:@"ZBK_WEIXIN"];
+    
 }
 
 -(void)OnTcp:(UISwitch *)tcp {

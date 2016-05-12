@@ -74,7 +74,7 @@
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSLog(@"count%d",_dataSource.count);
+    NSLog(@"count%lu",(unsigned long)_dataSource.count);
     resolutionRatioCell * cell = [resolutionRatioCell cellWithTableView:tableView];
     cell.contentLB.text = _dataSource[indexPath.row];
     

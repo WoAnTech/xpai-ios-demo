@@ -51,7 +51,9 @@
 		BD2489751C59EA220099DF13 /* 7.png in Resources */ = {isa = PBXBuildFile; fileRef = BD24896E1C59EA220099DF13 /* 7.png */; };
 		BD2489761C59EA220099DF13 /* 赛包包素材(roador.taobao.png in Resources */ = {isa = PBXBuildFile; fileRef = BD24896F1C59EA220099DF13 /* 赛包包素材(roador.taobao.png */; };
 		BD3E3C861CBF8353009C0C65 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD3E3C851CBF8353009C0C65 /* CoreTelephony.framework */; };
+		BD42B38D1CE45F9B001A12E5 /* VolumeView.m in Sources */ = {isa = PBXBuildFile; fileRef = BD42B38C1CE45F9B001A12E5 /* VolumeView.m */; };
 		BD53ECE41C71C508004A364E /* UIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = BD53ECE31C71C508004A364E /* UIView+Extension.m */; };
+		BD57AB071CD1EC6400402AEF /* TransferModelView.m in Sources */ = {isa = PBXBuildFile; fileRef = BD57AB061CD1EC6400402AEF /* TransferModelView.m */; };
 		BD7929CC1C3F76070024E112 /* NewRecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD7929CB1C3F76070024E112 /* NewRecordViewController.m */; };
 		BD7929CE1C3F7D9D0024E112 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = BD7929CD1C3F7D9C0024E112 /* logo.png */; };
 		BD7929D11C3F85DC0024E112 /* UIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = BD7929D01C3F85DC0024E112 /* UIView+Extension.m */; };
@@ -316,8 +318,12 @@
 		BD24896E1C59EA220099DF13 /* 7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 7.png; sourceTree = "<group>"; };
 		BD24896F1C59EA220099DF13 /* 赛包包素材(roador.taobao.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "赛包包素材(roador.taobao.png"; sourceTree = "<group>"; };
 		BD3E3C851CBF8353009C0C65 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		BD42B38B1CE45F9B001A12E5 /* VolumeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VolumeView.h; sourceTree = "<group>"; };
+		BD42B38C1CE45F9B001A12E5 /* VolumeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VolumeView.m; sourceTree = "<group>"; };
 		BD53ECE21C71C508004A364E /* UIView+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Extension.h"; sourceTree = "<group>"; };
 		BD53ECE31C71C508004A364E /* UIView+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Extension.m"; sourceTree = "<group>"; };
+		BD57AB051CD1EC6400402AEF /* TransferModelView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransferModelView.h; sourceTree = "<group>"; };
+		BD57AB061CD1EC6400402AEF /* TransferModelView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransferModelView.m; sourceTree = "<group>"; };
 		BD7929CA1C3F76070024E112 /* NewRecordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewRecordViewController.h; sourceTree = SOURCE_ROOT; };
 		BD7929CB1C3F76070024E112 /* NewRecordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewRecordViewController.m; sourceTree = SOURCE_ROOT; };
 		BD7929CD1C3F7D9C0024E112 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
@@ -739,6 +745,10 @@
 				BD1F10A81C5B4A4F00095E25 /* outPutLabel.m */,
 				BDF331C11CC49FA900145F10 /* SetFPSView.h */,
 				BDF331C21CC49FA900145F10 /* SetFPSView.m */,
+				BD57AB051CD1EC6400402AEF /* TransferModelView.h */,
+				BD57AB061CD1EC6400402AEF /* TransferModelView.m */,
+				BD42B38B1CE45F9B001A12E5 /* VolumeView.h */,
+				BD42B38C1CE45F9B001A12E5 /* VolumeView.m */,
 			);
 			path = SubViews;
 			sourceTree = "<group>";
@@ -1661,7 +1671,7 @@
 				ORGANIZATIONNAME = "B-Star";
 				TargetAttributes = {
 					DC84719F1328B57D00CE167E = {
-						DevelopmentTeam = 6BWXZ84974;
+						DevelopmentTeam = 2JDKXFZ285;
 					};
 				};
 			};
@@ -1921,9 +1931,11 @@
 				BDE6200C1C6196250079587B /* reconnectTimeView.m in Sources */,
 				BD0A78F91C4F355E002EE8EC /* ViedoPlayViewController.m in Sources */,
 				BD7929E31C3FA36D0024E112 /* SPFWQRegisterViewController.m in Sources */,
+				BD42B38D1CE45F9B001A12E5 /* VolumeView.m in Sources */,
 				BDF331C31CC49FA900145F10 /* SetFPSView.m in Sources */,
 				BDE3CB721C72FA6A00161539 /* MJRefreshHeader.m in Sources */,
 				BD9DE63E1C49018900EE4130 /* transcribeView.m in Sources */,
+				BD57AB071CD1EC6400402AEF /* TransferModelView.m in Sources */,
 				BD9DE6371C48D63600EE4130 /* BitStreamView.m in Sources */,
 				BDE3CB761C72FA6A00161539 /* MJRefreshBackGifFooter.m in Sources */,
 				BDAB49D41C4774D7006273E6 /* SettingViewCell.m in Sources */,
@@ -1955,8 +1967,8 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: 782231328@qq.com (A2WNRU342H)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: 782231328@qq.com (A2WNRU342H)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: qengli@gmail.com (V2Q54FZ5GE)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: qengli@gmail.com (V2Q54FZ5GE)";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -1985,8 +1997,8 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: 782231328@qq.com (A2WNRU342H)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: 782231328@qq.com (A2WNRU342H)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: qengli@gmail.com (V2Q54FZ5GE)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: qengli@gmail.com (V2Q54FZ5GE)";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
@@ -2027,7 +2039,7 @@
 					"$(PROJECT_DIR)/XpaiSDK",
 				);
 				ONLY_ACTIVE_ARCH = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = com.woan.cl;
+				PRODUCT_BUNDLE_IDENTIFIER = com.woan.liqing;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
@@ -2061,7 +2073,7 @@
 					"$(PROJECT_DIR)/XpaiSDK",
 				);
 				ONLY_ACTIVE_ARCH = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = com.woan.cl;
+				PRODUCT_BUNDLE_IDENTIFIER = com.woan.liqing;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";

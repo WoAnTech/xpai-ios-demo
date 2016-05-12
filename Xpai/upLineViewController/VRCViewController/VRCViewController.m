@@ -19,6 +19,7 @@
 #import "NetOverTimeView.h"
 #import "reconnectTimeView.h"
 #import "transcribeView.h"
+#import "TransferModelView.h"
 #import "AudioParameterView.h"
 #import "NetDeptionView.h"
 #import "SaveRedioView.h"
@@ -27,6 +28,8 @@
 #import "outPutLabel.h"
 #import "WoanPlayerInterface.h"
 #import "SetFPSView.h"
+#import "resolutionRatioCell.h"
+#import "VolumeView.h"
 
 @import CoreTelephony;
 
@@ -68,6 +71,9 @@
     NetDeptionView * _deptionView;//网络自适应页面
     SaveRedioView * _saveRedioView;//是否自动保存视频页面
     SetFPSView * _setFPSView;//修改帧率页面
+    TransferModelView * _TransferView;//修改输出流格式
+    VolumeView * _VolumeView;//增音页面
+    
     PlayViedoViewController * _playViedoView;//播放本地视频视频控制器
     UploadVideoView * _uploadVideoView;//上传页面
     UIImageView * _touchsImageView;//触摸图框
@@ -164,6 +170,8 @@
     [_backAlert release];
     [Callcenter release];
     [_setFPSView release];
+    [_TransferView release];
+    [_VolumeView release];
     
     [super dealloc];
 }
@@ -564,6 +572,8 @@
     [self netDeptionView];//网络自适应页面
     [self saveRedioView];//视频自动保存页面
     [self setFPSView];//设置FPS页面
+    [self setTranferModelView];//设置输出流格式
+    [self setVolumeView];//设置增音页面
 }
 
 //上传页面
@@ -666,6 +676,20 @@
     [self.view addSubview:_setFPSView];
 }
 
+-(void)setTranferModelView {
+    _TransferView = [[TransferModelView alloc]initWithFrame:CGRectMake(0, kScreenW / 2 -30, settingViewW, 160)];
+    _TransferView.alpha = 0;
+    [self.view addSubview:_TransferView];
+}
+
+
+-(void)setVolumeView {
+    _VolumeView = [[VolumeView alloc]initWithFrame:CGRectMake(0, kScreenW / 2 -30 , kScreenW, 90)];
+    _VolumeView.alpha = 0;
+    [self.view addSubview:_VolumeView];
+
+}
+
 #pragma mark -- 手势方法
 //设置页面向左轻扫
 -(void)swipeGesture {
@@ -693,6 +717,10 @@
         _outPutView.alpha = 0;
         _setFPSView.x = 0;
         _setFPSView.alpha = 0;
+        _TransferView.x = 0;
+        _TransferView.alpha = 0;
+        _VolumeView.x = 0;
+        _VolumeView.alpha = 0;
 
     }];
 }
@@ -897,7 +925,7 @@
         [self informationWithSte:[NSString stringWithFormat:@"视频存放地址：%@",[XpaiInterface getVideoFileName:VideoID]]];
         [XpaiInterface stopRecord];
         
-        [XpaiInterface setVideoResolution:RESOLUTION_PHOTO width:0 height:0];
+//        [XpaiInterface setVideoResolution:RESOLUTION_PHOTO width:0 height:0];
         [self RePreviewWithCameraModel:PHOTO_MODE];
         _PlayLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
         [_timer setFireDate:[NSDate distantFuture]];
@@ -1045,7 +1073,10 @@
     }else {
         transcribe = HARDWARE_ENCODER_STREAM;
     }
-    VideoID = [XpaiInterface startRecord:transcribe TransferMode:VIDEO_AND_AUDIO forceReallyFile:[CLSettingConfig sharedInstance].SaveRedio volume:0 parameters:paras];
+    
+    NSLog(@"%d",(int)[CLSettingConfig sharedInstance].TransferModel);
+    
+    VideoID = [XpaiInterface startRecord:transcribe TransferMode:(int)[CLSettingConfig sharedInstance].TransferModel forceReallyFile:[CLSettingConfig sharedInstance].SaveRedio volume:[CLSettingConfig sharedInstance].volume parameters:paras];
 }
 
 //录制
@@ -1053,7 +1084,7 @@
     NSLog(@"录制视频");
     [self informationWithSte:@"开始录制本地视频"];
 
-    VideoID = [XpaiInterface startRecord:HARDWARE_ENCODER_LOCAL_STORAGE_ONLY TransferMode:VIDEO_AND_AUDIO forceReallyFile:TRUE volume:0 parameters:nil];
+    VideoID = [XpaiInterface startRecord:HARDWARE_ENCODER_LOCAL_STORAGE_ONLY TransferMode:(int)[CLSettingConfig sharedInstance].TransferModel forceReallyFile:TRUE volume:[CLSettingConfig sharedInstance].volume parameters:nil];
 }
 
 #pragma mark ---常用方法调用
@@ -1188,7 +1219,7 @@
 //设置页面的代理方法
 -(void)subViewAppearWithNum:(NSInteger)num {
     for (UIView * view in self.view.subviews) {
-        if ([view isKindOfClass:[resolutionRatioView class]] || [view isKindOfClass:[BitStreamView class]] || [view isKindOfClass:[NetOverTimeView class]] ||[view isKindOfClass:[transcribeView class]] || [view isKindOfClass:[AudioParameterView class]] || [view isKindOfClass:[NetDeptionView class]]|| [view isKindOfClass:[SaveRedioView class]] || [view isKindOfClass:[outPutLabel class]] || [view isKindOfClass:[reconnectTimeView class]] || [view isKindOfClass:[SetFPSView class]]) {
+        if ([view isKindOfClass:[resolutionRatioView class]] || [view isKindOfClass:[BitStreamView class]] || [view isKindOfClass:[NetOverTimeView class]] ||[view isKindOfClass:[transcribeView class]] || [view isKindOfClass:[AudioParameterView class]] || [view isKindOfClass:[NetDeptionView class]]|| [view isKindOfClass:[SaveRedioView class]] || [view isKindOfClass:[outPutLabel class]] || [view isKindOfClass:[reconnectTimeView class]] || [view isKindOfClass:[SetFPSView class]] || [view isKindOfClass:[TransferModelView class]] || [view isKindOfClass:[VolumeView class]]) {
             view.alpha = 0 ;
             view.x = 0;
         }
@@ -1329,6 +1360,35 @@
         }
             break;
             
+            case 10://设置输出流
+        {
+            [UIView animateWithDuration:0.3 animations:^{
+                _TransferView.alpha = 1;
+                if (_isAcross == YES) {
+                    _TransferView.x = _settingView.maxX;
+                }else {
+                    _TransferView.y = _settingView.maxY + 2;
+                }
+                
+            }];
+
+        }
+            break;
+            
+            case 11://增音
+        {
+            [UIView animateWithDuration:0.3 animations:^{
+                _VolumeView.alpha = 1;
+                if (_isAcross == YES) {
+                    _VolumeView.x = _settingView.maxX;
+                }else {
+                    _VolumeView.y = _settingView.maxY + 2;
+                }
+            }];
+
+        }
+            break;
+            
         default:
             break;
     }
@@ -1445,6 +1505,10 @@
         _outPutView.alpha = 0;
         _setFPSView.x = 0;
         _setFPSView.alpha = 0;
+        _TransferView.x = 0;
+        _TransferView.alpha = 0;
+        _VolumeView.x = 0;
+        _VolumeView.alpha = 0;
         _uploadVideoView.y = screenW + 50;
     }];
     

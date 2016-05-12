@@ -128,7 +128,7 @@
     _textView.layer.borderWidth = 1;
     _textView.layer.borderColor = KtitleColor.CGColor;
     _textView.layer.cornerRadius = 6;
-    _textView.text = @"http://115.28.33.49:3999/mobile/1-7a6a12c57df0.flv";
+    _textView.text = @"http://s3.cn-north-1.amazonaws.com.cn/xvs/pub/UZSFETBZ/20160429/03/55/m3u8/aws-cn_north_1-5-d82ed476a9c8b665.m3u8";
     [backgroundView addSubview:_textView];
     
     UIButton * PlayBN = [UIButton buttonWithType:UIButtonTypeSystem];

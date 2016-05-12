@@ -24,6 +24,7 @@
     NSArray * _resolutionArr;
     NSArray * _transcribeViewArr;
     NSArray * _audioParameterArr;
+    NSArray * _TransModelArr;
 }
 
 @end
@@ -48,8 +49,8 @@
     _resolutionArr = [[NSArray alloc]initWithObjects:@"192x144",@"480x360",@"640x480",@"1280x720",@"640x360", nil];
     
     _transcribeViewArr = [[NSArray alloc]initWithObjects:@"软编码",@"硬编码", nil];
-    
     _audioParameterArr = [[NSArray alloc]initWithObjects:@"Amr-NB",@"ACC", nil];
+    _TransModelArr = [[NSArray alloc]initWithObjects:@"视频+音频",@"仅视频",@"仅音频", nil];
 }
 //通知中心
 -(void)receiveNotification {
@@ -63,13 +64,14 @@
     [_SettingView release];
     [_transcribeViewArr release];
     [_audioParameterArr release];
+    [_TransModelArr release];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     [super dealloc];
 }
 
 //设置分类内容
 -(void)addData {
-    _dataSource = [[NSArray alloc]initWithObjects:@"分辨率",@"码流",@"网络超时",@"重连超时",@"录制类型",@"音频编码参数",@"输出格式标签",@"网络自适应",@"保存视频文件",@"帧率", nil];
+    _dataSource = [[NSArray alloc]initWithObjects:@"分辨率",@"码流",@"网络超时",@"重连超时",@"录制类型",@"音频编码参数",@"输出格式标签",@"网络自适应",@"保存视频文件",@"帧率",@"输出流",@"增音", nil];
     
     SubViewW = kScreenH / 3;
     SubViewH = kScreenW - 20;
@@ -191,6 +193,17 @@
             cell.parameterLB.text = [NSString stringWithFormat:@"Max:%02d Min:%02d",[CLSettingConfig sharedInstance].MaxFPS,[CLSettingConfig sharedInstance].MinFPS];
         }
             break;
+            
+            case 10:
+        {
+            cell.parameterLB.text = _TransModelArr[[CLSettingConfig sharedInstance].TransferModel];
+        }
+            break;
+            
+            case 11:
+        {
+            cell.parameterLB.text = [NSString stringWithFormat:@"%.2f",[CLSettingConfig sharedInstance].volume];
+        }
             
         default:
             break;

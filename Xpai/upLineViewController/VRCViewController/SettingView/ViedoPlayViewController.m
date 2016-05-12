@@ -53,7 +53,7 @@
     [self createNotificationCentre];//通知中心
 
     [self CreatePlayView];//创建播放页面
-     _timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(timerWithViedo) userInfo:nil repeats:YES];
+     _timer = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(timerWithViedo) userInfo:nil repeats:YES];
     
     [_timer setFireDate:[NSDate distantFuture]];
     
@@ -97,7 +97,6 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveDuration:) name:WoanPlayerLoadDidPreparedNotification object:nil];//初始化结束
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playOver) name:WoanPlayerPlaybackDidFinishNotification object:nil];//播放结束
-    
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationWillResignActive:)
                                                  name:UIApplicationWillResignActiveNotification object:nil]; //监听是否触发home键挂起程序.
@@ -181,20 +180,20 @@
     [finishBN addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchUpInside];
     [buttonView addSubview:finishBN];
     
-    [finishBN release];
-    [buttonView release];
+//    [finishBN release];
+//    [buttonView release];
 }
 
 #pragma mark --按钮点击实现
 //旋转
 -(void)RotateView {
 //    
-//    _PlayFileURL = @"rtmp://rtmp-out.zhiboyun.com/live/aws-cn_north_1-5-60bfae9e117bf61f";
+//    _PlayFileURL = @"rtmp://rtmp-out.zhiboyun.com/live/LOVFHBRS-aws-cn_north_1-2-d3fec4c23a7e5d06";
 //    [_player pause];
 //    [_player stop];
-//    
+    
 //    [_playView removeFromSuperview];
-//    
+    
 //    [self CreatePlayView];
     
     if (_playView.contentMode == UIViewContentModeScaleAspectFit) {

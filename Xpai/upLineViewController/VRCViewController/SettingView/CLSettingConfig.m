@@ -32,15 +32,18 @@ static CLSettingConfig * _clSettingConfig;
     NSLog(@"%@",defaults);
     NSLog(@"%d",[defaults boolForKey:@"first"]);
     if (![defaults boolForKey:@"first"]) {
-        _resolution = 9;
         _BitStream = 800;
         _NetOverTime = 30;
         _reconnectOverTime = 30;
         _segment = 0;
+        _volume = 0;
         if ([[[UIDevice currentDevice] systemVersion] integerValue] >= 8.0) {//判断系统版本号
             _transcribe = 1;
+            _resolution = 9;
         }else {
             _transcribe = 0;//前三个废弃
+            _resolution = 0;
+
         }
         _audioParameter = 2;
         _audioSampling = 8000;
@@ -61,6 +64,7 @@ static CLSettingConfig * _clSettingConfig;
         _isTcp = NO;
         _MaxFPS = 22;
         _MinFPS = 20;
+        _TransferModel = 0;
         
         [self WriteData];
         return YES;
@@ -73,9 +77,11 @@ static CLSettingConfig * _clSettingConfig;
     _audioParameter = [defaults integerForKey:KaudioParamter];
     _audioSampling = [defaults integerForKey:kaudioSampling];
     _audioBit = [defaults integerForKey:kaudioBit];
+    _TransferModel = [defaults integerForKey:kTransferModel];
     _outPutTag = [defaults stringForKey:KOutPutTag];
     _NetDeption = [defaults boolForKey:KNetDeption];
     _SaveRedio = [defaults boolForKey:KsaveRedio];
+    _volume = [defaults floatForKey:KVolume];
     _MaxFPS = (int)[defaults integerForKey:KMaxFPS];
     _MinFPS = (int)[defaults integerForKey:kMinFPS];
     isNotFirst = [defaults boolForKey:@"first"];
@@ -106,12 +112,14 @@ static CLSettingConfig * _clSettingConfig;
     [defaults setInteger:_audioParameter forKey:KaudioParamter];
     [defaults setInteger:_audioSampling forKey:kaudioSampling];
     [defaults setInteger:_audioBit forKey:kaudioBit];
+    [defaults setInteger:_TransferModel forKey:kTransferModel];
     [defaults setObject:_outPutTag forKey:KOutPutTag];
     [defaults setBool:_NetDeption forKey:KNetDeption];
     [defaults setBool:_SaveRedio forKey:KsaveRedio];
     [defaults setInteger:_MaxFPS forKey:KMaxFPS];
     [defaults setInteger:_MinFPS forKey:kMinFPS];
     [defaults setBool:isNotFirst forKey:@"first"];
+    [defaults setFloat:_volume forKey:KVolume];
 //    [defaults setObject:_UserNames forKey:KUserName];
 //    [defaults setObject:_PassWords forKey:KPassWord];
 //    [defaults setObject:_serviceCodes forKey:KserviceCode];

@@ -35,6 +35,8 @@
 #define KmainPort @"mainPort"
 #define KisTcp @"isTcp"
 #define ksegment @"segment"
+#define kTransferModel @"transferModel"
+#define KVolume @"Volume"
 
 @interface CLSettingConfig : NSObject
 
@@ -62,11 +64,14 @@
 @property(nonatomic,assign)NSInteger  audioParameter;//音频编码参数
 @property(nonatomic,assign)NSInteger audioSampling;//音频编码采样率
 @property(nonatomic,assign)NSInteger audioBit;//音频编码比特率
+@property(nonatomic,assign)NSInteger TransferModel;//输出流格式（视频加音频、视频、音频）
+@property(nonatomic,assign)CGFloat volume;//增音
 @property(nonatomic,retain)NSString * outPutTag;//输出格式标签
 @property(nonatomic,assign)BOOL  NetDeption;//网络自适应
 @property(nonatomic,assign)BOOL  SaveRedio;//保存视频文件
 @property(nonatomic,assign)int MaxFPS;//最大帧率
 @property(nonatomic,assign)int MinFPS;//最小帧率
+
 
 @property (nonatomic,assign)NSInteger segment;
 

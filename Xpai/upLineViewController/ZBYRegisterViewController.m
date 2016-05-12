@@ -176,7 +176,7 @@
 #pragma mark --按钮方法
 //返回上一页
 -(void)back {
-//    [XpaiInterface disconnect];
+    [XpaiInterface disconnect];
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -229,9 +229,12 @@
     }];
     [VRC release];
 
-    
     NSLog(@"登录成功");
     
+}
+
+-(void)didDisconnect {
+    NSLog(@"断开成功");
 }
 
 //连接失败

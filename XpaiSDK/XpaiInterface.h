@@ -213,6 +213,7 @@ typedef enum VideoMirroredMode {
 + (NSString *)getVideoFileName:(SInt64)ID;
 + (NSString *)getVideoStreamID:(SInt64)ID;
 + (NSString *)getVideoStreamPath:(SInt64)ID;
++ (UInt32) getCacheRemaining;
 
 + (void)cancelLive:(SInt64)ID;
 + (NSString *)getXpaiLibVersion;

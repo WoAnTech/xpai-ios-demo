@@ -146,7 +146,7 @@
 //    [_FPSLabel release];
 //    [_NetLabel release];
     [_sentLabel release];
-//    [_Chche release];
+    [_Chche release];
     [_informationLabel release];
     [_settingBackgroundView release];
     [_settingView release];
@@ -334,12 +334,15 @@
 -(void)timer {
     //持续时间
     _DurationLabel.text =[NSString stringWithFormat:@"Duration:%d",_durationTime];
+    _Chche.text = [NSString stringWithFormat:@"Chche:%uk",(unsigned int)[XpaiInterface getCacheRemaining] / 1024];
     _durationTime += 1;
     if (_durationTime % 2 == 0) {
         [_makeVideoButton setBackgroundImage:[UIImage imageNamed:@"record_active"] forState:UIControlStateNormal];
     }else  {
         [_makeVideoButton setBackgroundImage:[UIImage imageNamed:@"record"] forState:UIControlStateNormal];
     }
+
+        NSLog(@"cache%u",(unsigned int)[XpaiInterface getCacheRemaining]);
 }
 
 #pragma mark --搭建界面
@@ -432,9 +435,13 @@
     //持续时间
     _DurationLabel = [UILabel labelWithFrame:CGRectMake(_SDKVerLabel.x, _DemoVerLabel.maxY + 5, labelW, labelH) text:@"Duration:"];
     [self.view addSubview:_DurationLabel];
-
+    
     _sentLabel = [UILabel labelWithFrame:CGRectMake(_SDKVerLabel.x, _DurationLabel.maxY + 5, labelW, labelH) text:@"Sent:0.00 KByte"];
     [self.view addSubview:_sentLabel];
+    
+    _Chche = [UILabel labelWithFrame:CGRectMake(_SDKVerLabel.x, _sentLabel.maxY + 5, labelW, labelH) text:@"Chche:0"];
+    [self.view addSubview:_Chche];
+    
     
         CGFloat lbW = kScreenH - 120;
     if (_isAcross == NO) {
@@ -1105,6 +1112,8 @@
 }
 
 #pragma mark -- xpaiInterface回调
+
+
 //语音消息
 -(void)doReceiveAudioMessage:(NSString *)userName msgFile:(NSString *)url {
     [self informationWithSte:[NSString stringWithFormat:@"收到一条来自%@用户的语音消息",userName]];
@@ -1121,10 +1130,11 @@
 -(void)doReceiveMessage:(NSString *)userName msg:(NSString *)message {
         NSString * str = [NSString stringWithFormat:@"用户:%@  发送消息:%@",userName,message];
         [self informationWithSte:str];
+    NSLog(@"message:%@",message);
         
-        WoanPlayerInterface * woanPlayer = [[WoanPlayerInterface alloc]initWithContentString:message parameters:nil];
-        [woanPlayer prepareToPlay];
-        [woanPlayer release];
+//        WoanPlayerInterface * woanPlayer = [[WoanPlayerInterface alloc]initWithContentString:message parameters:nil];
+//        [woanPlayer prepareToPlay];
+//        [woanPlayer release];
     
 }
 
@@ -1141,6 +1151,8 @@
 //    NSLog(@"631行 服务器接收数据回调%d",(unsigned int)sentLen);
     int num =(unsigned int) sentLen / 1024;
     _sentLabel.text = [NSString stringWithFormat:@"Sent: %02d KByte",num];
+//    NSLog(@"cache%u",(unsigned int)[XpaiInterface getCacheRemaining]);
+    
 }
 
 -(void)didCompleteUpload:(SInt64)ID {
@@ -1601,15 +1613,21 @@
 - (void)applicationDidEnterBackground:(UIApplication *)application
 //当应用程序将要入非活动状态执行，在此期间，应用程序不接收消息或事件，比如来电话了
 {
-    [XpaiInterface interruptLive];
-    [_timer setFireDate:[NSDate distantFuture]];
+    if ([XpaiInterface isRecording]) {
+        [XpaiInterface interruptLive];
+        [_timer setFireDate:[NSDate distantFuture]];
+
+    }
 }
 //重新进入程序
 - (void)applicationWillEnterForeground:(UIApplication *)application
 //当应用程序入活动状态执行，这个刚好跟上面那个方法相反
 {
-    [XpaiInterface resumeRecord];
-    [_timer setFireDate:[NSDate distantPast]];
+    if ([XpaiInterface isRecording] == YES) {
+        [XpaiInterface resumeRecord];
+        [_timer setFireDate:[NSDate distantPast]];
+
+    }
 }
 
 

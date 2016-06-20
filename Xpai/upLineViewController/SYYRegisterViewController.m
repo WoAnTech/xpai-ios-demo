@@ -105,7 +105,6 @@
     CGFloat labelH = 30; //提示板 高度
     CGFloat textFieldH = 30; //输入框高度
     CGFloat textFieldW = 150; //输入框宽度
-//    CGFloat crack = (kScreenH - _explainLabel.maxY - 20 - labelH * 3 - 120)/4; //缝隙高度
     CGFloat crack = 10;
     
     //创建TextField

@@ -125,7 +125,6 @@
      _GetVCUrl = [[UITextView alloc]initWithFrame:CGRectMake(kScreenW * 0.13, _segment.maxY + crack+ 30, kScreenW - kScreenW * 0.13 *2 + 20, textFieldH)];
     _GetVCUrl.delegate = self;
     _GetVCUrl.keyboardType = UIKeyboardTypeURL;
-//    _GetVCUrl.text = @"http://180.153.55.2:10010/api/20140928/get_vs";//测试网址
     
   
     NSString * username = [[NSString alloc]initWithString:[CLSettingConfig sharedInstance].SYYUserName];

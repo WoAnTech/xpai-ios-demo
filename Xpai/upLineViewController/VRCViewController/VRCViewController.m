@@ -73,7 +73,6 @@
     SetFPSView * _setFPSView;//修改帧率页面
     TransferModelView * _TransferView;//修改输出流格式
     VolumeView * _VolumeView;//增音页面
-    
     PlayViedoViewController * _playViedoView;//播放本地视频视频控制器
     UploadVideoView * _uploadVideoView;//上传页面
     UIImageView * _touchsImageView;//触摸图框
@@ -224,7 +223,7 @@
                 [XpaiInterface interruptLive];
                 callPhone = YES;
                 [weakTimer setFireDate:[NSDate distantFuture]];
-                }
+            }
         }
     };
 }
@@ -342,7 +341,6 @@
         [_makeVideoButton setBackgroundImage:[UIImage imageNamed:@"record"] forState:UIControlStateNormal];
     }
 
-        NSLog(@"cache%u",(unsigned int)[XpaiInterface getCacheRemaining]);
 }
 
 #pragma mark --搭建界面
@@ -808,10 +806,12 @@
         }
         
         [[CLSettingConfig sharedInstance]loadData];
-        [XpaiInterface setVideoResolution:(int)[CLSettingConfig sharedInstance].resolution width:640 height:360];
+//        [XpaiInterface setVideoResolution:(int)[CLSettingConfig sharedInstance].resolution width:640 height:360];
+        [XpaiInterface setVideoResolution:RESOLUTION_CUSTOM width:320 height:240];
+        
         [XpaiInterface initRecorder:camera workMode:workMord audioSampleRate:22050 focusMode:AVCaptureFocusModeContinuousAutoFocus  torchMode:AVCaptureTorchModeOff  glView:nil prevRect:self.view.frame captureVideoOrientation:orientation];
         _PlayLayer = [AVCaptureVideoPreviewLayer layerWithSession:[XpaiInterface getVideoCaptureSession] ];
-        NSLog(@"分辨率%ld",(long)[CLSettingConfig sharedInstance].resolution);
+
 
         [self.view.layer insertSublayer:_PlayLayer atIndex:1];
 
@@ -931,10 +931,11 @@
         NSLog(@"getVideoFileName 842行%@",[XpaiInterface getVideoFileName:VideoID]);
         [self informationWithSte:[NSString stringWithFormat:@"视频存放地址：%@",[XpaiInterface getVideoFileName:VideoID]]];
         [XpaiInterface stopRecord];
+        [self preView];
         
 //        [XpaiInterface setVideoResolution:RESOLUTION_PHOTO width:0 height:0];
-        [self RePreviewWithCameraModel:PHOTO_MODE];
-        _PlayLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
+//        [self RePreviewWithCameraModel:PHOTO_MODE];
+//        _PlayLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
         [_timer setFireDate:[NSDate distantFuture]];
         [_makeVideoButton setBackgroundImage:[UIImage imageNamed:@"record"] forState:UIControlStateNormal];
         _photographButton.hidden = NO;

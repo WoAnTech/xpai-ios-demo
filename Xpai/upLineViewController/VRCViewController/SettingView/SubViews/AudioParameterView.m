@@ -138,7 +138,7 @@
     
     _BitSlider = [[UISlider alloc]initWithFrame:CGRectMake(10, ACCLB2.maxY + 5, self.width - 20, 30)];
     _BitSlider.minimumValue =4000 ;
-    _BitSlider.maximumValue =16000;
+    _BitSlider.maximumValue =200000;
     _BitSlider.value = [CLSettingConfig sharedInstance].audioBit;
     [_BitSlider addTarget:self action:@selector(changeBitNum:) forControlEvents:UIControlEventValueChanged];
     [_BitSlider addTarget:self action:@selector(saveBitNum:) forControlEvents:UIControlEventTouchUpInside];

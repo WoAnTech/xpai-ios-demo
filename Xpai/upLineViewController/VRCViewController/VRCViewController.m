@@ -1159,7 +1159,7 @@
 -(void)didCompleteUpload:(SInt64)ID {
     NSLog(@"uploadVideoSuccess:%lld",ID);
     NSLog(@"上传成功");
-    [self informationWithSte:[NSString stringWithFormat:@"上传视频成功 ID：%lld",ID]];
+    [self informationWithSte:[NSString stringWithFormat:@"上传视频成功 ID:%lld",ID]];
     [UIView animateWithDuration:0.3 animations:^{
         _UploadingButton.alpha = 1;
         _makeVideoButton.alpha = 1;
@@ -1194,7 +1194,7 @@
 }
 
 -(void)didConnectToServer {
-    NSLog(@"链接成功");
+    NSLog(@"连接成功");
     _isLogin = YES;
     [_loginButton setBackgroundImage:[UIImage imageNamed:@"link"] forState:UIControlStateNormal];
     [_loginButton.layer removeAnimationForKey:@"disconnect"];
@@ -1212,19 +1212,19 @@
         [_loginButton.layer addAnimation:basic forKey:@"disconnect"];
     }
     isReconnect = YES;
-    [self informationWithSte:@"正在尝试重连，请保持网络畅通"];
+    [self informationWithSte:@"正尝试重连，请保持网络畅通"];
 }
 
 //重连成功回调
 -(void)didResumeLiveOk {
-    [self informationWithSte:@"尝试重连成功，恢复直播"];
+    [self informationWithSte:@"重连成功，恢复直播"];
     [_loginButton.layer removeAnimationForKey:@"disconnect"];
     isReconnect =  NO;
 }
 
 //重连失败回调
 -(void)didResumeLiveFail:(int)errorCode {
-    [self informationWithSte:[NSString stringWithFormat:@"错误码:%d 尝试重连失败，请重新登录直播",errorCode]];
+    [self informationWithSte:[NSString stringWithFormat:@"错误码:%d 重连失败，请重新登录直播",errorCode]];
     isReconnect = NO;
     [_loginButton.layer removeAnimationForKey:@"disconnect"];
 }

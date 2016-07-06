@@ -105,7 +105,6 @@
     CGFloat labelH = 30; //提示板 高度
     CGFloat textFieldH = 30; //输入框高度
     CGFloat textFieldW = 150; //输入框宽度
-//    CGFloat crack = (kScreenH - _explainLabel.maxY - 20 - labelH * 3 - 120)/4; //缝隙高度
     CGFloat crack = 10;
     
     //创建TextField
@@ -125,7 +124,6 @@
      _GetVCUrl = [[UITextView alloc]initWithFrame:CGRectMake(kScreenW * 0.13, _segment.maxY + crack+ 30, kScreenW - kScreenW * 0.13 *2 + 20, textFieldH)];
     _GetVCUrl.delegate = self;
     _GetVCUrl.keyboardType = UIKeyboardTypeURL;
-//    _GetVCUrl.text = @"http://180.153.55.2:10010/api/20140928/get_vs";//测试网址
     
   
     NSString * username = [[NSString alloc]initWithString:[CLSettingConfig sharedInstance].SYYUserName];

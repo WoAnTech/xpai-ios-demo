@@ -261,6 +261,7 @@
 		DC8471AF1328B57D00CE167E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DC8471AD1328B57D00CE167E /* InfoPlist.strings */; };
 		DC8471B21328B57D00CE167E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DC8471B11328B57D00CE167E /* main.m */; };
 		DC8471B51328B57D00CE167E /* XpaiAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DC8471B41328B57D00CE167E /* XpaiAppDelegate.m */; };
+		FFAB7AC31D2D024C008EEFF9 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FFAB7AC21D2D024C008EEFF9 /* Security.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -584,6 +585,8 @@
 		DC8471B11328B57D00CE167E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		DC8471B31328B57D00CE167E /* XpaiAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XpaiAppDelegate.h; sourceTree = "<group>"; };
 		DC8471B41328B57D00CE167E /* XpaiAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XpaiAppDelegate.m; sourceTree = "<group>"; };
+		FF2A1D931D18E28100A7496E /* libavcodec.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libavcodec.a; path = XpaiSDK/libavcodec.a; sourceTree = "<group>"; };
+		FFAB7AC21D2D024C008EEFF9 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -591,6 +594,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FFAB7AC31D2D024C008EEFF9 /* Security.framework in Frameworks */,
 				BD3E3C861CBF8353009C0C65 /* CoreTelephony.framework in Frameworks */,
 				BD09EB031C3CE7A5008399E0 /* libiconv.tbd in Frameworks */,
 				BD09EB011C3CE79C008399E0 /* libbz2.tbd in Frameworks */,
@@ -1588,6 +1592,8 @@
 		DC8471A31328B57D00CE167E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FFAB7AC21D2D024C008EEFF9 /* Security.framework */,
+				FF2A1D931D18E28100A7496E /* libavcodec.a */,
 				BD3E3C851CBF8353009C0C65 /* CoreTelephony.framework */,
 				BD09EB021C3CE7A5008399E0 /* libiconv.tbd */,
 				BD09EB001C3CE79C008399E0 /* libbz2.tbd */,
@@ -1671,7 +1677,7 @@
 				ORGANIZATIONNAME = "B-Star";
 				TargetAttributes = {
 					DC84719F1328B57D00CE167E = {
-						DevelopmentTeam = 2JDKXFZ285;
+						DevelopmentTeam = 6BWXZ84974;
 					};
 				};
 			};
@@ -2043,7 +2049,7 @@
 					"-all_load",
 					"-ObjC",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.woan.liqing;
+				PRODUCT_BUNDLE_IDENTIFIER = com.woan.cl;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
@@ -2081,7 +2087,7 @@
 					"-all_load",
 					"-ObjC",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.woan.liqing;
+				PRODUCT_BUNDLE_IDENTIFIER = com.woan.cl;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
